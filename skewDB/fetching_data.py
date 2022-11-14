@@ -1,36 +1,47 @@
 #import module
 import pandas as pd
-import numpy as np
+#import numpy as np
 
 # Reading filtered csv file
 df = pd.read_csv('C:/Ashwini/Applied bioinformatics/FilteredFile.csv')
 
-# storing parameter values in variable for e coli and bacillus subtilis
-E_coli = df.loc[df["name"] == "NC_000913.3",["siz","div","shift","rmsGC"]]
-#print(E_coli)
-B_subtilis = df.loc[df["name"] == "NC_000964.3",["siz","div","shift","rmsGC"]]
-#print(B_subtilis)
-
-#print(df.loc[df["name"] == "NZ_CP071399.1",["realm1","plasmid","siz","div","shift","rmsGC"]])
-
-# Finding ori and terminus
-
-
-
 #Finding ori and terminus for all chromosomes
+ter = []
+ori = []
 
-positive_shift = df[df["shift"] > 0]
-negative_shift = df[df["shift"] < 0]
-no_shift = df[df["shift"] == 0]
+def shift_value(shift, siz):
+    if shift > 0:
+        origin = shift
+    elif shift < 0:
+        origin = siz + shift
+    else:
+        origin = 1
+    return origin
+
+for i in range(len(df)):
+    terminal = df.loc[i, "siz"] * df.loc[i, "div"]
+    rounded_terminal = round(terminal)
+    ter.append(rounded_terminal)
+    shift = df.loc[i, "shift"]
+    siz = df.loc[i, "siz"]
+    origin = shift_value(shift, siz)
+    ori.append(origin)
+
+df["Ter"] = ter
+df["Ori"] = ori
+#print(df["Ter"])
+#print(df["Ori"])
+#print(list(df))
+
+# checking the calculation for the selected bacterias
+E_coli = df.loc[df["name"] == "NC_000913.3",["siz","div","shift","Ori", "Ter"]]
+print(E_coli)
+B_subtilis = df.loc[df["name"] == "NC_000964.3",["siz","div","shift","Ori", "Ter"]]
+print(B_subtilis)
 
 
-ori_positive_shift = positive_shift["shift"]
-#print(ori_positive_shift)
+df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+print(df)
 
-
-for ind in df.index:
-    #print(df["name"][ind], df["siz"][ind], df["div"][ind], df["shift"][ind])
-    ter = df["siz"] * df["div"]
-    round_off_ter = ter.apply(np.ceil)
-    print(round_off_ter)
-    #df.assign(Ter = round_off_ter)
+#writing to csv file stored in local computer
+df.to_csv("C:/Ashwini/Applied bioinformatics/dataFile_with_ori&ter.csv")

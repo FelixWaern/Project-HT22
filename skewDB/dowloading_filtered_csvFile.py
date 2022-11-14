@@ -30,5 +30,7 @@ df_4 = df_3.loc[df_3["div"].between(0.3333,0.6666)]
 df4_size = len(df_4.index)
 print(df4_size)
 
+df_4 = df_4.loc[:, ~df_4.columns.str.contains('^Unnamed')]
+
 #Dowloading the filtered dataframe to local computer
-df_4.to_csv('C:/Ashwini/Applied bioinformatics/FilteredFile.csv')
+df_4.to_csv('C:/Ashwini/Applied bioinformatics/FilteredDataFile.csv')
