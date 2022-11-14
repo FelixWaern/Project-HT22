@@ -3,7 +3,7 @@ import pandas as pd
 #import numpy as np
 
 # Reading filtered csv file
-df = pd.read_csv('C:/Ashwini/Applied bioinformatics/FilteredFile.csv')
+df = pd.read_csv('C:/Ashwini/Applied bioinformatics/FilteredDataFile.csv')
 
 #Finding ori and terminus for all chromosomes
 ter = []
@@ -29,9 +29,6 @@ for i in range(len(df)):
 
 df["Ter"] = ter
 df["Ori"] = ori
-#print(df["Ter"])
-#print(df["Ori"])
-#print(list(df))
 
 # checking the calculation for the selected bacterias
 E_coli = df.loc[df["name"] == "NC_000913.3",["siz","div","shift","Ori", "Ter"]]
@@ -41,7 +38,6 @@ print(B_subtilis)
 
 
 df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
-print(df)
 
 #writing to csv file stored in local computer
-df.to_csv("C:/Ashwini/Applied bioinformatics/dataFile_with_ori&ter.csv")
+#df.to_csv("C:/Ashwini/Applied bioinformatics/dataFile_with_ori&ter.csv")
