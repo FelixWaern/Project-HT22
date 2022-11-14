@@ -23,13 +23,17 @@ for x in seq_record:
     print(len(seq_record))
     print(len(seq_record.features))
 
+for feature in seq_record.features:
+                if feature.type == "rRNA":
+                    print(feature.qualifiers.get("product"), feature.location) 
+
+
 #for seq_record in SeqIO.parse(handle, "gb"):
 #    print(len(seq_record))
 #    print(len(seq_record.features))
 
-
 #Vi ska hämta genbank file som en handle
-# Jag tror jag inte har rätt ID verion utan behöver GI. Men GI finns inte längre så behöver ändra
+
 
 handle.close()
 print("Finished")

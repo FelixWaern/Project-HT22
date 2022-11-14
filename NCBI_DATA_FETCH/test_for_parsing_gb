@@ -1,31 +1,34 @@
 # Test for accession to handle function
-def accessions_to_handle(accession_numbers):
+# Multiple Entre.efetch test. 10 records combined with rRNA search. 
+# Combined with rRNA search
+#TODO KOLLA PÅ multithreading och multiproccessing och få in det i en dataframe. 
+
+def accession_to_rRNA_interval(accession_numbers):
+
     print("-------Test for handle parsing to make sure it is adaptable with fetch-------")
-    print("--------------------------10 records-----------------------------------")
+    print("----------------------------10 records---------------------------------------")
     print("Fetching accession %s from GenBank\n" % (accession_numbers))
     print("")
-
-    from Bio import Entrez
-    from Bio import SeqIO
-    import os
+    from Bio import Entrez #Should be imported in function above
+    from Bio import SeqIO #Should be imported in function above
+    import os #Should be imported in function above
 
     Entrez.email = "Felix.wae@gmail.com" #Always tell NCBI who you are
     Entrez.api_key = "7b4a5e9841f79495be73767323ad485fda08" #Always use key
 
-    # Multiple Entre.efetch test. 10 records. 
-    #accession_numbers = "NC_000913.3, NC_000964.3, NC_002516.2, NZ_CP041016.1, NZ_AP023438.1, NC_022737.1, NZ_CP013444.1, NZ_CP086979.1, NZ_CP085753.1, NZ_CP012026.1"
     i = 0
+    result = {}
+    
+
     try: 
-        res = Entrez.efetch("nucleotide", rettype="gbwithparts", retmode="text", id=accession_numbers)
-        
         with Entrez.efetch(
             db="nucleotide", rettype="gbwithparts", retmode="text", id=accession_numbers
         ) as handle:
-            for seq_record in SeqIO.parse(handle, "gb"):
+            for index, seq_record in enumerate(SeqIO.parse(handle, "gb")):
                 i += 1
                 print()
                 print("Record number: ", i)
-                print("%s %s..." % (seq_record.id, seq_record.description[:50]))
+                print(seq_record.id)
                 print(
                     "Sequence length %i, %i features, from: %s"
                     % (
@@ -34,10 +37,58 @@ def accessions_to_handle(accession_numbers):
                         seq_record.annotations["source"],
                     )
                 )
+                temp = []
+                for feature in seq_record.features: #This is the part where we get rRNA intervals, we return afterwards
+                    if feature.type == "rRNA":
+                        for product in feature.qualifiers.get("product"):
 
-        print("")
-        print("------------------Test done----------------")
-        return 
-    
+                            if "16S" in product:
+                                print(feature.qualifiers.get("product"), feature.location)
+                                temp.append(str(feature.location))
+                result[seq_record.id] = temp     
+        return result        
+
     except Exception:
-         sys.stderr.write("Error! Cannot fetch: %s        \n" % accession) 
+            sys.stderr.write("Error! Cannot fetch: %s        \n" % accession_numbers)
+#----------------------------------------------------------------------------------------
+#accession_numbers = "NC_000913.3, NC_000964.3, NC_002516.2, NZ_CP041016.1, NZ_AP023438.1, NC_022737.1, NZ_CP013444.1, NZ_CP086979.1, NZ_CP085753.1, NZ_CP012026.1"
+
+import time
+t0 = time.time()
+res = accession_to_rRNA_interval("NC_000913.3, NC_000964.3, NC_002516.2") 
+#, NZ_CP041016.1, NZ_AP023438.1, NC_022737.1, NZ_CP013444.1, NZ_CP086979.1, NZ_CP085753.1, NZ_CP012026.1")
+print("")
+
+for x in res:
+    print(x)
+    print(res[x][0][1:-5])
+    print(res[x][0][-2])
+    print("")
+
+t1 = time.time()
+print("")
+total = t1-t0
+print(total)
+print("")
+print("------------------Test done----------------")
+
+
+"""
+# To check if downloaded
+Entrez.email = "A.N.Other@example.com"  # Always tell NCBI who you are
+filename = "EU490707.gbk"
+if not os.path.isfile(filename):
+    # Downloading...
+    net_handle = Entrez.efetch(
+        db="nucleotide", id="EU490707", rettype="gb", retmode="text"
+    )
+    out_handle = open(filename, "w")
+    out_handle.write(net_handle.read())
+    out_handle.close()
+    net_handle.close()
+    print("Saved")
+
+print("Parsing...")
+record = SeqIO.read(filename, "genbank")
+print(record)
+"""
