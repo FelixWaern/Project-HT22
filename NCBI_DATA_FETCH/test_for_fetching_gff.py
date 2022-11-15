@@ -22,10 +22,9 @@ seq_record = SeqIO.parse(handle, "gb")
 for x in seq_record:
     print(len(seq_record))
     print(len(seq_record.features))
-
-for feature in seq_record.features:
-                if feature.type == "rRNA":
-                    print(feature.qualifiers.get("product"), feature.location) 
+    for feature in seq_record.features:
+                    if feature.type == "rRNA":
+                        print(feature.qualifiers.get("product"), feature.location) 
 
 
 #for seq_record in SeqIO.parse(handle, "gb"):

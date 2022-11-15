@@ -58,11 +58,9 @@ from Bio import SeqIO  # Should be imported once
 #import sys
 t0 = time.time()
 
-
 #--Old version, no multithreading, one single fetch, very slow
 #res = accession_to_rRNA_interval("NC_000913.3, NC_000964.3, NC_002516.2, NZ_CP041016.1, NZ_AP023438.1, NC_022737.1, NZ_CP013444.1, NZ_CP086979.1, NZ_CP085753.1, NZ_CP012026.1")
 #---------------------
-
 
 # ---- Test for multithreading using a function. 
 def batch_operator(batch):
@@ -111,8 +109,6 @@ t1.join()
 t2.join()
 #--------------------------------------------
 """
-
-
 
 
 print("")
