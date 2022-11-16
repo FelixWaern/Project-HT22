@@ -3,7 +3,7 @@ import pandas as pd
 #import numpy as np
 
 # Reading filtered csv file
-df = pd.read_csv('C:/Ashwini/Applied bioinformatics/FilteredDataFile.csv')
+df = pd.read_csv('C:/Users/Felix/Documents/FilteredDataFile.csv')
 
 #Finding ori and terminus for all chromosomes
 ter = []

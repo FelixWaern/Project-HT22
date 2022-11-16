@@ -5,8 +5,8 @@ import time #Should be imported once
 from Bio import Entrez  # Should be imported once
 from Bio import SeqIO  # Should be imported once
 import ssl # Should be imported once
-print("-------Test for handle parsing to make sure it is adaptable with fetch-------")
-print("----------------------------10 records MAX-----------------------------------")
+print("-------Package for GenBank rRNA caluculations fetched-------")
+print("--------------------10 records MAX--------------------------")
 
 def accession_to_rRNA_interval(accession_numbers, res):
     Entrez.email = "Felix.wae@gmail.com" #Always tell NCBI who you are
@@ -56,7 +56,7 @@ else:
 
 
 
-
+"""
 # -----------------------------------------
 #Test if functions work
 t0 = time.time()
@@ -79,7 +79,7 @@ print("")
 print("------------------Test done----------------")
 
 
-"""
+
 # To check if downloaded beforehand
 Entrez.email = "A.N.Other@example.com"  # Always tell NCBI who you are
 filename = "EU490707.gbk"
