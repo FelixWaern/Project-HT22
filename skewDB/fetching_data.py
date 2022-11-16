@@ -31,11 +31,12 @@ df["Ter"] = ter
 df["Ori"] = ori
 
 # checking the calculation for the selected bacterias
-E_coli = df.loc[df["name"] == "NC_000913.3",["siz","div","shift","Ori", "Ter"]]
+E_coli = df.loc[df["name"] == "NC_000913.3",["dnaApos","siz","div","shift","Ori", "Ter"]]
 print(E_coli)
-B_subtilis = df.loc[df["name"] == "NC_000964.3",["siz","div","shift","Ori", "Ter"]]
+B_subtilis = df.loc[df["name"] == "NC_000964.3",["siz","div","shift","Ori", "Ter", "dnaApos"]]
 print(B_subtilis)
-
+P_aeruginosa = df.loc[df["name"] == "NC_002516.2",["siz","div","shift","Ori", "Ter", "dnaApos"]]
+print(P_aeruginosa)
 
 df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
 
