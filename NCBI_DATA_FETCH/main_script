@@ -1,67 +1,34 @@
-# Test for accession to handle function
 # Multiple Entre.efetch test. 10 records combined with rRNA search. 
-# Combined with rRNA search
-#TODO Multithreading verkar funka 
+import os  # Should be imported once
+import threading  # Should be imported once
+import time #Should be imported once
+from Bio import Entrez  # Should be imported once
+from Bio import SeqIO  # Should be imported once
 print("-------Test for handle parsing to make sure it is adaptable with fetch-------")
 print("----------------------------10 records MAX-----------------------------------")
 
-def accession_to_rRNA_interval(accession_numbers, res): #!!!! added res
-
-    
-    print("Fetching accession %s from GenBank\n" % (accession_numbers))
-    print("")
-    
-
+def accession_to_rRNA_interval(accession_numbers, res):
     Entrez.email = "Felix.wae@gmail.com" #Always tell NCBI who you are
     Entrez.api_key = "7b4a5e9841f79495be73767323ad485fda08" #Always use key
-
     result = {}
-
     try: 
         with Entrez.efetch(
             db="nucleotide", rettype="gbwithparts", retmode="text", id=accession_numbers
         ) as handle:
             for index, seq_record in enumerate(SeqIO.parse(handle, "gb")):
-                print()
-                print("Accession number: ", seq_record.id)
-                print(
-                    "Sequence length %i, %i features, from: %s"
-                    % (
-                        len(seq_record),
-                        len(seq_record.features),
-                        seq_record.annotations["source"],
-                    )
-                )
                 temp = []
                 for feature in seq_record.features: 
                     if feature.type == "rRNA":
                         for product in feature.qualifiers.get("product"):
 
                             if "16S" in product:
-                                print(feature.qualifiers.get("product"), feature.location)
                                 temp.append(str(feature.location))
                 result[seq_record.id] = temp     
-                res[seq_record.id] = temp #!!!!!!!Added
-        #return result        #!!!! Commented out
+                res[seq_record.id] = temp 
 
     except Exception:
         sys.stderr.write("Error! Cannot fetch: %s        \n" % accession_numbers)
-
 #----------------------------------------------------------------------------------------
-#accession_numbers = "NC_000913.3, NC_000964.3, NC_002516.2, NZ_CP041016.1, NZ_AP023438.1, NC_022737.1, NZ_CP013444.1, NZ_CP086979.1, NZ_CP085753.1, NZ_CP012026.1"
-
-import os  # Should be imported once
-import threading  # Should be imported once
-import time
-from Bio import Entrez  # Should be imported once
-from Bio import SeqIO  # Should be imported once
-#import sys
-t0 = time.time()
-
-#--Old version, no multithreading, one single fetch, very slow
-#res = accession_to_rRNA_interval("NC_000913.3, NC_000964.3, NC_002516.2, NZ_CP041016.1, NZ_AP023438.1, NC_022737.1, NZ_CP013444.1, NZ_CP086979.1, NZ_CP085753.1, NZ_CP012026.1")
-#---------------------
-
 # ---- Test for multithreading using a function. 
 def batch_operator(batch):
     res = {}
@@ -74,41 +41,12 @@ def batch_operator(batch):
     for x in threads:
         threads[x].join()
     return(res)
+#---------------------------------------------------------------------------------------
+t0 = time.time()
 batch = ["NC_000913.3", "NC_000964.3", "NC_002516.2", "NZ_CP041016.1", "NZ_AP023438.1", "NC_022737.1", "NZ_CP013444.1", "NZ_CP086979.1", "NZ_CP085753.1", "NZ_CP012026.1"]
 res = batch_operator(batch)
 # -----------------------------------------
 
-
-"""
-# ----Test multithreading here, works sometimes but inconsistently, very fast
-ac_nr_list = ["NC_000913.3", "NC_000964.3", "NC_002516.2", "NZ_CP041016.1", "NZ_AP023438.1", "NC_022737.1", "NZ_CP013444.1", "NZ_CP086979.1", "NZ_CP085753.1", "NZ_CP012026.1"]
-res = {}
-threads = {}
-#Iterate over list
-for x in ac_nr_list:
-    threads[x] = threading.Thread(target = accession_to_rRNA_interval, args =(x, res))
-for x in threads:
-    threads[x].start() # Can move this into the loop above. 
-for x in threads:
-    threads[x].join()
-# --------------------
-"""
-
-"""
-# ------Test version for multithreading, works for low nr of accession nr, only for testing and debugging
-res = {}
-t1 = threading.Thread(target = accession_to_rRNA_interval, args =( ["NC_000913.3"], res))
-t2 = threading.Thread(target = accession_to_rRNA_interval, args =( ["NC_000964.3"], res))
-# starting thread 1
-t1.start()
-# starting thread 2
-t2.start()
-# wait until thread 1 is completely executed
-t1.join()
-# wait until thread 2 is completely executed
-t2.join()
-#--------------------------------------------
-"""
 
 
 print("")
