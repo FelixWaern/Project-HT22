@@ -54,13 +54,11 @@ else:
     ssl._create_default_https_context = _create_unverified_https_context
 
 
-
-
 """
 # -----------------------------------------
 #Test if functions work
 t0 = time.time()
-batch = ["NC_000913.3", "NC_000964.3", "NC_002516.2", "NZ_CP041016.1", "NZ_AP023438.1", "NC_022737.1", "NZ_CP013444.1", "NZ_CP086979.1", "NZ_CP085753.1", "NZ_CP012026.1"]
+#batch = ["NC_000913.3", "NC_000964.3", "NC_002516.2", "NZ_CP041016.1", "NZ_AP023438.1", "NC_022737.1", "NZ_CP013444.1", "NZ_CP086979.1", "NZ_CP085753.1", "NZ_CP012026.1"]
 res = batch_operator(batch)
 print("")
 print("Testing if the functions works as intended")  
