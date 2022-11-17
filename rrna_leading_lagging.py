@@ -19,13 +19,32 @@ rrna_dict = {
 df_rrna = pd.DataFrame(dict([ (k, pd.Series(v)) for k, v in rrna_dict.items() ])).transpose()
 df_rrna = df_rrna.reset_index()
 df_rrna.rename(columns = {'index':'name'}, inplace = True)
-print(df_rrna)
 
 # import the Dataframe columns with intervals for ori and ter
-df_ori_ter = fd.df[['name', 'Ter', 'Ori']]
-print(df_ori_ter)
+df_ori_ter = fd.df[['name', 'siz', 'shift', 'div','Ter', 'Ori']]
 
 # merge the Datframe columns with matching accession numbers
 df_rrna_ori_ter = pd.merge(df_rrna, df_ori_ter, on="name")
-print(df_rrna_ori_ter)
+print(df_rrna_ori_ter[['name', 'siz', 'shift', 'div','Ter', 'Ori']])
 
+for i in range(len(df_rrna_ori_ter)):
+    if df_rrna_ori_ter.loc[i, "shift"] < 0:
+        leading = pd.arrays.IntervalArray([
+            pd.Interval(0, df_rrna_ori_ter.loc[i, "Ter"], closed='left'), 
+            pd.Interval(df_rrna_ori_ter.loc[i, "Ori"], 
+            df_rrna_ori_ter.loc[i, "siz"], closed='left')])
+        print(leading)
+        lagging = pd.Interval(
+            df_rrna_ori_ter.loc[i, "Ter"], 
+            df_rrna_ori_ter.loc[i, "Ori"], closed='left')
+        print(lagging)
+    else: 
+        leading = pd.Interval(
+            df_rrna_ori_ter.loc[i, "Ori"], 
+            df_rrna_ori_ter.loc[i, "Ter"], closed='left')
+        print(leading)
+        lagging = pd.arrays.IntervalArray([
+            pd.Interval(0, df_rrna_ori_ter.loc[i, "Ori"], closed='left'), 
+            pd.Interval(df_rrna_ori_ter.loc[i, "Ter"], 
+            df_rrna_ori_ter.loc[i, "siz"], closed='left')])
+        print(lagging)
