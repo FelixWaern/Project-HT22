@@ -13,10 +13,11 @@ j = 1
 batch = []
 dict = {}
 t_tot = []
+t_fin_1 = time.time()
 for index, row in fd.df.iterrows():
     if i == 10:
         if 'NC_002947.4' in batch:
-            batch.remove('NC_002947.4') #Doesent work for some reason
+            batch.remove('NC_002947.4') #Doesent work for some reason, the NCBI page is also wierd
         t0 = time.time()
         res = ms.batch_operator(batch)
         dict.update(res)
@@ -39,7 +40,10 @@ print("Number of chromosomes left: ",len(batch))
 res = ms.batch_operator(batch)
 dict.update(res)
 
+
 print("-----All chromosmes with corresponding rRNA intervals should be in dict now-----")
+t_fin_2 = time.time()
+print("Total time :",t_fin_2-t_fin_1)
 print("")
 print("------------------Test done----------------")
 
