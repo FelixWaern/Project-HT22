@@ -1,4 +1,4 @@
-from skewDB import fetching_data
+from skewDB import fetching_data as fd
 import pandas as pd
 
 # dictionary with list object as values
@@ -15,6 +15,17 @@ rrna_dict = {
     "NC_002516.2" : ['[722095:723631](+)', '[4792195:4793731](-)', '[5267723:5269259](-)', '[6043207:6044743](-)']
 }
   
-# creating a Dataframe object 
-df_rrna = pd.DataFrame(dict([ (k, pd.Series(v)) for k, v in rrna_dict.items() ]))
+# creating a Dataframe object with intervals for the rrna genes
+df_rrna = pd.DataFrame(dict([ (k, pd.Series(v)) for k, v in rrna_dict.items() ])).transpose()
+df_rrna = df_rrna.reset_index()
+df_rrna.rename(columns = {'index':'name'}, inplace = True)
 print(df_rrna)
+
+# import the Dataframe columns with intervals for ori and ter
+df_ori_ter = fd.df[['name', 'Ter', 'Ori']]
+print(df_ori_ter)
+
+# merge the Datframe columns with matching accession numbers
+df_rrna_ori_ter = pd.merge(df_rrna, df_ori_ter, on="name")
+print(df_rrna_ori_ter)
+
