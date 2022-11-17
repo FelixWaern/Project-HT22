@@ -27,24 +27,48 @@ df_ori_ter = fd.df[['name', 'siz', 'shift', 'div','Ter', 'Ori']]
 df_rrna_ori_ter = pd.merge(df_rrna, df_ori_ter, on="name")
 print(df_rrna_ori_ter[['name', 'siz', 'shift', 'div','Ter', 'Ori']])
 
-for i in range(len(df_rrna_ori_ter)):
+"""for i in range(len(df_rrna_ori_ter)):
     if df_rrna_ori_ter.loc[i, "shift"] < 0:
         leading = pd.arrays.IntervalArray([
             pd.Interval(0, df_rrna_ori_ter.loc[i, "Ter"], closed='left'), 
             pd.Interval(df_rrna_ori_ter.loc[i, "Ori"], 
             df_rrna_ori_ter.loc[i, "siz"], closed='left')])
-        print(leading)
+        df_rrna_ori_ter.loc[i, "leading"] = str(leading)
         lagging = pd.Interval(
             df_rrna_ori_ter.loc[i, "Ter"], 
             df_rrna_ori_ter.loc[i, "Ori"], closed='left')
-        print(lagging)
+        df_rrna_ori_ter.loc[i, "lagging"] = str(lagging)
     else: 
         leading = pd.Interval(
             df_rrna_ori_ter.loc[i, "Ori"], 
             df_rrna_ori_ter.loc[i, "Ter"], closed='left')
-        print(leading)
+        df_rrna_ori_ter.loc[i, "leading"] = str(leading)
         lagging = pd.arrays.IntervalArray([
             pd.Interval(0, df_rrna_ori_ter.loc[i, "Ori"], closed='left'), 
             pd.Interval(df_rrna_ori_ter.loc[i, "Ter"], 
             df_rrna_ori_ter.loc[i, "siz"], closed='left')])
-        print(lagging)
+        df_rrna_ori_ter.loc[i, "lagging"] = str(lagging)
+print(df_rrna_ori_ter[['leading', 'lagging']])"""
+
+for i in range(len(df_rrna_ori_ter)):
+    if df_rrna_ori_ter.loc[i, "shift"] < 0:
+        leading1 = pd.Interval(0, df_rrna_ori_ter.loc[i, "Ter"], closed='left')
+        leading2 = pd.Interval(df_rrna_ori_ter.loc[i, "Ori"], 
+            df_rrna_ori_ter.loc[i, "siz"], closed='left')
+        df_rrna_ori_ter.loc[i, "leading1"] = str(leading1)
+        df_rrna_ori_ter.loc[i, "leading2"] = str(leading2)
+        lagging1 = pd.Interval(
+            df_rrna_ori_ter.loc[i, "Ter"], 
+            df_rrna_ori_ter.loc[i, "Ori"], closed='left')
+        df_rrna_ori_ter.loc[i, "lagging1"] = str(lagging1)
+    else: 
+        leading1 = pd.Interval(
+            df_rrna_ori_ter.loc[i, "Ori"], 
+            df_rrna_ori_ter.loc[i, "Ter"], closed='left')
+        df_rrna_ori_ter.loc[i, "leading1"] = str(leading1)
+        lagging1 = pd.Interval(0, df_rrna_ori_ter.loc[i, "Ori"], closed='left') 
+        lagging2 = pd.Interval(df_rrna_ori_ter.loc[i, "Ter"], 
+            df_rrna_ori_ter.loc[i, "siz"], closed='left')
+        df_rrna_ori_ter.loc[i, "lagging1"] = str(lagging1)
+        df_rrna_ori_ter.loc[i, "lagging2"] = str(lagging2)
+print(df_rrna_ori_ter)
