@@ -9,7 +9,7 @@ import sys
 print("-------Package for GenBank rRNA caluculations fetched-------")
 print("--------------------10 records MAX--------------------------")
 
-def accession_to_rRNA_interval(accession_numbers, res):
+def accession_to_rRNA_interval(accession_numbers, res, faulty):
     Entrez.email = "Felix.wae@gmail.com" #Always tell NCBI who you are
     Entrez.api_key = "7b4a5e9841f79495be73767323ad485fda08" #Always use API key
     result = {}
@@ -57,22 +57,20 @@ def accession_to_rRNA_interval(accession_numbers, res):
         """
     except Exception:
         # Adding faulty NCBI file to list for error log
+        faulty.append(accession_numbers)
         sys.stderr.write("Error! Cannot fetch: %s        \n" % accession_numbers)
 #----------------------------------------------------------------------------------------
 
-def batch_operator(batch):
+def batch_operator(batch, faulty):
     # The batch operator recieves a list of accession numbers and returns them as a dictionary with the accession numbers as keys
     # with the rRNA intervals for each chromosmes as the content. The functions uses multithreading, one thread per accession number.
-    # Input: ["NC_000913.3", "NC_000964.3", "NC_002516.2", "NZ_CP041016.1"]
-    # Output: {"NC_000913.3": ['[223770:225312](+)', '[2729615:2731157](-)', '[3427220:3428762](-)', '[3941807:3943349](+)', '[4035530:4037072](+)', '[4166658:4168200](+)', '[4208146:4209688](+)']
-    # , "NC_000964.3": ['[9809:11364](+)', '[30278:31832](+)', '[90535:92089](+)', '[96391:97945](+)', '[160892:162445](+)', '[166499:168053](+)', '[171497:173049](+)', '[635432:636987](+)', '[946695:948250](+)', '[3177085:3178640](-)']
-    # , "NC_002516.2": ['[722095:723631](+)', '[4792195:4793731](-)', '[5267723:5269259](-)', '[6043207:6044743](-)']
-    # , "NZ_CP041016.1: ['[1399531:1401046](-)', '[2622584:2624099](-)', '[5379840:5381355](+)']
-    # "}
+    # Input: ["NC_002516.2", "NZ_CP041016.1"]
+    # Output: {"NC_002516.2": ['[722095:723631](+)', '[4792195:4793731](-)', '[5267723:5269259](-)', '[6043207:6044743](-)']
+    # , "NZ_CP041016.1: ['[1399531:1401046](-)', '[2622584:2624099](-)', '[5379840:5381355](+)']"}
     res = {}
     threads = {}
     for x in batch:
-        threads[x] = threading.Thread(target = accession_to_rRNA_interval, args =(x, res))
+        threads[x] = threading.Thread(target = accession_to_rRNA_interval, args =(x, res, faulty))
     for x in threads:
         threads[x].start() 
     for x in threads:
@@ -92,12 +90,14 @@ else:
 
 
 
-# 'NC_002947.4'
+"""
 # -----------------------------------------
 #Test if functions work
+# FAULTY RECORD: 'NC_002947.4'
 t0 = time.time()
 batch = ["NC_000913.3", "NC_000964.3", "NC_002516.2", "NZ_CP041016.1", "NZ_AP023438.1", "NC_022737.1", "NZ_CP013444.1", "NZ_CP086979.1", "NZ_CP085753.1", "NZ_CP012026.1"]
-res = batch_operator(batch)
+faulty = []
+res = batch_operator(batch, faulty)
 print("")
 print("Testing if the functions works as intended")  
 for x in res:
@@ -112,6 +112,7 @@ print("")
 total = t1-t0
 print(total)
 print("")
+print("Faulty records: ", faulty)
 print("------------------Test done----------------")
 
 
