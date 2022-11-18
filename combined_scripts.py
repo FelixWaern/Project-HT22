@@ -1,4 +1,5 @@
 # Combining the fetching data
+#TODO If faulty record gathering, email NCBI about the faulty files, check if zipped is possible. 
 print("--------------Test for df batch interation--------------")
 import time
 import sys
@@ -30,7 +31,9 @@ for index, row in fd.df.iterrows():
         print("")
         print("Batch:",j, "done!")
         print("Batch:",j, "took!", total, "seconds")
-        print("Estiated time left: ", ((sum(t_tot)/len(t_tot))*2700)-((sum(t_tot)/len(t_tot))*j) ,"seconds")
+        print("Estimated time left: ", ((sum(t_tot)/len(t_tot))*2700)-((sum(t_tot)/len(t_tot))*j) ,"seconds")
+        print("Estimated mean total time: ", ((sum(t_tot)/len(t_tot))*2700),"seconds")
+
         j += 1
     else:
         i += 1
