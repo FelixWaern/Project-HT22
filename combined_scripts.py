@@ -13,7 +13,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG, filename="faulty_NCBI_records", filemode="a+",
                         format="%(asctime)-15s %(levelname)-8s %(message)s")
     
-test_df = fd.df.head(600)
+test_df = fd.df.head(9000)
 
 i = 0
 j = 1
