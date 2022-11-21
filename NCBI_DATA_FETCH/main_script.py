@@ -76,7 +76,7 @@ else:
 
 
 
-"""
+
 # -----------------------------------------
 #Test if functions work
 # FAULTY RECORD: 'NC_002947.4'
@@ -93,6 +93,13 @@ for x in res:
     print(res[x][0][-2])
     print("")
 
+#for x in res:
+#    if res[x][-2] == "+":
+#        if res[x][0]
+#        #Check in positive strand
+#    elif res[x][-2] == "-":
+        #Check
+
 t1 = time.time()
 print("")
 total = t1-t0
@@ -100,4 +107,3 @@ print(total)
 print("")
 print("Faulty records: ", faulty)
 print("------------------Test done----------------")
-"""
