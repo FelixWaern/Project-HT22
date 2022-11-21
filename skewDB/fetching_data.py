@@ -51,8 +51,10 @@ B_subtilis = df.loc[df["name"] == "NC_000964.3",["siz","div","shift","Ori", "Ter
 print(B_subtilis)
 P_aeruginosa = df.loc[df["name"] == "NC_002516.2",["siz","div","shift","Ori", "Ter", "dnaApos"]]
 print(P_aeruginosa)
+Z_mobilis = df.loc[df["name"] == "NC_006526.2",["dnaApos","siz","div","shift","Ori", "Ter"]]
+print(Z_mobilis)
 
 df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
 
 #writing to csv file stored in local computer
-df.to_csv("C:/Ashwini/Applied bioinformatics/File_with_ori&ter.csv")
+#df.to_csv("C:/Ashwini/Applied bioinformatics/File_with_ori&ter.csv")
