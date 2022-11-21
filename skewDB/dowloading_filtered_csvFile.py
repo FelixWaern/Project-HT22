@@ -1,5 +1,15 @@
 # first import the module
 import pandas as pd
+import ssl
+
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    # Legacy Python that doesn't verify HTTPS certificates by default
+    pass
+else:
+    # Handle target environment that doesn't support HTTPS verification
+    ssl._create_default_https_context = _create_unverified_https_context
 
 # reading csv file into dataframe
 df = pd.read_csv('https://skewdb.org/view/gcskewdb.csv')
@@ -33,4 +43,4 @@ print(df4_size)
 df_4 = df_4.loc[:, ~df_4.columns.str.contains('^Unnamed')]
 
 #Dowloading the filtered dataframe to local computer
-df_4.to_csv('C:/Ashwini/Applied bioinformatics/FilteredDataFile.csv')
+df_4.to_csv('/Users/saralindberg/Documents/Applied_bioinformatics/Code/Project-HT22/FilteredDataFile.csv')

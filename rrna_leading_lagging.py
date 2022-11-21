@@ -1,5 +1,6 @@
 from skewDB import fetching_data as fd
 import pandas as pd
+import re
 
 # dictionary with list object as values
 rrna_dict = {
@@ -23,9 +24,8 @@ df_rrna.rename(columns = {'index':'name'}, inplace = True)
 # import the Dataframe columns with intervals for ori and ter
 df_ori_ter = fd.df[['name', 'siz', 'shift', 'div','Ter', 'Ori']]
 
-# merge the Datframe columns with matching accession numbers
+# merge the Dataframe columns with matching accession numbers
 df_rrna_ori_ter = pd.merge(df_rrna, df_ori_ter, on="name")
-print(df_rrna_ori_ter[['name', 'siz', 'shift', 'div','Ter', 'Ori']])
 
 """for i in range(len(df_rrna_ori_ter)):
     if df_rrna_ori_ter.loc[i, "shift"] < 0:
@@ -50,25 +50,44 @@ print(df_rrna_ori_ter[['name', 'siz', 'shift', 'div','Ter', 'Ori']])
         df_rrna_ori_ter.loc[i, "lagging"] = str(lagging)
 print(df_rrna_ori_ter[['leading', 'lagging']])"""
 
+# create intervals for leading and lagging strand
 for i in range(len(df_rrna_ori_ter)):
+    # negative shift
     if df_rrna_ori_ter.loc[i, "shift"] < 0:
+        # add leading strand interval
         leading1 = pd.Interval(0, df_rrna_ori_ter.loc[i, "Ter"], closed='left')
         leading2 = pd.Interval(df_rrna_ori_ter.loc[i, "Ori"], 
             df_rrna_ori_ter.loc[i, "siz"], closed='left')
         df_rrna_ori_ter.loc[i, "leading1"] = str(leading1)
         df_rrna_ori_ter.loc[i, "leading2"] = str(leading2)
+        # add lagging strand interval
         lagging1 = pd.Interval(
             df_rrna_ori_ter.loc[i, "Ter"], 
             df_rrna_ori_ter.loc[i, "Ori"], closed='left')
         df_rrna_ori_ter.loc[i, "lagging1"] = str(lagging1)
+    # positive shift
     else: 
+        # add leading strand interval
         leading1 = pd.Interval(
             df_rrna_ori_ter.loc[i, "Ori"], 
             df_rrna_ori_ter.loc[i, "Ter"], closed='left')
         df_rrna_ori_ter.loc[i, "leading1"] = str(leading1)
+        # add lagging strand interval
         lagging1 = pd.Interval(0, df_rrna_ori_ter.loc[i, "Ori"], closed='left') 
         lagging2 = pd.Interval(df_rrna_ori_ter.loc[i, "Ter"], 
             df_rrna_ori_ter.loc[i, "siz"], closed='left')
         df_rrna_ori_ter.loc[i, "lagging1"] = str(lagging1)
         df_rrna_ori_ter.loc[i, "lagging2"] = str(lagging2)
+
 print(df_rrna_ori_ter)
+
+# iterate over the df_rrna_ori_ter Dataframe and compare rRNA interval with leading/lagging strand
+for i in range(len(df_rrna_ori_ter)):
+    # negative shift
+    if df_rrna_ori_ter.loc[i, 0][-2] == "-":
+        rrna = re.findall(r'(?<=\[)[0-9]+', df_rrna_ori_ter.loc[i, 0])
+        #if str(rrna[0]) in df_rrna_ori_ter.loc[i, "lagging1"]:
+        print("OK")
+        print("RNA", rrna[0])
+        print(df_rrna_ori_ter.loc[i, "lagging1"])
+

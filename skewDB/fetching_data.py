@@ -3,7 +3,7 @@ import pandas as pd
 #import numpy as np
 
 # Reading filtered csv file
-df = pd.read_csv('C:/Ashwini/Applied bioinformatics/FilteredDataFile.csv')
+df = pd.read_csv('/Users/saralindberg/Documents/Applied_bioinformatics/Code/Project-HT22/FilteredDataFile.csv')
 
 #Finding ori and terminus for all chromosomes
 ter = []
@@ -45,14 +45,14 @@ df["Ori"] = ori
 df["Ter"] = ter
 
 # checking the calculation for the selected bacterias
-E_coli = df.loc[df["name"] == "NC_000913.3",["dnaApos","siz","div","shift","Ori", "Ter"]]
-print(E_coli)
-B_subtilis = df.loc[df["name"] == "NC_000964.3",["siz","div","shift","Ori", "Ter", "dnaApos"]]
-print(B_subtilis)
-P_aeruginosa = df.loc[df["name"] == "NC_002516.2",["siz","div","shift","Ori", "Ter", "dnaApos"]]
-print(P_aeruginosa)
+# E_coli = df.loc[df["name"] == "NC_000913.3",["dnaApos","siz","div","shift","Ori", "Ter"]]
+# print(E_coli)
+# B_subtilis = df.loc[df["name"] == "NC_000964.3",["siz","div","shift","Ori", "Ter", "dnaApos"]]
+# print(B_subtilis)
+# P_aeruginosa = df.loc[df["name"] == "NC_002516.2",["siz","div","shift","Ori", "Ter", "dnaApos"]]
+# print(P_aeruginosa)
 
 df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
 
 #writing to csv file stored in local computer
-df.to_csv("C:/Ashwini/Applied bioinformatics/File_with_ori&ter.csv")
+df.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/Project-HT22/dataFile_with_ori&ter.csv")
