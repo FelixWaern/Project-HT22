@@ -5,7 +5,8 @@ import time #Should be imported once
 from Bio import Entrez  # Should be imported once
 from Bio import SeqIO  # Should be imported once
 import ssl # Should be imported once
-import sys
+import sys # Should be imported once
+import gzip  # Should be imported once
 print("-------Package for GenBank rRNA caluculations fetched-------")
 print("--------------------10 records MAX--------------------------")
 
@@ -14,21 +15,21 @@ def accession_to_rRNA_interval(accession_numbers, res, faulty):
     Entrez.api_key = "7b4a5e9841f79495be73767323ad485fda08" #Always use API key
     result = {}
     path = 'D:/' #Path to local storage
-    absolute_path = path + accession_numbers + ".gbff" # What the file should be named
+    absolute_path = path + accession_numbers + ".gbff.gz" # What the file should be named. NEEDS TO BE CHANGED
     try: 
         # Check if it downloaded to local storage
         if not os.path.isfile(absolute_path):
             net_handle = Entrez.efetch(
                 db="nucleotide", id=accession_numbers, rettype="gbwithparts", retmode="text"
             )
-            out_handle = open(os.path.join(path, accession_numbers+".gbff"), "w")
-            out_handle.write(net_handle.read())
+            out_handle = gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "wt") # NEEDS TO BE CHANGED
+            out_handle.write(net_handle.read()) #NEEDS TO BE CHANGED
             out_handle.close()
             net_handle.close()
             print("Saved")
         
         # Open the file locally
-        with open(os.path.join(path, accession_numbers+".gbff")) as input_handle:
+        with gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "rt") as input_handle: # NEEDS TO BE CHANGED
             for index, seq_record in enumerate(SeqIO.parse(input_handle, "gb")):
                 temp = []
                 for feature in seq_record.features: 
@@ -40,21 +41,6 @@ def accession_to_rRNA_interval(accession_numbers, res, faulty):
                 result[seq_record.id] = temp     
                 res[seq_record.id] = temp 
 
-        """
-        with Entrez.efetch(
-            db="nucleotide", rettype="gbwithparts", retmode="text", id=accession_numbers
-        ) as handle:
-            for index, seq_record in enumerate(SeqIO.parse(handle, "gb")):
-                temp = []
-                for feature in seq_record.features: 
-                    if feature.type == "rRNA":
-                        for product in feature.qualifiers.get("product"):
-
-                            if "16S" in product:
-                                temp.append(str(feature.location))
-                result[seq_record.id] = temp     
-                res[seq_record.id] = temp 
-        """
     except Exception:
         # Adding faulty NCBI file to list for error log
         faulty.append(accession_numbers)
@@ -114,23 +100,4 @@ print(total)
 print("")
 print("Faulty records: ", faulty)
 print("------------------Test done----------------")
-
-
-# To check if downloaded beforehand
-Entrez.email = "A.N.Other@example.com"  # Always tell NCBI who you are
-filename = "EU490707.gbk"
-if not os.path.isfile(filename):
-    # Downloading...
-    net_handle = Entrez.efetch(
-        db="nucleotide", id="EU490707", rettype="gb", retmode="text"
-    )
-    out_handle = open(filename, "w")
-    out_handle.write(net_handle.read())
-    out_handle.close()
-    net_handle.close()
-    print("Saved")
-
-print("Parsing...")
-record = SeqIO.read(filename, "genbank")
-print(record)
 """
