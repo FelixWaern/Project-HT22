@@ -7,6 +7,7 @@ from Bio import SeqIO  # Should be imported once
 import ssl # Should be imported once
 import sys # Should be imported once
 import gzip  # Should be imported once
+import logging
 print("-------Package for GenBank rRNA caluculations fetched-------")
 print("--------------------10 records MAX--------------------------")
 
@@ -15,32 +16,45 @@ def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, l
     Entrez.api_key = api_key #Always use API key
     path = local_storage_path #Path to local storage
     result = {}
-    absolute_path = path + accession_numbers + ".gbff.gz" # What the file should be named. NEEDS TO BE CHANGED
+    absolute_path = path + accession_numbers + ".gbff.gz" 
     try: 
         # Check if it downloaded to local storage
         if not os.path.isfile(absolute_path):
             net_handle = Entrez.efetch(
                 db="nucleotide", id=accession_numbers, rettype="gbwithparts", retmode="text"
             )
-            out_handle = gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "wt") # NEEDS TO BE CHANGED
-            out_handle.write(net_handle.read()) #NEEDS TO BE CHANGED
+            out_handle = gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "wt") 
+            out_handle.write(net_handle.read()) 
             out_handle.close()
             net_handle.close()
             print("Saved")
-        
+         # Local variables
+        rrna_16s = []
+        rrna_other = []
         # Open the file locally
-        with gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "rt") as input_handle: # NEEDS TO BE CHANGED
+        with gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "rt") as input_handle:
             for index, seq_record in enumerate(SeqIO.parse(input_handle, "gb")):
                 temp = []
                 for feature in seq_record.features: 
                     if feature.type == "rRNA":
                         for product in feature.qualifiers.get("product"):
-
                             if "16S" in product:
                                 temp.append(str(feature.location))
+                                rrna_16s.append(str(feature.location)) 
+                            elif "RNA" in product:
+                                rrna_other.append(product)  
                 result[seq_record.id] = temp     
                 res[seq_record.id] = temp 
-
+        # Print warning or info to log file
+        if len(rrna_16s) == 0:
+            if len(rrna_other) == 0:
+                logging.warning("---------- WARNING ----------")
+                logging.warning(f" \nNo rRNA was found for {accession_numbers}") 
+            else:
+                logging.warning("---------- WARNING ----------")
+                logging.warning(f" \nNo 16S rRNA genes were found for {accession_numbers}, but these products were found:") 
+                for e in rrna_other:
+                    logging.warning(f"{e}") 
     except Exception:
         # Adding faulty NCBI file to list for error log
         faulty.append(accession_numbers)

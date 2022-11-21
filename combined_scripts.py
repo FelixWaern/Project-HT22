@@ -1,5 +1,5 @@
 # Combining the fetching data & csv_filtered
-def get_rRNA_intervals(email, api_key, local_storage_path):
+def get_rRNA_intervals(csv_path, email, api_key, local_storage_path):
     print("--------------Test for batch interation--------------")
     import time
     import sys
@@ -8,9 +8,10 @@ def get_rRNA_intervals(email, api_key, local_storage_path):
     from skewDB import fetching_data as fd
     sys.path.insert(0, '/NCBI_DATA_FETCH/')
     from NCBI_DATA_FETCH import main_script as ms
-        
-    test_df = fd.df.head(2000)
-    fd.fetch_csv_as_df(local_storage_path)
+
+    df = fd.fetch_csv_as_df(csv_path)    
+    test_df = df.head(50)
+
     i = 0
     j = 1
     batch = []
