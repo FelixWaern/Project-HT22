@@ -10,11 +10,11 @@ import gzip  # Should be imported once
 print("-------Package for GenBank rRNA caluculations fetched-------")
 print("--------------------10 records MAX--------------------------")
 
-def accession_to_rRNA_interval(accession_numbers, res, faulty):
-    Entrez.email = "Felix.wae@gmail.com" #Always tell NCBI who you are
-    Entrez.api_key = "7b4a5e9841f79495be73767323ad485fda08" #Always use API key
+def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, local_storage_path):
+    Entrez.email = email #Always tell NCBI who you are
+    Entrez.api_key = api_key #Always use API key
+    path = local_storage_path #Path to local storage
     result = {}
-    path = 'D:/' #Path to local storage
     absolute_path = path + accession_numbers + ".gbff.gz" # What the file should be named. NEEDS TO BE CHANGED
     try: 
         # Check if it downloaded to local storage
@@ -47,7 +47,7 @@ def accession_to_rRNA_interval(accession_numbers, res, faulty):
         sys.stderr.write("Error! Cannot fetch: %s        \n" % accession_numbers)
 #----------------------------------------------------------------------------------------
 
-def batch_operator(batch, faulty):
+def batch_operator(batch, faulty, email, api_key, local_storage_path):
     # The batch operator recieves a list of accession numbers and returns them as a dictionary with the accession numbers as keys
     # with the rRNA intervals for each chromosmes as the content. The functions uses multithreading, one thread per accession number.
     # Input: ["NC_002516.2", "NZ_CP041016.1"]
@@ -56,7 +56,7 @@ def batch_operator(batch, faulty):
     res = {}
     threads = {}
     for x in batch:
-        threads[x] = threading.Thread(target = accession_to_rRNA_interval, args =(x, res, faulty))
+        threads[x] = threading.Thread(target = accession_to_rRNA_interval, args =(x, res, faulty, email, api_key, local_storage_path))
     for x in threads:
         threads[x].start() 
     for x in threads:
@@ -76,7 +76,7 @@ else:
 
 
 
-
+"""
 # -----------------------------------------
 #Test if functions work
 # FAULTY RECORD: 'NC_002947.4'
@@ -107,3 +107,4 @@ print(total)
 print("")
 print("Faulty records: ", faulty)
 print("------------------Test done----------------")
+"""
