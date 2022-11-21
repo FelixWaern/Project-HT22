@@ -47,14 +47,15 @@ def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, l
                 res[seq_record.id] = temp 
         # Print warning or info to log file
         if len(rrna_16s) == 0:
-            if len(rrna_other) == 0:
-                logging.warning("---------- WARNING ----------")
+            if len(rrna_other) == 0: 
                 logging.warning(f" \nNo rRNA was found for {accession_numbers}") 
             else:
-                logging.warning("---------- WARNING ----------")
-                logging.warning(f" \nNo 16S rRNA genes were found for {accession_numbers}, but these products were found:") 
+                l = []
                 for e in rrna_other:
-                    logging.warning(f"{e}") 
+                    l.append(e)
+                    #logging.warning(f"{e}") 
+                logging.warning(f" \nNo 16S rRNA genes were found for {accession_numbers}, but these products were found: {str(l)}") 
+                
     except Exception:
         # Adding faulty NCBI file to list for error log
         faulty.append(accession_numbers)
