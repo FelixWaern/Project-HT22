@@ -5,18 +5,32 @@ import time #Should be imported once
 from Bio import Entrez  # Should be imported once
 from Bio import SeqIO  # Should be imported once
 import ssl # Should be imported once
-print("-------Test for handle parsing to make sure it is adaptable with fetch-------")
-print("----------------------------10 records MAX-----------------------------------")
+import sys # Should be imported once
+import gzip  # Should be imported once
+print("-------Package for GenBank rRNA caluculations fetched-------")
+print("--------------------10 records MAX--------------------------")
 
-def accession_to_rRNA_interval(accession_numbers, res):
+def accession_to_rRNA_interval(accession_numbers, res, faulty):
     Entrez.email = "Felix.wae@gmail.com" #Always tell NCBI who you are
-    Entrez.api_key = "7b4a5e9841f79495be73767323ad485fda08" #Always use key
+    Entrez.api_key = "7b4a5e9841f79495be73767323ad485fda08" #Always use API key
     result = {}
+    path = 'D:/' #Path to local storage
+    absolute_path = path + accession_numbers + ".gbff.gz" # What the file should be named. NEEDS TO BE CHANGED
     try: 
-        with Entrez.efetch(
-            db="nucleotide", rettype="gbwithparts", retmode="text", id=accession_numbers
-        ) as handle:
-            for index, seq_record in enumerate(SeqIO.parse(handle, "gb")):
+        # Check if it downloaded to local storage
+        if not os.path.isfile(absolute_path):
+            net_handle = Entrez.efetch(
+                db="nucleotide", id=accession_numbers, rettype="gbwithparts", retmode="text"
+            )
+            out_handle = gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "wt") # NEEDS TO BE CHANGED
+            out_handle.write(net_handle.read()) #NEEDS TO BE CHANGED
+            out_handle.close()
+            net_handle.close()
+            print("Saved")
+        
+        # Open the file locally
+        with gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "rt") as input_handle: # NEEDS TO BE CHANGED
+            for index, seq_record in enumerate(SeqIO.parse(input_handle, "gb")):
                 temp = []
                 for feature in seq_record.features: 
                     if feature.type == "rRNA":
@@ -28,22 +42,29 @@ def accession_to_rRNA_interval(accession_numbers, res):
                 res[seq_record.id] = temp 
 
     except Exception:
+        # Adding faulty NCBI file to list for error log
+        faulty.append(accession_numbers)
         sys.stderr.write("Error! Cannot fetch: %s        \n" % accession_numbers)
 #----------------------------------------------------------------------------------------
 
-def batch_operator(batch):
+def batch_operator(batch, faulty):
+    # The batch operator recieves a list of accession numbers and returns them as a dictionary with the accession numbers as keys
+    # with the rRNA intervals for each chromosmes as the content. The functions uses multithreading, one thread per accession number.
+    # Input: ["NC_002516.2", "NZ_CP041016.1"]
+    # Output: {"NC_002516.2": ['[722095:723631](+)', '[4792195:4793731](-)', '[5267723:5269259](-)', '[6043207:6044743](-)']
+    # , "NZ_CP041016.1: ['[1399531:1401046](-)', '[2622584:2624099](-)', '[5379840:5381355](+)']"}
     res = {}
     threads = {}
-    #Iterate over list
     for x in batch:
-        threads[x] = threading.Thread(target = accession_to_rRNA_interval, args =(x, res))
+        threads[x] = threading.Thread(target = accession_to_rRNA_interval, args =(x, res, faulty))
     for x in threads:
-        threads[x].start() # Can move this into the loop above. 
+        threads[x].start() 
     for x in threads:
         threads[x].join()
     return(res)
 #---------------------------------------------------------------------------------------
 
+# For some operating systems this was required as to not get errors when fetching the NCBI files. 
 try:
     _create_unverified_https_context = ssl._create_unverified_context
 except AttributeError:
@@ -56,12 +77,13 @@ else:
 
 
 
-
 # -----------------------------------------
 #Test if functions work
+# FAULTY RECORD: 'NC_002947.4'
 t0 = time.time()
 batch = ["NC_000913.3", "NC_000964.3", "NC_002516.2", "NZ_CP041016.1", "NZ_AP023438.1", "NC_022737.1", "NZ_CP013444.1", "NZ_CP086979.1", "NZ_CP085753.1", "NZ_CP012026.1"]
-res = batch_operator(batch)
+faulty = []
+res = batch_operator(batch, faulty)
 print("")
 print("Testing if the functions works as intended")  
 for x in res:
@@ -71,30 +93,17 @@ for x in res:
     print(res[x][0][-2])
     print("")
 
+#for x in res:
+#    if res[x][-2] == "+":
+#        if res[x][0]
+#        #Check in positive strand
+#    elif res[x][-2] == "-":
+        #Check
+
 t1 = time.time()
 print("")
 total = t1-t0
 print(total)
 print("")
+print("Faulty records: ", faulty)
 print("------------------Test done----------------")
-
-
-"""
-# To check if downloaded beforehand
-Entrez.email = "A.N.Other@example.com"  # Always tell NCBI who you are
-filename = "EU490707.gbk"
-if not os.path.isfile(filename):
-    # Downloading...
-    net_handle = Entrez.efetch(
-        db="nucleotide", id="EU490707", rettype="gb", retmode="text"
-    )
-    out_handle = open(filename, "w")
-    out_handle.write(net_handle.read())
-    out_handle.close()
-    net_handle.close()
-    print("Saved")
-
-print("Parsing...")
-record = SeqIO.read(filename, "genbank")
-print(record)
-"""
