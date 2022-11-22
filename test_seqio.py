@@ -22,7 +22,7 @@ def find_rrna():
     with open("GCF_000006765.1_ASM676v1_genomic.gbff") as input_handle:
         for record in SeqIO.parse(input_handle, "genbank"):
             for feature in record.features:
-                if feature.type == "tRNA":
+                if feature.type == "rRNA":
                     for product in feature.qualifiers.get("product"):
                         if "16S" in product:
                             rrna_16s.append(str(feature.location))       
