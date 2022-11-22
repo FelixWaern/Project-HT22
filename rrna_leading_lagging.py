@@ -1,6 +1,7 @@
 from skewDB import fetching_data as fd
 import pandas as pd
 import re
+import logging
 
 # dictionary with list object as values
 rrna_dict = {
@@ -16,6 +17,12 @@ rrna_dict = {
     "NC_002516.2" : ['[722095:723631](+)', '[4792195:4793731](-)', '[5267723:5269259](-)', '[6043207:6044743](-)']
 }
   
+# Create log file
+root_logger = logging.getLogger()
+root_logger.setLevel(logging.DEBUG)
+handler = logging.FileHandler(f'leading_lagging.log', 'w', 'utf-8')
+root_logger.addHandler(handler)
+
 # creating a Dataframe object with intervals for the rrna genes
 df_rrna = pd.DataFrame(dict([ (k, pd.Series(v)) for k, v in rrna_dict.items() ])).transpose()
 df_rrna = df_rrna.reset_index()
@@ -69,7 +76,7 @@ for row in range(len(df_rrna_ori_ter)):
                 if int(rrna[0]) in df_rrna_ori_ter.loc[row, "lagging1"]:
                     pass
                 else:
-                    print("FALSE")
+                    logging.warning(f" \nThe overlap with rRNA and leading/lagging strand is not correct for {df_rrna_ori_ter.loc[row, 'name']}") 
             elif df_rrna_ori_ter.loc[row, col][-2] == "+":
                 if int(rrna[0]) in df_rrna_ori_ter.loc[row, "leading1"]:
                     pass
@@ -77,7 +84,7 @@ for row in range(len(df_rrna_ori_ter)):
                     if int(rrna[0]) in df_rrna_ori_ter.loc[row, "leading2"]:
                         pass
                     else:
-                        print("FALSE")
+                        logging.warning(f" \nThe overlap with rRNA and leading/lagging strand is not correct for {df_rrna_ori_ter.loc[row, 'name']}") 
         # positive shift
         else:
             if len(rrna) == 0:
@@ -86,7 +93,7 @@ for row in range(len(df_rrna_ori_ter)):
                 if int(rrna[0]) in df_rrna_ori_ter.loc[row, "leading1"]:
                     pass
                 else:
-                    print("FALSE")
+                    logging.warning(f" \nThe overlap with rRNA and leading/lagging strand is not correct for {df_rrna_ori_ter.loc[row, 'name']}") 
             elif df_rrna_ori_ter.loc[row, col][-2] == "-":
                 if int(rrna[0]) in df_rrna_ori_ter.loc[row, "lagging1"]:
                     pass
@@ -94,4 +101,4 @@ for row in range(len(df_rrna_ori_ter)):
                     if int(rrna[0]) in df_rrna_ori_ter.loc[row, "lagging2"]:
                         pass
                     else:
-                        print("FALSE")
+                        logging.warning(f" \nThe overlap with rRNA and leading/lagging strand is not correct for {df_rrna_ori_ter.loc[row, 'name']}") 
