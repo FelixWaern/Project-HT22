@@ -56,70 +56,42 @@ for row in range(len(df_rrna_ori_ter)):
         df_rrna_ori_ter.loc[row, "lagging1"] = lagging1
         df_rrna_ori_ter.loc[row, "lagging2"] = lagging2
 
-print(df_rrna_ori_ter)
-df_rrna_ori_ter.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/Project-HT22/df_rrna_ori_ter.csv")
-
-# iterate over the df_rrna_ori_ter Dataframe and compare rRNA interval with leading/lagging strand
+# iterate over the Dataframe df_rrna_ori_ter and compare the rRNA intervals with leading/lagging strand
 for row in range(len(df_rrna_ori_ter)):
     for col in range(0, len(max(rrna_dict.values(), key=len))):
+        # find the first position of the rrna gene with regex
         rrna = re.findall(r'(?<=\[)[0-9]+', str(df_rrna_ori_ter.loc[row, col]))
-    # negative shift
+        # negative shift
         if df_rrna_ori_ter.loc[row, "shift"] < 0:
             if len(rrna) == 0:
                 pass
             elif str(df_rrna_ori_ter.loc[row, col][-2]) == "-":
-                print("RNA", rrna[0])
-                print("interval", df_rrna_ori_ter.loc[row, "lagging1"])
-                print("correct", int(rrna[0]) in df_rrna_ori_ter.loc[row, "lagging1"])
-            elif df_rrna_ori_ter.loc[row, col][-2] == "+":
-                rrna = re.findall(r'(?<=\[)[0-9]+', df_rrna_ori_ter.loc[row, col])
-                print("RNA", rrna[0])
-                print("interval", df_rrna_ori_ter.loc[row, "leading1"], df_rrna_ori_ter.loc[row, "leading2"])
-                if int(rrna[0]) in df_rrna_ori_ter.loc[row, "leading1"]:
-                    print("True")
+                if int(rrna[0]) in df_rrna_ori_ter.loc[row, "lagging1"]:
                     pass
                 else:
-                    print("correct", int(rrna[0]) in df_rrna_ori_ter.loc[row, "leading2"])
+                    print("FALSE")
+            elif df_rrna_ori_ter.loc[row, col][-2] == "+":
+                if int(rrna[0]) in df_rrna_ori_ter.loc[row, "leading1"]:
+                    pass
+                else:
+                    if int(rrna[0]) in df_rrna_ori_ter.loc[row, "leading2"]:
+                        pass
+                    else:
+                        print("FALSE")
+        # positive shift
         else:
             if len(rrna) == 0:
                 pass
             elif str(df_rrna_ori_ter.loc[row, col][-2]) == "+":
-                #if str(rrna[0]) in df_rrna_ori_ter.loc[i, "lagging1"]:
-                print("RNA", rrna[0])
-                print("interval", df_rrna_ori_ter.loc[row, "leading1"])
-                print("correct", int(rrna[0]) in df_rrna_ori_ter.loc[row, "leading1"])
-            elif df_rrna_ori_ter.loc[row, col][-2] == "-":
-                rrna = re.findall(r'(?<=\[)[0-9]+', df_rrna_ori_ter.loc[row, col])
-                print("RNA", rrna[0])
-                print("interval", df_rrna_ori_ter.loc[row, "lagging1"], df_rrna_ori_ter.loc[row, "lagging2"])
-                if int(rrna[0]) in df_rrna_ori_ter.loc[row, "lagging1"]:
-                    print("True")
+                if int(rrna[0]) in df_rrna_ori_ter.loc[row, "leading1"]:
                     pass
                 else:
-                    print("correct", int(rrna[0]) in df_rrna_ori_ter.loc[row, "lagging2"])
-
-
-"""for i in range(len(df_rrna_ori_ter)):
-    if df_rrna_ori_ter.loc[i, "shift"] < 0:
-        leading = pd.arrays.IntervalArray([
-            pd.Interval(0, df_rrna_ori_ter.loc[i, "Ter"], closed='left'), 
-            pd.Interval(df_rrna_ori_ter.loc[i, "Ori"], 
-            df_rrna_ori_ter.loc[i, "siz"], closed='left')])
-        df_rrna_ori_ter.loc[i, "leading"] = str(leading)
-        lagging = pd.Interval(
-            df_rrna_ori_ter.loc[i, "Ter"], 
-            df_rrna_ori_ter.loc[i, "Ori"], closed='left')
-        df_rrna_ori_ter.loc[i, "lagging"] = str(lagging)
-    else: 
-        leading = pd.Interval(
-            df_rrna_ori_ter.loc[i, "Ori"], 
-            df_rrna_ori_ter.loc[i, "Ter"], closed='left')
-        df_rrna_ori_ter.loc[i, "leading"] = str(leading)
-        lagging = pd.arrays.IntervalArray([
-            pd.Interval(0, df_rrna_ori_ter.loc[i, "Ori"], closed='left'), 
-            pd.Interval(df_rrna_ori_ter.loc[i, "Ter"], 
-            df_rrna_ori_ter.loc[i, "siz"], closed='left')])
-        df_rrna_ori_ter.loc[i, "lagging"] = str(lagging)
-print(df_rrna_ori_ter[['leading', 'lagging']])"""
-
-
+                    print("FALSE")
+            elif df_rrna_ori_ter.loc[row, col][-2] == "-":
+                if int(rrna[0]) in df_rrna_ori_ter.loc[row, "lagging1"]:
+                    pass
+                else:
+                    if int(rrna[0]) in df_rrna_ori_ter.loc[row, "lagging2"]:
+                        pass
+                    else:
+                        print("FALSE")
