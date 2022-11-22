@@ -1,0 +1,9 @@
+2022-11-22 11:35:56,268 The filtered data csv file was read from C:/Ashwini/Applied bioinformatics/FilteredDataFile.csv
+2022-11-22 11:35:56,901 Ori and Ter columns were successfully added
+2022-11-22 11:35:56,901 Checking the column values for few selected bacterial species
+2022-11-22 11:35:56,914    dnaApos      siz       div   shift      Ori      Ter
+4  3883729  4641651  0.499972 -744727  3896924  1948353
+2022-11-22 11:35:56,919         siz       div  shift      Ori      Ter  dnaApos
+86  4215605  0.481996 -69702  4145903  1998309      410
+2022-11-22 11:35:56,924        siz       div  shift    Ori      Ter  dnaApos
+9  6264403  0.376268  67390  67390  2382451      483

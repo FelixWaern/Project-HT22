@@ -21,6 +21,10 @@ for i in range(len(csv_files)):
 
 print(gcfits_accession[1])
 
+
+test = csv.df.loc[csv.df["name"] == "NZ_CP064947.1",["realm2", "dnaApos","siz","div","shift","plasmid"]]
+print(test)
+
 #Accessing csv file to get the chromosomes with higher RMSCG
 high_rmsGC = csv.df_2.loc[csv.df_2["rmsGC"] > 0.2]
 high_rmsGC_siz = len(high_rmsGC.index)
@@ -54,6 +58,11 @@ for file in csv_files:
     #else:
         #print("not present")
 
+if "NZ_CP064947.1" in new_csv_files:
+    print("present")
+else:
+    print("not present") 
+
 print(new_csv_files[1])
 
 li=[]
@@ -65,7 +74,7 @@ print("finished reading csv files into dataframes")
 #print(li[1])
 
 li[1].plot(x = "pos", y = "predgc2skew")
-plt.show()
+#plt.show()
 
 #big_df = pd.concat(li, ignore_index=True)
 

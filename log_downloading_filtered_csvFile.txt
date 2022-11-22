@@ -1,0 +1,14 @@
+2022-11-22 11:21:04,775 The csv file from https://skewdb.org/view/gcskewdb.csv was read
+2022-11-22 11:21:11,193 Total number of chromosomes present in the csv file are: 38267
+2022-11-22 11:21:11,215 Total number of chromosomes of bacteria after removing archea and other things are: 37419
+2022-11-22 11:21:11,233 Total number of chromosomes of bacteria after removing plasmids are: 30987
+2022-11-22 11:21:11,247 Total number of chromosomes of bacteria, whose rmsGC values are less than 0.2 are: 28431
+2022-11-22 11:21:11,261 Total number of chromosomes of bacteria after filtering for the extreame div values are: 27733
+2022-11-22 11:21:11,278 Successfully downloaded the filtered data csv file 
+2022-11-22 11:22:38,150 The csv file from https://skewdb.org/view/gcskewdb.csv was read
+2022-11-22 11:22:45,683 Total number of chromosomes present in the csv file are: 38267
+2022-11-22 11:22:45,704 Total number of chromosomes of bacteria after removing archea and other things are: 37419
+2022-11-22 11:22:45,720 Total number of chromosomes of bacteria after removing plasmids are: 30987
+2022-11-22 11:22:45,736 Total number of chromosomes of bacteria, whose rmsGC values are less than 0.2 are: 28431
+2022-11-22 11:22:45,750 Total number of chromosomes of bacteria after filtering for the extreame div values are: 27733
+2022-11-22 11:22:45,765 Successfully downloaded the filtered data csv file 
