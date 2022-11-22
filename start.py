@@ -9,6 +9,7 @@ import datetime
 from combined_scripts import get_rRNA_intervals as get_rrna
 sys.path.insert(0, '/skewDB/')
 from skewDB import dowloading_filtered_csvFile as download_filtered
+from rrna_leading_lagging import rrna_lead_lag as rll
 
 
 def start(csv_path, email, api_key, local_storage_path):
@@ -40,9 +41,11 @@ def start(csv_path, email, api_key, local_storage_path):
     rrna_dict = get_rrna(csv_path, email, api_key, local_storage_path)    
 
 
-    # Send to Saras script
+    # Send to rrna leading lagging script
+    rll(csv_path, rrna_dict)
 
-
+    print("Everything is done")
+    
 csv_path = 'C:/Users/Felix/Documents/FilteredDataFile.csv'
 email = "Felix.wae@gmail.com"
 api_key = "7b4a5e9841f79495be73767323ad485fda08"

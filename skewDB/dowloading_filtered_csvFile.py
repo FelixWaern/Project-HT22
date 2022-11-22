@@ -1,7 +1,6 @@
 # first import the module
 import pandas as pd
-def run_download_filtered_csvfile(csv_path):import ssl
-
+import ssl
 try:
     _create_unverified_https_context = ssl._create_unverified_context
 except AttributeError:
@@ -10,6 +9,8 @@ except AttributeError:
 else:
     # Handle target environment that doesn't support HTTPS verification
     ssl._create_default_https_context = _create_unverified_https_context
+
+def run_download_filtered_csvfile(csv_path):
 
     # reading csv file into dataframe
     df = pd.read_csv('https://skewdb.org/view/gcskewdb.csv')
