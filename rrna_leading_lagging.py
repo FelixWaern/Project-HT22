@@ -27,6 +27,78 @@ df_ori_ter = fd.df[['name', 'siz', 'shift', 'div','Ter', 'Ori']]
 # merge the Dataframe columns with matching accession numbers
 df_rrna_ori_ter = pd.merge(df_rrna, df_ori_ter, on="name")
 
+# create intervals for leading and lagging strand
+for row in range(len(df_rrna_ori_ter)):
+    # negative shift
+    if df_rrna_ori_ter.loc[row, "shift"] < 0:
+        # add leading strand interval
+        leading1 = pd.Interval(0, df_rrna_ori_ter.loc[row, "Ter"], closed='left')
+        leading2 = pd.Interval(df_rrna_ori_ter.loc[row, "Ori"], 
+            df_rrna_ori_ter.loc[row, "siz"], closed='left')
+        df_rrna_ori_ter.loc[row, "leading1"] = leading1
+        df_rrna_ori_ter.loc[row, "leading2"] = leading2
+        # add lagging strand interval
+        lagging1 = pd.Interval(
+            df_rrna_ori_ter.loc[row, "Ter"], 
+            df_rrna_ori_ter.loc[row, "Ori"], closed='left')
+        df_rrna_ori_ter.loc[row, "lagging1"] = lagging1
+    # positive shift
+    else: 
+        # add leading strand interval
+        leading1 = pd.Interval(
+            df_rrna_ori_ter.loc[row, "Ori"], 
+            df_rrna_ori_ter.loc[row, "Ter"], closed='left')
+        df_rrna_ori_ter.loc[row, "leading1"] = leading1
+        # add lagging strand interval
+        lagging1 = pd.Interval(0, df_rrna_ori_ter.loc[row, "Ori"], closed='left') 
+        lagging2 = pd.Interval(df_rrna_ori_ter.loc[row, "Ter"], 
+            df_rrna_ori_ter.loc[row, "siz"], closed='left')
+        df_rrna_ori_ter.loc[row, "lagging1"] = lagging1
+        df_rrna_ori_ter.loc[row, "lagging2"] = lagging2
+
+print(df_rrna_ori_ter)
+df_rrna_ori_ter.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/Project-HT22/df_rrna_ori_ter.csv")
+
+# iterate over the df_rrna_ori_ter Dataframe and compare rRNA interval with leading/lagging strand
+for row in range(len(df_rrna_ori_ter)):
+    for col in range(0, len(max(rrna_dict.values(), key=len))):
+        rrna = re.findall(r'(?<=\[)[0-9]+', str(df_rrna_ori_ter.loc[row, col]))
+    # negative shift
+        if df_rrna_ori_ter.loc[row, "shift"] < 0:
+            if len(rrna) == 0:
+                pass
+            elif str(df_rrna_ori_ter.loc[row, col][-2]) == "-":
+                print("RNA", rrna[0])
+                print("interval", df_rrna_ori_ter.loc[row, "lagging1"])
+                print("correct", int(rrna[0]) in df_rrna_ori_ter.loc[row, "lagging1"])
+            elif df_rrna_ori_ter.loc[row, col][-2] == "+":
+                rrna = re.findall(r'(?<=\[)[0-9]+', df_rrna_ori_ter.loc[row, col])
+                print("RNA", rrna[0])
+                print("interval", df_rrna_ori_ter.loc[row, "leading1"], df_rrna_ori_ter.loc[row, "leading2"])
+                if int(rrna[0]) in df_rrna_ori_ter.loc[row, "leading1"]:
+                    print("True")
+                    pass
+                else:
+                    print("correct", int(rrna[0]) in df_rrna_ori_ter.loc[row, "leading2"])
+        else:
+            if len(rrna) == 0:
+                pass
+            elif str(df_rrna_ori_ter.loc[row, col][-2]) == "+":
+                #if str(rrna[0]) in df_rrna_ori_ter.loc[i, "lagging1"]:
+                print("RNA", rrna[0])
+                print("interval", df_rrna_ori_ter.loc[row, "leading1"])
+                print("correct", int(rrna[0]) in df_rrna_ori_ter.loc[row, "leading1"])
+            elif df_rrna_ori_ter.loc[row, col][-2] == "-":
+                rrna = re.findall(r'(?<=\[)[0-9]+', df_rrna_ori_ter.loc[row, col])
+                print("RNA", rrna[0])
+                print("interval", df_rrna_ori_ter.loc[row, "lagging1"], df_rrna_ori_ter.loc[row, "lagging2"])
+                if int(rrna[0]) in df_rrna_ori_ter.loc[row, "lagging1"]:
+                    print("True")
+                    pass
+                else:
+                    print("correct", int(rrna[0]) in df_rrna_ori_ter.loc[row, "lagging2"])
+
+
 """for i in range(len(df_rrna_ori_ter)):
     if df_rrna_ori_ter.loc[i, "shift"] < 0:
         leading = pd.arrays.IntervalArray([
@@ -50,44 +122,4 @@ df_rrna_ori_ter = pd.merge(df_rrna, df_ori_ter, on="name")
         df_rrna_ori_ter.loc[i, "lagging"] = str(lagging)
 print(df_rrna_ori_ter[['leading', 'lagging']])"""
 
-# create intervals for leading and lagging strand
-for i in range(len(df_rrna_ori_ter)):
-    # negative shift
-    if df_rrna_ori_ter.loc[i, "shift"] < 0:
-        # add leading strand interval
-        leading1 = pd.Interval(0, df_rrna_ori_ter.loc[i, "Ter"], closed='left')
-        leading2 = pd.Interval(df_rrna_ori_ter.loc[i, "Ori"], 
-            df_rrna_ori_ter.loc[i, "siz"], closed='left')
-        df_rrna_ori_ter.loc[i, "leading1"] = str(leading1)
-        df_rrna_ori_ter.loc[i, "leading2"] = str(leading2)
-        # add lagging strand interval
-        lagging1 = pd.Interval(
-            df_rrna_ori_ter.loc[i, "Ter"], 
-            df_rrna_ori_ter.loc[i, "Ori"], closed='left')
-        df_rrna_ori_ter.loc[i, "lagging1"] = str(lagging1)
-    # positive shift
-    else: 
-        # add leading strand interval
-        leading1 = pd.Interval(
-            df_rrna_ori_ter.loc[i, "Ori"], 
-            df_rrna_ori_ter.loc[i, "Ter"], closed='left')
-        df_rrna_ori_ter.loc[i, "leading1"] = str(leading1)
-        # add lagging strand interval
-        lagging1 = pd.Interval(0, df_rrna_ori_ter.loc[i, "Ori"], closed='left') 
-        lagging2 = pd.Interval(df_rrna_ori_ter.loc[i, "Ter"], 
-            df_rrna_ori_ter.loc[i, "siz"], closed='left')
-        df_rrna_ori_ter.loc[i, "lagging1"] = str(lagging1)
-        df_rrna_ori_ter.loc[i, "lagging2"] = str(lagging2)
-
-print(df_rrna_ori_ter)
-
-# iterate over the df_rrna_ori_ter Dataframe and compare rRNA interval with leading/lagging strand
-for i in range(len(df_rrna_ori_ter)):
-    # negative shift
-    if df_rrna_ori_ter.loc[i, 0][-2] == "-":
-        rrna = re.findall(r'(?<=\[)[0-9]+', df_rrna_ori_ter.loc[i, 0])
-        #if str(rrna[0]) in df_rrna_ori_ter.loc[i, "lagging1"]:
-        print("OK")
-        print("RNA", rrna[0])
-        print(df_rrna_ori_ter.loc[i, "lagging1"])
 
