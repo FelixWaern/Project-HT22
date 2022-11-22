@@ -21,13 +21,8 @@ def shift_value(shift, siz):
 
 #Method defined for calculate the size after adding the shift value 
 def shift_value_terminus(shift, siz):
-    if shift > 0:
-        new_siz = siz + shift
-    elif shift < 0:
-        new_siz = siz + shift
-    else:
-         new_siz = siz
-    return new_siz
+    ter = (siz * df.loc[i, "div"]) + shift
+    return ter
 
 #For loop for iterating over all chromosomes
 for i in range(len(df)):
@@ -35,8 +30,7 @@ for i in range(len(df)):
     siz = df.loc[i, "siz"]
     origin = shift_value(shift, siz)
     ori.append(origin)
-    new_siz = shift_value_terminus(shift, siz)
-    terminus = new_siz * df.loc[i, "div"]
+    terminus = shift_value_terminus(shift, siz)
     rounded_terminus = round(terminus)
     ter.append(rounded_terminus)
     
