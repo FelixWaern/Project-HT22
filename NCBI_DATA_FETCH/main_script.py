@@ -53,7 +53,6 @@ def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, l
                 l = []
                 for e in rrna_other:
                     l.append(e)
-                    #logging.warning(f"{e}") 
                 logging.warning(f" \nNo 16S rRNA genes were found for {accession_numbers}, but these products were found: {str(l)}") 
                 
     except Exception:
