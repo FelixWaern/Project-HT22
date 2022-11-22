@@ -16,7 +16,7 @@ def start(csv_path, email, api_key, local_storage_path):
     if __name__ == "__main__":
         now = datetime.datetime.now()
         start_datetime = now.strftime('%Y-%m-%d %H:%M')
-        logging.basicConfig(level=logging.DEBUG, filename="faulty_NCBI_records", filemode="a+",
+        logging.basicConfig(level=logging.DEBUG, filename="logfile", filemode="a+",
                         format="%(asctime)-15s %(levelname)-8s %(message)s")
                         
         """Function that searches for 16S rRNA genes"""
@@ -27,8 +27,7 @@ def start(csv_path, email, api_key, local_storage_path):
         # Create log file
         root_logger = logging.getLogger()
         root_logger.setLevel(logging.DEBUG)
-        handler = logging.FileHandler(f'warnings_rrna_{start_datetime}.log', 'w', 'utf-8')
-        root_logger.addHandler(handler)
+        
     
 
     #Check if csv is downloaded & filtered 

@@ -94,16 +94,19 @@ else:
 # -----------------------------------------
 #Test if functions work
 # FAULTY RECORD: 'NC_002947.4'
+email = "Felix.wae@gmail.com"
+api_key = "7b4a5e9841f79495be73767323ad485fda08"
+local_storage_path = 'D:/'
 t0 = time.time()
 batch = ["NC_000913.3", "NC_000964.3", "NC_002516.2", "NZ_CP041016.1", "NZ_AP023438.1", "NC_022737.1", "NZ_CP013444.1", "NZ_CP086979.1", "NZ_CP085753.1", "NZ_CP012026.1"]
 faulty = []
-res = batch_operator(batch, faulty)
+res = batch_operator(batch, faulty, email, api_key, local_storage_path)
 print("")
 print("Testing if the functions works as intended")  
 for x in res:
     print(x)
     print(res[x])
-    print(res[x][0][1:-5])
+    print(res[x][0][1:-4])
     print(res[x][0][-2])
     print("")
 
