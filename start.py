@@ -1,5 +1,7 @@
 # The top script which calls and checks 
-#TODO Email NCBI about the faulty files, fix so only one log file with date
+#TODO Email NCBI about the faulty files, perform for larger dataset, investigate faulty or 
+# strange record, fix the log file gets the date
+#TODO The new dnaA investigation things
 
 
 import sys
@@ -45,7 +47,7 @@ def start(csv_path, email, api_key, local_storage_path):
     rll(csv_path, rrna_dict)
 
     print("Everything is done")
-    
+
 csv_path = 'C:/Users/Felix/Documents/FilteredDataFile.csv'
 email = "Felix.wae@gmail.com"
 api_key = "7b4a5e9841f79495be73767323ad485fda08"
