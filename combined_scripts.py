@@ -9,8 +9,10 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path):
     sys.path.insert(0, '/NCBI_DATA_FETCH/')
     from NCBI_DATA_FETCH import main_script as ms
 
-    df = fd.fetch_csv_as_df(csv_path)    
-    test_df = df.head(8000)
+    df = fd.fetch_csv_as_df(csv_path) 
+    #Ta från [6000:7000]
+    #test_df = df.loc[6000:7000]
+    test_df = df.head(50)
 
     i = 0
     j = 1
