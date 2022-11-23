@@ -51,3 +51,4 @@ email = "Felix.wae@gmail.com"
 api_key = "7b4a5e9841f79495be73767323ad485fda08"
 local_storage_path = 'D:/'
 start(csv_path, email, api_key, local_storage_path)
+#TEST
