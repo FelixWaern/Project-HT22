@@ -1,3 +1,4 @@
+#TODO Fix the other special case. Make nicer warning messages, so it is easy to find which rrna that is not matching
 def rrna_lead_lag(csv_path, rrna_dict):
     import sys
     sys.path.insert(0, '/skewDB/')
@@ -57,7 +58,6 @@ def rrna_lead_lag(csv_path, rrna_dict):
         # positive shift
         else: 
             # special case for positive shift 
-            #TODO calculate terminus manually here!!!!!
             if ter > df_rrna_ori_ter.loc[row, "siz"]:
                 # add leading strand interval
                 leading1 = pd.Interval(
