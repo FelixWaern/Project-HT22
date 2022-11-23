@@ -23,7 +23,14 @@ def fetch_csv_as_df(csv_path):
     #Method defined for calculate the size after adding the shift value 
     def shift_value_terminus(shift, siz):
         ter = (siz * df.loc[i, "div"]) + shift
-        return ter
+        if ter > siz:
+            new_ter = ter - siz
+            return new_ter
+        elif ter < 0:
+            new_ter = (siz + ter)
+            return new_ter
+        else:
+            return ter
 
     #For loop for iterating over all chromosomes
     for i in range(len(df)):
@@ -48,6 +55,6 @@ def fetch_csv_as_df(csv_path):
     # print(P_aeruginosa)
 
     df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
-    return(df)
     #writing to csv file stored in local computer
-    #df.to_csv("C:/Ashwini/Applied bioinformatics/dataFile_with_ori&ter.csv")
+    df.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_with_ori&ter.csv")
+    return(df)
