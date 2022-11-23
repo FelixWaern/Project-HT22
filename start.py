@@ -46,8 +46,8 @@ def start(csv_path, email, api_key, local_storage_path):
 
     print("Everything is done")
     
-csv_path = 'C:/Users/Felix/Documents/FilteredDataFile.csv'
-email = "Felix.wae@gmail.com"
-api_key = "7b4a5e9841f79495be73767323ad485fda08"
-local_storage_path = 'D:/'
+csv_path = '/Users/saralindberg/Documents/Applied_bioinformatics/Code/FilteredDataFile.csv'
+email = "lindberg.sara2@gmail.com"
+api_key = "bddd70a82f6fd9c645410095b4a732aa7c08"
+local_storage_path = '/Volumes/LIONELGUY/'
 start(csv_path, email, api_key, local_storage_path)
