@@ -43,30 +43,78 @@ def rrna_lead_lag(csv_path, rrna_dict):
     for row in range(len(df_rrna_ori_ter)):
         # negative shift
         if df_rrna_ori_ter.loc[row, "shift"] < 0:
-            # add leading strand interval
-            leading1 = pd.Interval(0, df_rrna_ori_ter.loc[row, "Ter"], closed='left')
-            leading2 = pd.Interval(df_rrna_ori_ter.loc[row, "Ori"], 
-                df_rrna_ori_ter.loc[row, "siz"], closed='left')
-            df_rrna_ori_ter.loc[row, "leading1"] = leading1
-            df_rrna_ori_ter.loc[row, "leading2"] = leading2
-            # add lagging strand interval
-            lagging1 = pd.Interval(
-                df_rrna_ori_ter.loc[row, "Ter"], 
-                df_rrna_ori_ter.loc[row, "Ori"], closed='left')
-            df_rrna_ori_ter.loc[row, "lagging1"] = lagging1
+            # special case for negative shift 
+            if df_rrna_ori_ter.loc[row, "Ter"] < 0:
+                print("NEGATIVE")
+                print("Name", df_rrna_ori_ter.loc[row, "name"])
+                print("Ori", df_rrna_ori_ter.loc[row, "Ori"])
+                print("Ter", df_rrna_ori_ter.loc[row, "Ter"])
+                print("Size", df_rrna_ori_ter.loc[row, "siz"])
+                # add leading strand interval
+                leading1 = pd.Interval(0, df_rrna_ori_ter.loc[row, "Ori"], closed='left')
+                leading2 = pd.Interval(df_rrna_ori_ter.loc[row, "Ter"], 
+                    df_rrna_ori_ter.loc[row, "siz"], closed='left')
+                df_rrna_ori_ter.loc[row, "leading1"] = leading1
+                df_rrna_ori_ter.loc[row, "leading2"] = leading2
+                # add lagging strand interval
+                lagging1 = pd.Interval(
+                    df_rrna_ori_ter.loc[row, "Ori"], 
+                    df_rrna_ori_ter.loc[row, "Ter"], closed='left')
+                df_rrna_ori_ter.loc[row, "lagging1"] = lagging1
+            else:
+                # add leading strand interval
+                print("NEGATIVE")
+                print("Name", df_rrna_ori_ter.loc[row, "name"])
+                print("Ori", df_rrna_ori_ter.loc[row, "Ori"])
+                print("Ter", df_rrna_ori_ter.loc[row, "Ter"])
+                print("Size", df_rrna_ori_ter.loc[row, "siz"])
+                leading1 = pd.Interval(0, df_rrna_ori_ter.loc[row, "Ter"], closed='left')
+                leading2 = pd.Interval(df_rrna_ori_ter.loc[row, "Ori"], 
+                    df_rrna_ori_ter.loc[row, "siz"], closed='left')
+                df_rrna_ori_ter.loc[row, "leading1"] = leading1
+                df_rrna_ori_ter.loc[row, "leading2"] = leading2
+                # add lagging strand interval
+                lagging1 = pd.Interval(
+                    df_rrna_ori_ter.loc[row, "Ter"], 
+                    df_rrna_ori_ter.loc[row, "Ori"], closed='left')
+                df_rrna_ori_ter.loc[row, "lagging1"] = lagging1
         # positive shift
         else: 
-            # add leading strand interval
-            leading1 = pd.Interval(
-                df_rrna_ori_ter.loc[row, "Ori"], 
-                df_rrna_ori_ter.loc[row, "Ter"], closed='left')
-            df_rrna_ori_ter.loc[row, "leading1"] = leading1
-            # add lagging strand interval
-            lagging1 = pd.Interval(0, df_rrna_ori_ter.loc[row, "Ori"], closed='left') 
-            lagging2 = pd.Interval(df_rrna_ori_ter.loc[row, "Ter"], 
-                df_rrna_ori_ter.loc[row, "siz"], closed='left')
-            df_rrna_ori_ter.loc[row, "lagging1"] = lagging1
-            df_rrna_ori_ter.loc[row, "lagging2"] = lagging2
+            # special case for positive shift 
+            if df_rrna_ori_ter.loc[row, "Ter"] > df_rrna_ori_ter.loc[row, "siz"]:
+                print("POSITIVE")
+                print("Name", df_rrna_ori_ter.loc[row, "name"])
+                print("Ori", df_rrna_ori_ter.loc[row, "Ori"])
+                print("Ter", df_rrna_ori_ter.loc[row, "Ter"])
+                print("Size", df_rrna_ori_ter.loc[row, "siz"])
+                # add leading strand interval
+                leading1 = pd.Interval(
+                    df_rrna_ori_ter.loc[row, "Ter"], 
+                    df_rrna_ori_ter.loc[row, "Ori"], closed='left')
+                df_rrna_ori_ter.loc[row, "leading1"] = leading1
+                # add lagging strand interval
+                lagging1 = pd.Interval(0, df_rrna_ori_ter.loc[row, "Ter"], closed='left') 
+                lagging2 = pd.Interval(df_rrna_ori_ter.loc[row, "Ori"], 
+                    df_rrna_ori_ter.loc[row, "siz"], closed='left')
+                df_rrna_ori_ter.loc[row, "lagging1"] = lagging1
+                df_rrna_ori_ter.loc[row, "lagging2"] = lagging2
+            else:
+                # add leading strand interval
+                print("POSITIVE")
+                print("Name", df_rrna_ori_ter.loc[row, "name"])
+                print("Ori", df_rrna_ori_ter.loc[row, "Ori"])
+                print("Ter", df_rrna_ori_ter.loc[row, "Ter"])
+                print("Size", df_rrna_ori_ter.loc[row, "siz"])
+                leading1 = pd.Interval(
+                    df_rrna_ori_ter.loc[row, "Ori"], 
+                    df_rrna_ori_ter.loc[row, "Ter"], closed='left')
+                df_rrna_ori_ter.loc[row, "leading1"] = leading1
+                # add lagging strand interval
+                lagging1 = pd.Interval(0, df_rrna_ori_ter.loc[row, "Ori"], closed='left') 
+                lagging2 = pd.Interval(df_rrna_ori_ter.loc[row, "Ter"], 
+                    df_rrna_ori_ter.loc[row, "siz"], closed='left')
+                df_rrna_ori_ter.loc[row, "lagging1"] = lagging1
+                df_rrna_ori_ter.loc[row, "lagging2"] = lagging2
 
     # iterate over the Dataframe df_rrna_ori_ter and compare the rRNA intervals with leading/lagging strand
     for row in range(len(df_rrna_ori_ter)):
