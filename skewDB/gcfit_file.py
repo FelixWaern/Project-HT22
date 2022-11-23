@@ -64,7 +64,9 @@ for file_name in new_csv_files:
 print("finished reading csv files into dataframes")
 #print(li[1])
 
-li[1].plot(x = "pos", y = "predgc2skew")
+plt.figure()
+plt.plot(li[1].pos, li[1].gc2skew ,label="Cumulative GC skew")
+plt.plot(li[1].pos, li[1].predgc2skew ,label="Fitted GC skew")
 plt.show()
 
 #big_df = pd.concat(li, ignore_index=True)
