@@ -1,6 +1,5 @@
 # Combining the fetching data & csv_filtered
-def get_rRNA_intervals(csv_path, email, api_key, local_storage_path):
-    print("--------------Test for batch interation--------------")
+def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, verbose=False):
     import time
     import sys
     import logging
@@ -23,8 +22,10 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path):
     t_fin_1 = time.time()
     for index, row in test_df.iterrows():
         if i == 10:
+            if verbose == True:
+                logging.debug(f"\n --------Batch {j} sent to batch_operator--------- \n Contains NCBI records: {batch} ")
             t0 = time.time()
-            res = ms.batch_operator(batch, faulty, email, api_key, local_storage_path)
+            res = ms.batch_operator(batch, faulty, email, api_key, local_storage_path, verbose)
             dict.update(res)
             i = 0
             batch = []
@@ -45,8 +46,11 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path):
             batch.append(row["name"])
 
     print("Number of chromosomes left: ",len(batch))
-    res = ms.batch_operator(batch, faulty, email, api_key, local_storage_path)
-    dict.update(res)
+    if len(batch) > 0:
+        if verbose == True:
+                logging.debug(f"\n --------Remaining NCBI records sent to batch_operator--------- \n Contains NCBI records: {batch} ")
+        res = ms.batch_operator(batch, faulty, email, api_key, local_storage_path)
+        dict.update(res)
 
 
     print("-----All chromosmes with corresponding rRNA intervals should be in dict now-----")

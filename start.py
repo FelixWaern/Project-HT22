@@ -1,13 +1,11 @@
 # The top script which calls and checks 
 #TODO Email NCBI about the faulty files, KEEP UNTIL LATER SO WE KNOW WE HAVE ONE FAULTY.
 #TODO Perform for larger dataset, investigate faulty or strange records
-#TODO Fix the log file gets the date - DONE
-#TODO Make it compatible for bash commands - DONE
-#TODO Add optional verbosity as bash commands - 
-#TODO Write the description of the program for the terminal parser. 
+#TODO Add optional verbosity as bash commands - Started can be expanded
 #TODO The new dnaA investigation things - 
 #TODO Need a check if biopython is downloaded?
 
+import importlib.util
 import argparse
 import sys
 import os
@@ -18,57 +16,86 @@ sys.path.insert(0, '/skewDB/')
 from skewDB import dowloading_filtered_csvFile as download_filtered
 from rrna_leading_lagging import rrna_lead_lag as rll
 
+
 """
-parser = argparse.ArgumentParser(description='What the process does.')
+parser = argparse.ArgumentParser(description='The start.py script downloads chromosomes data from the SkewDB by Bert Hubert. It filters it, calculates leading and lagging strand, and passes it '
+                                "to to a subscript which fetches the NCBI records corresponding to the remaining chromosomes. "
+                                "The NCBI record contains rRNA intervals which are compared to the leading and lagging strand intervals. "
+                                "If the primary rRNA intervals do not overlap with leading they are stored in a logfile and reported. And vice versa for complementary rRNA and the lagging strand.")
 
 # 4 positional arguments which are mandatory
 parser.add_argument('csv_path', metavar='csv_path',
-                    help='The csv path to what the filtered data from the SkewDB will be name. Example: C:/Users/Felix/Documents/FilteredDataFile.csv)
+                    help='The csv path to what the filtered data from the SkewDB will be name. Example: C:/Users/Felix/Documents/FilteredDataFile.csv')
 
 parser.add_argument('email', metavar='email',
                     help='The email used for the NCBI account of the user. Must be the account as the API-key is for. Example: firstname.lastname@gmail.com')
 
 parser.add_argument('api_key', metavar='api_key',
-                    help='The api key for the NCBI account. API-key must be used and must match the email for the account.' Example: 1y4a5e5641h73645fg73759384ad485lot05)
+                    help='The API-key for the NCBI account. API-key must be used and must match the email for the account. Example: 1y4a5e5641h73645fg73759384ad485lot05')
 
 parser.add_argument('local_storage_path', metavar='local_storage_path',
-                    help='The local storage path to a where the NCBI records will be stored, must have sufficient space. Approximately 70 GB' Example: D:/)
+                    help='The local storage path to a where the NCBI records will be stored, must have sufficient space. Approximately 70 GB. Example: D:/ ')
 
 # Optional arguments
+parser.add_argument('-v', '--verbose',
+                    action='store_true',
+                    help = 'Toggle verbose logging. Changes the amount of information in the output log file.' )  # on/off flag
 
 #Parsing all arguments
 args = parser.parse_args()
 """
 
-def start(csv_path, email, api_key, local_storage_path):
+
+def start(csv_path, email, api_key, local_storage_path, verbose=False):
+
+    print("--------------Starting SkewDB rRNA interval match--------------")
     # Start logging
     if __name__ == "__main__":
         # Starting main log file
         now = datetime.datetime.now()
         start_datetime = now.strftime('%Y-%m-%d__%H%M')
         log_file_name = str("logfile_" + start_datetime + ".log")
-        print(log_file_name)
-        print(type(log_file_name))
         logging.basicConfig(level=logging.DEBUG, filename=log_file_name, filemode="a+",
                         format="%(asctime)-15s %(levelname)-8s %(message)s")
         
-    
+    logging.info(f"Logging verbose set to {verbose}") 
+
+    # ---------------Check if biopython is installed-----------------
+    # For illustrative purposes.
+    name = 'biopython'
+    if name in sys.modules:
+        print(f"{name!r} already in sys.modules")
+    elif (spec := importlib.util.find_spec(name)) is not None:
+        # If you choose to perform the actual import ...
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[name] = module
+        spec.loader.exec_module(module)
+        print(f"{name!r} has been imported")
+    else:
+        print(f"can't find the {name!r} module")
+
 
     #Check if csv is downloaded & filtered 
     if not os.path.isfile(csv_path):
+        if verbose == True:
+            logging.debug(f"\n --------Filtered csv file not found--------- \n run_downloaded_filtered_csvfile input: {csv_path} ")
         download_filtered.run_download_filtered_csvfile(csv_path)
         print("csv filtered downloaded")
 
 
     #Get the rRNA interval dict
-    rrna_dict = get_rrna(csv_path, email, api_key, local_storage_path)    
+    if verbose == True:
+        logging.debug(f"\n --------parameters into rrna_dict()--------- \n csv_path = {csv_path} \n email = {email} \n api_key = {api_key} \n local_storage_path = {local_storage_path}")
+    rrna_dict = get_rrna(csv_path, email, api_key, local_storage_path, verbose)
 
 
     # Send to rrna leading lagging script
+    if verbose == True:
+         logging.debug(f"\n parameters into rrna_dict: \n csv_path = {csv_path} \n rrna_dict = rrna_dict, too long to display")
     rll(csv_path, rrna_dict)
 
     print("Everything is done")
-#start(args.csv_path, args.email, args.api_key, args.local_storage_path)
+#start(args.csv_path, args.email, args.api_key, args.local_storage_path, args.verbose)
 
 
 
