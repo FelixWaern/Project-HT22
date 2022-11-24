@@ -10,9 +10,9 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path):
     from NCBI_DATA_FETCH import main_script as ms
 
     df = fd.fetch_csv_as_df(csv_path) 
-    #Ta från [6000:7000]
-    #test_df = df.loc[6000:7000]
-    test_df = df.head(50)
+    #Ta från [8000:9000]
+    test_df = df.loc[8000:9000]
+    #test_df = df.head(50)
 
     i = 0
     j = 1
@@ -56,9 +56,9 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path):
     print("")
     print("Faulty records from NCBI: ", faulty)
     if faulty == []:
-        logging.info("OK! No faulty records from NCBI recorded!")
+        logging.debug("OK! No faulty records from NCBI recorded!")
     else:
-        logging.info("Faulty records from NCBI: "+ str(faulty))
+        logging.warning("Faulty records from NCBI: "+ str(faulty))
     print("")
     print("------------------Test done----------------")
     return(dict)
