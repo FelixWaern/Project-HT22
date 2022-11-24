@@ -48,6 +48,9 @@ def fetch_csv_as_df(csv_path):
     # print(P_aeruginosa)
 
     df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
-    return(df)
     #writing to csv file stored in local computer
-    #df.to_csv("C:/Ashwini/Applied bioinformatics/dataFile_with_ori&ter.csv")
+    #df.to_csv("C:/Ashwini/Applied bioinformatics/Updated_dataFile_with_ori&ter.csv")
+    return(df)
+
+    
+    

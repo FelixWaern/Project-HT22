@@ -15,8 +15,10 @@ def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, l
     Entrez.email = email #Always tell NCBI who you are
     Entrez.api_key = api_key #Always use API key
     path = local_storage_path #Path to local storage
+    #print("path", path)
     result = {}
     absolute_path = path + accession_numbers + ".gbff.gz" 
+    #print("absolute_path", absolute_path)
     try: 
         # Check if it downloaded to local storage
         if not os.path.isfile(absolute_path):
