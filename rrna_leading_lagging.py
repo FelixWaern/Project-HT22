@@ -87,12 +87,13 @@ def rrna_lead_lag(csv_path, rrna_dict):
         for col in range(0, len(max(rrna_dict.values(), key=len))):
             # find the first position of the rrna gene with regex
             rrna = re.findall(r'(?<=\[)[0-9]+', str(df_rrna_ori_ter.loc[row, col]))
+            rrna_comp = re.findall(r'(?<=\:)[0-9]+', str(df_rrna_ori_ter.loc[row, col]))
             # negative shift
             if df_rrna_ori_ter.loc[row, "shift"] < 0:
                 if len(rrna) == 0: # no rrna in that column
                     pass
                 elif str(df_rrna_ori_ter.loc[row, col][-2]) == "-":
-                    if int(rrna[0]) in df_rrna_ori_ter.loc[row, "lagging1"]:
+                    if int(rrna_comp[0]) in df_rrna_ori_ter.loc[row, "lagging1"]:
                         pass
                     else:
                         logging.warning(f" \nThe overlap with rRNA and leading/lagging strand is not correct for {df_rrna_ori_ter.loc[row, 'name']}") 
@@ -114,10 +115,10 @@ def rrna_lead_lag(csv_path, rrna_dict):
                     else:
                         logging.warning(f" \nThe overlap with rRNA and leading/lagging strand is not correct for {df_rrna_ori_ter.loc[row, 'name']}") 
                 elif df_rrna_ori_ter.loc[row, col][-2] == "-":
-                    if int(rrna[0]) in df_rrna_ori_ter.loc[row, "lagging1"]:
+                    if int(rrna_comp[0]) in df_rrna_ori_ter.loc[row, "lagging1"]:
                         pass
                     else:
-                        if int(rrna[0]) in df_rrna_ori_ter.loc[row, "lagging2"]:
+                        if int(rrna_comp[0]) in df_rrna_ori_ter.loc[row, "lagging2"]:
                             pass
                         else:
                             logging.warning(f" \nThe overlap with rRNA and leading/lagging strand is not correct for {df_rrna_ori_ter.loc[row, 'name']}") 
