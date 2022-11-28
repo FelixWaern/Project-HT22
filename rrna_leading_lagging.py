@@ -4,6 +4,7 @@ from find_lead_lag import neg_shift_strands as neg_s
 from find_lead_lag import pos_shift_strands as pos_s
 from find_lead_lag import two_strands as two_s
 from check_direction import check_rrna_dir as check
+from check_direction import no_shift_check_rrna_dir as no_shift_check
 import time 
 
 
@@ -15,6 +16,7 @@ def rrna_lead_lag(csv_path, rrna_dict):
     import re
     import logging
 
+    t0 = time.time()
     # Create log file
     root_logger = logging.getLogger()
     root_logger.setLevel(logging.DEBUG)
@@ -73,7 +75,7 @@ def rrna_lead_lag(csv_path, rrna_dict):
                 z1, z2 = df_rrna_ori_ter.loc[row, "Ter"], df_rrna_ori_ter.loc[row, "siz"]
             # write to Dataframe
             pos_s(df_rrna_ori_ter, row, x1, x2, y1, y2, z1, z2)
-        # Ori/Ter is at position 1
+        # no shift
         else:
             if df_rrna_ori_ter.loc[row, "Ori"] == 1:
                 print("ORI==1")
@@ -87,7 +89,7 @@ def rrna_lead_lag(csv_path, rrna_dict):
                 # lagging strand interval
                 y1, y2 = 0, df_rrna_ori_ter.loc[row, "Ori"]
             # write to Dataframe
-            two_s(df_rrna_ori_ter, row, x1, x2, y1, y2, z1, z2)
+            two_s(df_rrna_ori_ter, row, x1, x2, y1, y2)
 
     df_rrna_ori_ter.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_with_rrna_lead_lag.csv")
 
@@ -107,10 +109,18 @@ def rrna_lead_lag(csv_path, rrna_dict):
                 text = ["lagging1", "leading1", "leading2"]
                 check(df_rrna_ori_ter, sign, rna, text, row, col)
             # positive shift
-            else:
+            elif df_rrna_ori_ter.loc[row, "shift"] > 0:
                 sign = ["+", "-"]
                 rna = [rrna[0], rrna_comp[0]]
                 text = ["leading1", "lagging1", "lagging2"]
                 check(df_rrna_ori_ter, sign, rna, text, row, col)
-  
+            # no shift
+            else:
+                sign = ["+", "-"]
+                rna = [rrna[0], rrna_comp[0]]
+                text = ["leading1", "lagging1"]
+                no_shift_check(df_rrna_ori_ter, sign, rna, text, row, col)
+    t1 = time.time()
+    total = t1-t0
+    print(total)
     print("rrna lead lag done")
