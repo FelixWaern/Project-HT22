@@ -3,7 +3,6 @@
 #TODO Perform for larger dataset, investigate faulty or strange records
 #TODO Add optional verbosity as bash commands - Started can be expanded
 #TODO The new dnaA investigation things - 
-#TODO Need a check if biopython is downloaded?
 
 import importlib.util
 import argparse
@@ -17,7 +16,6 @@ from skewDB import dowloading_filtered_csvFile as download_filtered
 from rrna_leading_lagging import rrna_lead_lag as rll
 
 
-"""
 parser = argparse.ArgumentParser(description='The start.py script downloads chromosomes data from the SkewDB by Bert Hubert. It filters it, calculates leading and lagging strand, and passes it '
                                 "to to a subscript which fetches the NCBI records corresponding to the remaining chromosomes. "
                                 "The NCBI record contains rRNA intervals which are compared to the leading and lagging strand intervals. "
@@ -43,7 +41,7 @@ parser.add_argument('-v', '--verbose',
 
 #Parsing all arguments
 args = parser.parse_args()
-"""
+
 
 
 def start(csv_path, email, api_key, local_storage_path, verbose=False):
@@ -60,20 +58,22 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False):
         
     logging.info(f"Logging verbose set to {verbose}") 
 
-    # ---------------Check if biopython is installed-----------------
-    # For illustrative purposes.
-    name = 'biopython'
-    if name in sys.modules:
-        print(f"{name!r} already in sys.modules")
-    elif (spec := importlib.util.find_spec(name)) is not None:
-        # If you choose to perform the actual import ...
-        module = importlib.util.module_from_spec(spec)
-        sys.modules[name] = module
-        spec.loader.exec_module(module)
-        print(f"{name!r} has been imported")
-    else:
-        print(f"can't find the {name!r} module")
 
+    #Check if biopython is installed. 
+    name = 'Bio'
+    if name in sys.modules: #Check if already loaded. 
+        if verbose == True:
+            logging.debug(f"\n --------Biopython already loaded---------")
+        print(f"{name!r} already in sys.modules") 
+
+    elif (spec := importlib.util.find_spec(name)) is not None: #Check if package exists on machine
+        if verbose == True:
+            logging.debug(f"\n --------Biopython is installed--------- ")
+        print(f"{name!r} is installed")
+    else:
+        print(f"can't find the {name!r} module, not installed")
+        logging.warning("BIOPYTHON NEEDS TO BE INSTALLED BEFORE RUNNING START.PY")
+        sys.exit()
 
     #Check if csv is downloaded & filtered 
     if not os.path.isfile(csv_path):
@@ -95,12 +95,13 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False):
     rll(csv_path, rrna_dict)
 
     print("Everything is done")
-#start(args.csv_path, args.email, args.api_key, args.local_storage_path, args.verbose)
+start(args.csv_path, args.email, args.api_key, args.local_storage_path, args.verbose)
 
 
-
+"""
 csv_path = 'C:/Users/Felix/Documents/FilteredDataFile.csv'
 email = "Felix.wae@gmail.com"
 api_key = "7b4a5e9841f79495be73767323ad485fda08"
 local_storage_path = 'D:/'
 start(csv_path, email, api_key, local_storage_path)
+"""

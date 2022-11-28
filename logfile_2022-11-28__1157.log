@@ -1,0 +1,26 @@
+2022-11-28 11:57:25,938 INFO     Logging verbose set to False
+2022-11-28 12:00:59,412 WARNING   
+No rRNA was found for NZ_CP038231.1
+2022-11-28 12:01:00,402 WARNING   
+No rRNA was found for NZ_CP038143.1
+2022-11-28 12:08:07,546 WARNING   
+No rRNA was found for NZ_CP040841.1
+2022-11-28 12:51:51,377 WARNING   
+No rRNA was found for NZ_CP043039.1
+2022-11-28 12:58:40,682 WARNING   
+No 16S rRNA genes were found for NZ_CP033313.1, but these products were found: ['5S ribosomal RNA', '23S ribosomal RNA']
+2022-11-28 12:58:44,059 WARNING   
+No 16S rRNA genes were found for NZ_CP033322.1, but these products were found: ['5S ribosomal RNA', '23S ribosomal RNA']
+2022-11-28 12:58:44,122 WARNING   
+No 16S rRNA genes were found for NZ_CP033319.1, but these products were found: ['23S ribosomal RNA']
+2022-11-28 12:59:24,033 WARNING   
+No 16S rRNA genes were found for NZ_CP033316.1, but these products were found: ['5S ribosomal RNA']
+2022-11-28 13:04:27,867 WARNING   
+No rRNA was found for NZ_CP043556.1
+2022-11-28 13:18:32,384 WARNING   
+No rRNA was found for NZ_CP044510.1
+2022-11-28 13:18:53,347 WARNING   
+No rRNA was found for NZ_CP044514.1
+2022-11-28 13:21:37,696 WARNING   
+No rRNA was found for NZ_CP034910.1
+2022-11-28 13:27:17,421 WARNING  Faulty records from NCBI: ['NZ_CP022945.1']
