@@ -41,8 +41,8 @@ def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, l
                     if feature.type == "rRNA":
                         for product in feature.qualifiers.get("product"):
                             if "16S" in product:
-                                temp.append(str(feature.location))
-                                rrna_16s.append(str(feature.location)) 
+                                temp.append(str(feature.location +1)) #Plus 1 in both start and end of sequence to match python indexing
+                                rrna_16s.append(str(feature.location +1)) #Plus 1 in both start and end of sequence to match python indexing
                             elif "RNA" in product:
                                 rrna_other.append(product)  
                 result[seq_record.id] = temp     
@@ -99,9 +99,9 @@ else:
 email = "Felix.wae@gmail.com"
 api_key = "7b4a5e9841f79495be73767323ad485fda08"
 local_storage_path = 'D:/'
-t0 = time.time()
 batch = ["NC_000913.3", "NC_000964.3", "NC_002516.2", "NZ_CP041016.1", "NZ_AP023438.1", "NC_022737.1", "NZ_CP013444.1", "NZ_CP086979.1", "NZ_CP085753.1", "NZ_CP012026.1"]
 faulty = []
+t0 = time.time()
 res = batch_operator(batch, faulty, email, api_key, local_storage_path)
 print("")
 print("Testing if the functions works as intended")  
