@@ -13,16 +13,16 @@ def fetch_csv_as_df(csv_path):
     #Method defined for calculating the origin of replication based on the positive/negative value of shift
     def shift_value(shift, siz):
         if shift > 0:
-            origin = shift
+            origin = shift + 1
         elif shift < 0:
-            origin = siz + shift
+            origin = siz + shift + 1
         else:
             origin = 1
         return origin
 
     #Method defined for calculate the size after adding the shift value 
     def shift_value_terminus(shift, siz):
-        ter = (siz * df.loc[i, "div"]) + shift
+        ter = (siz * df.loc[i, "div"]) + shift + 1
         if ter > siz:
             new_ter = ter - siz
             return new_ter
