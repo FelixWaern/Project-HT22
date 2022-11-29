@@ -35,9 +35,21 @@ def fetch_csv_as_df(csv_path):
         rounded_terminus = round(terminus)
         ter.append(rounded_terminus)
         
-    #assigning ori and ter lists to dataframe
-    df["Ori"] = ori
-    df["Ter"] = ter
+    #Checking the range for ori and ter and assigning those to dataframe
+    if any(item <= siz and item > 0 for item in ori):
+        print("Ori is within range")
+        df["Ori"] = ori
+        print("Ori has been added successfully")
+    else:
+        print("Ori is not within the range")
+
+    if any(item <= siz and item > 0 for item in ter):
+        print("Terminus is within range")
+        df["Ter"] = ter
+        print("Terminus has been added successfully")
+    else:
+        print("terminus is not within the range")
+    
 
     # checking the calculation for the selected bacterias
     # E_coli = df.loc[df["name"] == "NC_000913.3",["dnaApos","siz","div","shift","Ori", "Ter"]]
