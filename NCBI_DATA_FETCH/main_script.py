@@ -8,10 +8,8 @@ import ssl # Should be imported once
 import sys # Should be imported once
 import gzip  # Should be imported once
 import logging
-print("-------Package for GenBank rRNA caluculations fetched-------")
-print("--------------------10 records MAX--------------------------")
 
-def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, local_storage_path):
+def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, local_storage_path, verbose=False):
     Entrez.email = email #Always tell NCBI who you are
     Entrez.api_key = api_key #Always use API key
     path = local_storage_path #Path to local storage
@@ -20,6 +18,8 @@ def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, l
     try: 
         # Check if it downloaded to local storage
         if not os.path.isfile(absolute_path):
+            if verbose == True:
+                logging.debug(f"\n Downloading NCBI record: \n {accession_numbers} ")
             net_handle = Entrez.efetch(
                 db="nucleotide", id=accession_numbers, rettype="gbwithparts", retmode="text"
             )
@@ -32,6 +32,8 @@ def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, l
         rrna_16s = []
         rrna_other = []
         # Open the file locally
+        if verbose == True:
+            logging.debug(f"\n Fetching NCBI record: \n {accession_numbers} ")
         with gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "rt") as input_handle:
             for index, seq_record in enumerate(SeqIO.parse(input_handle, "gb")):
                 temp = []
@@ -39,8 +41,8 @@ def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, l
                     if feature.type == "rRNA":
                         for product in feature.qualifiers.get("product"):
                             if "16S" in product:
-                                temp.append(str(feature.location))
-                                rrna_16s.append(str(feature.location)) 
+                                temp.append(str(feature.location +1)) #Plus 1 in both start and end of sequence to match python indexing
+                                rrna_16s.append(str(feature.location +1)) #Plus 1 in both start and end of sequence to match python indexing
                             elif "RNA" in product:
                                 rrna_other.append(product)  
                 result[seq_record.id] = temp     
@@ -61,7 +63,7 @@ def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, l
         sys.stderr.write("Error! Cannot fetch: %s        \n" % accession_numbers)
 #----------------------------------------------------------------------------------------
 
-def batch_operator(batch, faulty, email, api_key, local_storage_path):
+def batch_operator(batch, faulty, email, api_key, local_storage_path, verbose=False):
     # The batch operator recieves a list of accession numbers and returns them as a dictionary with the accession numbers as keys
     # with the rRNA intervals for each chromosmes as the content. The functions uses multithreading, one thread per accession number.
     # Input: ["NC_002516.2", "NZ_CP041016.1"]
@@ -70,7 +72,7 @@ def batch_operator(batch, faulty, email, api_key, local_storage_path):
     res = {}
     threads = {}
     for x in batch:
-        threads[x] = threading.Thread(target = accession_to_rRNA_interval, args =(x, res, faulty, email, api_key, local_storage_path))
+        threads[x] = threading.Thread(target = accession_to_rRNA_interval, args =(x, res, faulty, email, api_key, local_storage_path, verbose))
     for x in threads:
         threads[x].start() 
     for x in threads:
@@ -97,9 +99,9 @@ else:
 email = "Felix.wae@gmail.com"
 api_key = "7b4a5e9841f79495be73767323ad485fda08"
 local_storage_path = 'D:/'
-t0 = time.time()
 batch = ["NC_000913.3", "NC_000964.3", "NC_002516.2", "NZ_CP041016.1", "NZ_AP023438.1", "NC_022737.1", "NZ_CP013444.1", "NZ_CP086979.1", "NZ_CP085753.1", "NZ_CP012026.1"]
 faulty = []
+t0 = time.time()
 res = batch_operator(batch, faulty, email, api_key, local_storage_path)
 print("")
 print("Testing if the functions works as intended")  
