@@ -2,7 +2,10 @@
 #TODO Email NCBI about the faulty files, KEEP UNTIL LATER SO WE KNOW WE HAVE ONE FAULTY.
 #TODO Perform for larger dataset, investigate faulty or strange records
 #TODO Add optional verbosity as bash commands - Started can be expanded
-#TODO The new dnaA investigation things - 
+#TODO The new dnaA investigation things -
+#TODO Create test data with all special cases
+#TODO Create list for all rRNA which do not follow hypothesis 
+#TODO Fix list for the rRNA where no rRNA was found.  
 
 import importlib.util
 import argparse

@@ -68,5 +68,5 @@ def fetch_csv_as_df(csv_path):
 
     df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
     #writing to csv file stored in local computer
-    df.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_with_ori&ter.csv")
+    #df.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_with_ori&ter.csv")
     return(df)

@@ -91,7 +91,9 @@ def rrna_lead_lag(csv_path, rrna_dict):
     #df_rrna_ori_ter.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_with_rrna_lead_lag.csv")
 
     # iterate over the Dataframe df_rrna_ori_ter and compare the rRNA intervals with leading/lagging strand
+    j = 0
     for row in range(len(df_rrna_ori_ter)):
+        records = []
         for col in range(0, len(max(rrna_dict.values(), key=len))):
             # find the first/last position of the rrna gene with regex
             rrna = re.findall(r'(?<=\[)[0-9]+', str(df_rrna_ori_ter.loc[row, col]))
@@ -104,19 +106,26 @@ def rrna_lead_lag(csv_path, rrna_dict):
                 sign = ["-", "+"]
                 rna = [rrna_comp[0], rrna[0]]
                 text = ["lagging1", "leading1", "leading2"]
-                check(df_rrna_ori_ter, sign, rna, text, row, col)
+                check(df_rrna_ori_ter, sign, rna, text, row, col, records)
             # positive shift
             elif df_rrna_ori_ter.loc[row, "shift"] > 0:
                 sign = ["+", "-"]
                 rna = [rrna[0], rrna_comp[0]]
                 text = ["leading1", "lagging1", "lagging2"]
-                check(df_rrna_ori_ter, sign, rna, text, row, col)
+                check(df_rrna_ori_ter, sign, rna, text, row, col, records)
             # no shift
             else:
                 sign = ["+", "-"]
                 rna = [rrna[0], rrna_comp[0]]
                 text = ["leading1", "lagging1"]
-                no_shift_check(df_rrna_ori_ter, sign, rna, text, row, col)
+                no_shift_check(df_rrna_ori_ter, sign, rna, text, row, col, records)
+        if records != []:
+            string = ""
+            for i in range(len(records)):
+                string = string + records[i]
+            logging.warning(f" \n -------- The overlap with rRNA and strand is not correct for {df_rrna_ori_ter.loc[row, 'name']} ------- {string} \n -------------------------------------------------------------------------------")    
+            j += 1
+    logging.warning(f"  Nr of records with rRNA and strand non-overlap: {j}")
     t1 = time.time()
     total = t1-t0
     print("rrna lead lag done")
