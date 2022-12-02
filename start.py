@@ -3,9 +3,18 @@
 #TODO Perform for larger dataset, investigate faulty or strange records
 #TODO Add optional verbosity as bash commands - Started can be expanded
 #TODO The new dnaA investigation things -
-#TODO Create test data with all special cases
+#TODO Create valididation data to prove that the method works. 
 #TODO Create list for all rRNA which do not follow hypothesis 
-#TODO Fix list for the rRNA where no rRNA was found.  
+#TODO Fix list for the rRNA where no rRNA was found. 
+#TODO Output the distance to origin and distance to dnaA of the rRNA gene 
+#TODO Check if rRNA is between the predicted origin and dnaAPos. 
+#TODO Graphical representation
+#TODO Machine readable file as output.
+#TODO The code might be wrong during the calculation. Increase checks and redo. 
+#TODO Save output as csv and save the all the information especially dnaA position relative to our predicted Ori and inte start of rRNA interval
+#TODO Fix the 2 special cases. Should be reversed. 
+
+
 
 import importlib.util
 import argparse

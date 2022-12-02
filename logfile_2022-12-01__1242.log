@@ -1,0 +1,445 @@
+2022-12-01 12:42:04,442 INFO     Logging verbose set to False
+2022-12-01 12:42:58,429 INFO     Logging verbose set to False
+2022-12-01 12:44:17,544 WARNING   
+No rRNA was found for NZ_AP025145.1
+2022-12-01 12:44:17,608 WARNING   
+No rRNA was found for NZ_AP025148.1
+2022-12-01 12:44:17,653 WARNING   
+No rRNA was found for NZ_AP025150.1
+2022-12-01 12:44:27,285 WARNING   
+No rRNA was found for NZ_AP025156.1
+2022-12-01 12:44:27,404 WARNING   
+No rRNA was found for NZ_AP025153.1
+2022-12-01 12:50:02,013 WARNING   
+No rRNA was found for NZ_CP065405.1
+2022-12-01 12:59:04,855 WARNING   
+No rRNA was found for NZ_AP024957.1
+2022-12-01 13:10:13,403 WARNING  Faulty records from NCBI: ['NZ_CP086217.1']
+2022-12-01 13:10:16,272 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP065381.1 ------- 
+     rRNA interval = 2761933 & strand interval = [1318832, 2718516) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,273 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP065380.1 ------- 
+     rRNA interval = 2821179 & strand interval = [1342591, 2788454) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,276 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP074149.1 ------- 
+     rRNA interval = 4774282 & strand interval = [2488158, 4742118) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,283 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP074159.1 ------- 
+     rRNA interval = 4649886 & strand interval = [2288566, 4600337) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,285 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP074170.1 ------- 
+     rRNA interval = 4992583 & strand interval = [2423803, 4920421) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,301 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_AP025014.1 ------- 
+     rRNA interval = 5061324 & strand interval = [2402165, 5041357) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,310 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_AP025158.1 ------- 
+     rRNA interval = 1868931 & strand interval = [71579, 1062778) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,312 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_AP024940.1 ------- 
+     rRNA interval = 4632733 & strand interval = [2327106, 4613878) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,313 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_AP024687.1 ------- 
+     rRNA interval = 5071148 & strand interval = [2568631, 5057805) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,314 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_AP024929.1 ------- 
+     rRNA interval = 251538 & strand interval = [1024238, 1895771) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,315 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_AP024933.1 ------- 
+     rRNA interval = 264546 & strand interval = [1025521, 1923287) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,315 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_AP024937.1 ------- 
+     rRNA interval = 252433 & strand interval = [1014087, 1912558) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,328 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_AP025018.1 ------- 
+     rRNA interval = 1861157 & strand interval = [2006898, 8410368)
+     rRNA interval = 4628305 & strand interval = [8410368, 11423120)
+     rRNA interval = 5866065 & strand interval = [8410368, 11423120) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,339 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP073356.1 ------- 
+     rRNA interval = 3868252 & strand interval = [1787647, 3833202) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,342 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP066978.1 ------- 
+     rRNA interval = 115588 & strand interval = [137024, 2520953) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,349 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP083267.1 ------- 
+     rRNA interval = 1592624 & strand interval = [3905712, 8085429)
+     rRNA interval = 2035512 & strand interval = [3905712, 8085429)
+     rRNA interval = 3348955 & strand interval = [3905712, 8085429)
+     rRNA interval = 3871322 & strand interval = [3905712, 8085429)
+     rRNA interval = 4566595 & strand interval = [39527, 3905712)
+     rRNA interval = 5871180 & strand interval = [39527, 3905712) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,356 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP083403.1 ------- 
+     rRNA interval = 4563681 & strand interval = [2262093, 4561516)
+     rRNA interval = 4680741 & strand interval = [2262093, 4561516) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,384 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP083620.1 ------- 
+     rRNA interval = 47026 & strand interval = [78558, 2452281) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,387 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP083636.1 ------- 
+     rRNA interval = 107960 & strand interval = [118105, 976681) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,392 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP083630.1 ------- 
+     rRNA interval = 4069051 & strand interval = [4074141, 5057122) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,397 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP083641.1 ------- 
+     rRNA interval = 4477421 & strand interval = [2070455, 4458426) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,401 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP083633.1 ------- 
+     rRNA interval = 1390890 & strand interval = [2651666, 5343478)
+     rRNA interval = 2174749 & strand interval = [2651666, 5343478)
+     rRNA interval = 2692384 & strand interval = [64226, 2651666)
+     rRNA interval = 2802531 & strand interval = [64226, 2651666)
+     rRNA interval = 2891835 & strand interval = [64226, 2651666)
+     rRNA interval = 2936788 & strand interval = [64226, 2651666)
+     rRNA interval = 3308623 & strand interval = [64226, 2651666)
+     rRNA interval = 3686653 & strand interval = [64226, 2651666) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,408 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP082952.1 ------- 
+     rRNA interval = 18127 & strand interval = [30281, 2104123) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,427 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP083718.1 ------- 
+     rRNA interval = 740048 & strand interval = [875529, 2115155)
+     rRNA interval = 1404929 & strand interval = [2115155, 2626232) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,449 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP083740.1 ------- 
+     rRNA interval = 5989258 & strand interval = [1199492, 4390586) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,451 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP083930.1 ------- 
+     rRNA interval = 1330307 & strand interval = [92870, 1115532)
+     rRNA interval = 1566767 & strand interval = [92870, 1115532)
+     rRNA interval = 1794603 & strand interval = [92870, 1115532)
+     rRNA interval = 2227544 & strand interval = [92870, 1115532) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,456 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP083944.1 ------- 
+     rRNA interval = 2464701 & strand interval = [84618, 2446958) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,467 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP084031.1 ------- 
+     rRNA interval = 4605731 & strand interval = [2298775, 4595228) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,477 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP083455.1 ------- 
+     rRNA interval = 271649 & strand interval = [1279390, 2724601)
+     rRNA interval = 2724754 & strand interval = [1279390, 2724601)
+     rRNA interval = 2813544 & strand interval = [1279390, 2724601) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,484 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP084300.1 ------- 
+     rRNA interval = 2938395 & strand interval = [1517833, 2930440) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,487 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP084318.1 ------- 
+     rRNA interval = 305104 & strand interval = [1717532, 3994765)
+     rRNA interval = 2476562 & strand interval = [103671, 1717532)
+     rRNA interval = 2483220 & strand interval = [103671, 1717532) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,528 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP084351.1 ------- 
+     rRNA interval = 4729856 & strand interval = [2318850, 4695793) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,529 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP084353.1 ------- 
+     rRNA interval = 4653849 & strand interval = [2316815, 4648721) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,539 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP075564.1 ------- 
+     rRNA interval = 4471633 & strand interval = [2206579, 4464954) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,544 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP076245.1 ------- 
+     rRNA interval = 5344838 & strand interval = [2644481, 5273237)
+     rRNA interval = 5441284 & strand interval = [2644481, 5273237) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,551 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP084692.1 ------- 
+     rRNA interval = 1361780 & strand interval = [1378950, 3774256) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,565 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP084740.1 ------- 
+     rRNA interval = 2180108 & strand interval = [2198153, 4503487) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,577 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP084770.1 ------- 
+     rRNA interval = 5206123 & strand interval = [2489934, 5173521) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,602 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP085032.1 ------- 
+     rRNA interval = 3859662 & strand interval = [1866418, 3818466) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,619 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP066126.1 ------- 
+     rRNA interval = 15001 & strand interval = [35102, 2504245) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,638 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP074587.1 ------- 
+     rRNA interval = 393049 & strand interval = [2102003, 4221871)
+     rRNA interval = 836226 & strand interval = [2102003, 4221871)
+     rRNA interval = 1750575 & strand interval = [2102003, 4221871)
+     rRNA interval = 2011944 & strand interval = [2102003, 4221871)
+     rRNA interval = 2084732 & strand interval = [2102003, 4221871)
+     rRNA interval = 2467247 & strand interval = [25776, 2102003)
+     rRNA interval = 2531259 & strand interval = [25776, 2102003)
+     rRNA interval = 2830798 & strand interval = [25776, 2102003) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,660 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP085767.1 ------- 
+     rRNA interval = 1931041 & strand interval = [4236422, 4729472) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,663 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP085774.1 ------- 
+     rRNA interval = 483811 & strand interval = [2955028, 4859043) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,668 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP085809.1 ------- 
+     rRNA interval = 317 & strand interval = [83461, 2354481)
+     rRNA interval = 4748428 & strand interval = [83461, 2354481) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,679 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP085808.1 ------- 
+     rRNA interval = 4283170 & strand interval = [1876678, 4248062) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,686 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086159.1 ------- 
+     rRNA interval = 37382 & strand interval = [47043, 832965) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,687 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086161.1 ------- 
+     rRNA interval = 37382 & strand interval = [46883, 835417) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,688 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086160.1 ------- 
+     rRNA interval = 37380 & strand interval = [46165, 797369) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,693 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086165.1 ------- 
+     rRNA interval = 37382 & strand interval = [46484, 792641) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,694 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086171.1 ------- 
+     rRNA interval = 37383 & strand interval = [46098, 792584) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,694 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086172.1 ------- 
+     rRNA interval = 37382 & strand interval = [48310, 793754) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,695 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086162.1 ------- 
+     rRNA interval = 37383 & strand interval = [51415, 829686) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,696 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086163.1 ------- 
+     rRNA interval = 37382 & strand interval = [46610, 792511) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,696 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086164.1 ------- 
+     rRNA interval = 37382 & strand interval = [47428, 792105) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,697 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086168.1 ------- 
+     rRNA interval = 37507 & strand interval = [42790, 825624) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,698 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086170.1 ------- 
+     rRNA interval = 37382 & strand interval = [46289, 792669) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,704 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP085974.1 ------- 
+     rRNA interval = 227390 & strand interval = [2089499, 4701183)
+     rRNA interval = 4405674 & strand interval = [4701183, 5108828) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,707 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP085949.1 ------- 
+     rRNA interval = 1501112 & strand interval = [1553641, 1837148) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,715 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP085972.1 ------- 
+     rRNA interval = 546451 & strand interval = [2391634, 4302708)
+     rRNA interval = 3082882 & strand interval = [4302708, 4775547)
+     rRNA interval = 4580960 & strand interval = [2391634, 4302708) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,719 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP085961.1 ------- 
+     rRNA interval = 1293940 & strand interval = [1621404, 2713234) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,726 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086100.1 ------- 
+     rRNA interval = 4717902 & strand interval = [2296342, 4696418) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,727 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086101.1 ------- 
+     rRNA interval = 4717917 & strand interval = [2296247, 4696040) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,731 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086020.1 ------- 
+     rRNA interval = 214842 & strand interval = [919024, 1887055)
+     rRNA interval = 246933 & strand interval = [919024, 1887055)
+     rRNA interval = 419564 & strand interval = [919024, 1887055)
+     rRNA interval = 952400 & strand interval = [17114, 919024)
+     rRNA interval = 1021830 & strand interval = [17114, 919024)
+     rRNA interval = 1309454 & strand interval = [17114, 919024)
+     rRNA interval = 1316388 & strand interval = [17114, 919024)
+     rRNA interval = 1430487 & strand interval = [17114, 919024) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,733 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086133.1 ------- 
+     rRNA interval = 79432 & strand interval = [90851, 2104301) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,737 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086174.1 ------- 
+     rRNA interval = 1224192 & strand interval = [3209155, 6740825)
+     rRNA interval = 1706841 & strand interval = [3209155, 6740825)
+     rRNA interval = 3082470 & strand interval = [3209155, 6740825)
+     rRNA interval = 4323738 & strand interval = [118076, 3209155)
+     rRNA interval = 6379951 & strand interval = [118076, 3209155) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,738 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086102.1 ------- 
+     rRNA interval = 2022874 & strand interval = [3720913, 8372991)
+     rRNA interval = 4648602 & strand interval = [207, 3720913)
+     rRNA interval = 4919640 & strand interval = [207, 3720913)
+     rRNA interval = 5400991 & strand interval = [207, 3720913)
+     rRNA interval = 6908649 & strand interval = [207, 3720913)
+     rRNA interval = 7375146 & strand interval = [207, 3720913) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,739 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086257.1 ------- 
+     rRNA interval = 60949 & strand interval = [68093, 2260321) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,742 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086177.1 ------- 
+     rRNA interval = 1224192 & strand interval = [3209183, 6741245)
+     rRNA interval = 1707277 & strand interval = [3209183, 6741245)
+     rRNA interval = 3082905 & strand interval = [3209183, 6741245)
+     rRNA interval = 4324173 & strand interval = [117695, 3209183)
+     rRNA interval = 6380370 & strand interval = [117695, 3209183) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,743 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086176.1 ------- 
+     rRNA interval = 1224192 & strand interval = [3209351, 6741256)
+     rRNA interval = 1707270 & strand interval = [3209351, 6741256)
+     rRNA interval = 3082898 & strand interval = [3209351, 6741256)
+     rRNA interval = 4324166 & strand interval = [116503, 3209351)
+     rRNA interval = 6380382 & strand interval = [116503, 3209351) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,744 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086173.1 ------- 
+     rRNA interval = 1224192 & strand interval = [3209634, 6740827)
+     rRNA interval = 1706841 & strand interval = [3209634, 6740827)
+     rRNA interval = 3082469 & strand interval = [3209634, 6740827)
+     rRNA interval = 4323738 & strand interval = [116430, 3209634)
+     rRNA interval = 6379953 & strand interval = [116430, 3209634) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,745 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086179.1 ------- 
+     rRNA interval = 1224192 & strand interval = [3213286, 6740828)
+     rRNA interval = 1706841 & strand interval = [3213286, 6740828)
+     rRNA interval = 3082469 & strand interval = [3213286, 6740828)
+     rRNA interval = 4323736 & strand interval = [113307, 3213286)
+     rRNA interval = 6379954 & strand interval = [113307, 3213286) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,746 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086178.1 ------- 
+     rRNA interval = 1224192 & strand interval = [3209274, 6740840)
+     rRNA interval = 1706841 & strand interval = [3209274, 6740840)
+     rRNA interval = 3082469 & strand interval = [3209274, 6740840)
+     rRNA interval = 4323738 & strand interval = [111838, 3209274)
+     rRNA interval = 6379965 & strand interval = [111838, 3209274) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,747 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086259.1 ------- 
+     rRNA interval = 5204934 & strand interval = [2467688, 5186022) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,780 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086371.1 ------- 
+     rRNA interval = 449249 & strand interval = [459394, 922238) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,791 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP086405.1 ------- 
+     rRNA interval = 4765635 & strand interval = [2359525, 4718399) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,843 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP076620.1 ------- 
+     rRNA interval = 9930 & strand interval = [22013, 1808938) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,856 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP087587.1 ------- 
+     rRNA interval = 31031 & strand interval = [41034, 1926738) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,859 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP087390.1 ------- 
+     rRNA interval = 1055290 & strand interval = [2183180, 4484014)
+     rRNA interval = 1772410 & strand interval = [2183180, 4484014)
+     rRNA interval = 1999874 & strand interval = [2183180, 4484014)
+     rRNA interval = 2079646 & strand interval = [2183180, 4484014)
+     rRNA interval = 2540723 & strand interval = [4484014, 4656682)
+     rRNA interval = 2649995 & strand interval = [4484014, 4656682)
+     rRNA interval = 3162914 & strand interval = [4484014, 4656682) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,860 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP087578.1 ------- 
+     rRNA interval = 4838298 & strand interval = [2475553, 4792896) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,865 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP087584.1 ------- 
+     rRNA interval = 61822 & strand interval = [66730, 2262029) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,867 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP087280.1 ------- 
+     rRNA interval = 4794844 & strand interval = [2265114, 4774918) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,869 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP087686.1 ------- 
+     rRNA interval = 1447201 & strand interval = [9039, 1388531)
+     rRNA interval = 1566786 & strand interval = [9039, 1388531) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,872 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP087685.1 ------- 
+     rRNA interval = 1447259 & strand interval = [10942, 1387737)
+     rRNA interval = 1566844 & strand interval = [10942, 1387737) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,877 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP087696.1 ------- 
+     rRNA interval = 1485176 & strand interval = [2796267, 2824791)
+     rRNA interval = 1604761 & strand interval = [2796267, 2824791) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,896 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP088095.1 ------- 
+     rRNA interval = 4680322 & strand interval = [155495, 2157714) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,908 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP088243.1 ------- 
+     rRNA interval = 1786833 & strand interval = [1884741, 4288837)
+     rRNA interval = 1792498 & strand interval = [1884741, 4288837)
+     rRNA interval = 2261463 & strand interval = [4288837, 4612228)
+     rRNA interval = 2267130 & strand interval = [4288837, 4612228) 
+ -------------------------------------------------------------------------------
+2022-12-01 13:10:16,913 WARNING    Nr of records with rRNA and strand non-overlap: 86

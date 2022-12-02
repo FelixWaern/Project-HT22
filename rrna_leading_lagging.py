@@ -29,7 +29,7 @@ def rrna_lead_lag(csv_path, rrna_dict):
 
     # import the Dataframe columns with values for ori and ter
     temp = fd.fetch_csv_as_df(csv_path)   
-    df_ori_ter = temp[['name', 'siz', 'shift', 'div','Ter', 'Ori']]
+    df_ori_ter = temp[['name', 'siz', 'shift', 'div','Ter', 'Ori', 'dnaApos']]
     #df_ori_ter.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_double_check_ori_ter.csv")
 
     # merge the Dataframe columns with matching accession numbers
