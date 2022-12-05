@@ -19,12 +19,12 @@ def rrna_lead_lag(csv_path, rrna_dict):
     df = pd.read_csv(temp_rna_path)
     rrna_dict = {}
     for i in range(0, len(df)):
-        print(i)
         rna_row = []
         for x in df.loc[i]:
+            print(x)
             rna_row.append(x)
+            print(rna_row)
         rna_row = rna_row[1:]
-        print(rna_row)    
         rrna_dict[i + 1] = rna_row
         
 
