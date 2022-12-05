@@ -14,6 +14,21 @@ def rrna_lead_lag(csv_path, rrna_dict):
     import re
     import logging
 
+    #load the temporary dataframe for the rRNA
+    temp_rna_path = "C:/Users/Felix/Documents/rna_dict.csv"
+    df = pd.read_csv(temp_rna_path)
+    rrna_dict = {}
+    for i in range(0, len(df)):
+        print(i)
+        rna_row = []
+        for x in df.loc[i]:
+            rna_row.append(x)
+        rna_row = rna_row[1:]
+        print(rna_row)    
+        rrna_dict[i + 1] = rna_row
+        
+
+
     t0 = time.time()
     # Create log file
     root_logger = logging.getLogger()
@@ -26,6 +41,8 @@ def rrna_lead_lag(csv_path, rrna_dict):
     df_rrna = df_rrna.reset_index()
     df_rrna.rename(columns = {'index':'name'}, inplace = True)
     #df_rrna.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_with_rrna.csv")
+
+    
 
     # import the Dataframe columns with values for ori and ter
     temp = fd.fetch_csv_as_df(csv_path)   

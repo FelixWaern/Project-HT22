@@ -1,0 +1,207 @@
+2022-12-05 11:03:40,416 INFO     Logging verbose set to False
+2022-12-05 11:19:29,021 WARNING   
+No rRNA was found for NZ_CP092666.1
+2022-12-05 11:19:29,093 WARNING   
+No rRNA was found for NZ_CP092673.1
+2022-12-05 11:19:31,815 WARNING   
+No rRNA was found for NZ_CP092678.1
+2022-12-05 11:24:05,360 WARNING   
+No rRNA was found for NZ_CP092736.1
+2022-12-05 11:24:08,180 WARNING   
+No rRNA was found for NZ_CP092741.1
+2022-12-05 11:43:52,639 WARNING   
+No rRNA was found for NZ_CP093324.1
+2022-12-05 12:03:02,424 WARNING   
+No rRNA was found for NZ_CP091941.1
+2022-12-05 12:03:02,426 WARNING   
+No rRNA was found for NZ_CP091948.1
+2022-12-05 12:03:07,417 WARNING   
+No rRNA was found for NZ_CP091954.1
+2022-12-05 12:03:43,188 WARNING   
+No rRNA was found for NZ_CP091963.1
+2022-12-05 12:06:45,072 WARNING  Faulty records from NCBI: ['NZ_CP094846.1', 'NZ_AP025563.1', 'NZ_CP094872.1', 'NZ_AP025560.1', 'NZ_AP025562.1', 'NZ_CP050251.1', 'NZ_CP090477.1', 'NZ_AP025558.1', 'NZ_CP083239.1', 'NZ_CP092411.1', 'NZ_AP025585.1', 'NZ_AP025566.1', 'NZ_AP025575.1', 'NZ_AP025577.1', 'NZ_AP025569.1', 'NZ_AP025570.1', 'NZ_AP025568.1', 'NZ_AP025581.1', 'NZ_AP025567.1', 'NZ_AP025565.1', 'NZ_AP025603.1', 'NZ_AP025617.1', 'NZ_AP025613.1', 'NZ_AP025609.1', 'NZ_AP025596.1', 'NZ_AP025593.1', 'NZ_AP025677.1', 'NZ_AP025623.1', 'NZ_AP025682.1', 'NZ_AP025556.1', 'NZ_AP025635.1', 'NZ_AP025627.1', 'NZ_AP025625.1', 'NZ_AP025589.1', 'NZ_CP094929.1', 'NZ_AP025685.1', 'NZ_CP094930.1', 'NZ_CP094828.1', 'NZ_AP025621.1', 'NZ_AP025667.1', 'NZ_CP064359.1', 'NZ_CP064367.1', 'NZ_CP064364.1', 'NZ_CP094971.1', 'NZ_CP064374.1', 'NZ_CP064373.1', 'NZ_CP064365.1', 'NZ_CP094998.1', 'NZ_CP064363.1', 'NZ_CP064368.1', 'NZ_CP064381.1', 'NZ_CP064389.1', 'NZ_CP064379.1', 'NZ_CP064382.1', 'NZ_CP094987.1', 'NZ_CP064385.1', 'NZ_CP094997.1', 'NZ_CP064387.1', 'NZ_CP094999.1', 'NZ_CP064383.1', 'NZ_CP064378.1', 'NZ_CP069062.1', 'NZ_CP069067.1', 'NZ_CP069064.1', 'NZ_CP069066.1', 'NZ_CP069063.1', 'NZ_CP069065.1', 'NZ_CP064376.1', 'NZ_CP064391.1', 'NZ_CP064377.1', 'NZ_CP078521.1', 'NZ_CP069073.1', 'NZ_CP069070.1', 'NZ_CP069071.1', 'NZ_CP069076.1', 'NZ_CP069077.1', 'NZ_CP069074.1', 'NZ_CP069072.1', 'NZ_CP069069.1', 'NZ_CP069075.1', 'NZ_CP064772.1', 'NZ_CP058671.1', 'NZ_CP050147.1', 'NZ_CP086066.1', 'NZ_CP064768.1', 'NZ_CP058353.1', 'NZ_CP074348.1', 'NZ_CP050149.1', 'NZ_CP068018.1', 'NZ_CP050148.1', 'NZ_CP091507.1', 'NZ_CP091518.1', 'NZ_CP091510.1', 'NZ_CP091512.1', 'NZ_CP091515.1', 'NZ_CP091508.1', 'NZ_CP091509.1', 'NZ_CP091511.1', 'NZ_CP087111.1', 'NZ_CP087272.1', 'NZ_CP084263.1', 'NZ_CP084261.1', 'NZ_CP091516.1', 'NZ_CP091519.1', 'NZ_CP084260.1', 'NZ_CP084265.1', 'NZ_CP095022.1', 'NZ_CP095020.1', 'NZ_CP095021.1', 'NZ_CP095023.1', 'NZ_CP084286.1', 'NZ_CP084272.1', 'NZ_CP084284.1', 'NZ_CP084274.1', 'NZ_CP084271.1', 'NZ_CP084283.1', 'NZ_CP095083.1', 'NZ_CP095072.1', 'NZ_CP095086.1', 'NZ_CP095088.1', 'NZ_CP095090.1', 'NZ_CP095045.1', 'NZ_CP095043.1', 'NZ_CP095044.1', 'NZ_CP095091.1', 'NZ_CP095058.1', 'NZ_CP095046.1', 'NZ_CP095071.1', 'NZ_CP095049.1', 'NZ_CP095074.1', 'NZ_CP094059.1', 'NZ_CP094056.1', 'NZ_CP094054.1', 'NZ_CP094051.1', 'NZ_CP094058.1', 'NZ_CP094052.1', 'NZ_CP095061.1', 'NZ_CP095075.1', 'NZ_CP087266.1', 'NZ_CP095121.1', 'NZ_CP094062.1', 'NZ_CP094071.1', 'NZ_CP094074.1', 'NZ_CP094073.1', 'NZ_CP094070.1', 'NZ_CP094067.1', 'NZ_CP094063.1', 'NZ_CP094065.1', 'NZ_CP094066.1', 'NZ_CP094064.1', 'NZ_CP094078.1', 'NZ_CP094091.1', 'NZ_CP094088.1', 'NZ_CP094083.1', 'NZ_CP094080.1', 'NZ_CP094090.1', 'NZ_CP094079.1', 'NZ_CP094087.1', 'NZ_CP094085.1', 'NZ_CP094082.1', 'NZ_CP094093.1', 'NZ_CP094095.1', 'NZ_CP094098.1', 'NZ_CP094099.1', 'NZ_CP094105.1', 'NZ_CP094106.1', 'NZ_CP094102.1', 'NZ_CP094101.1', 'NZ_CP094096.1', 'NZ_CP094094.1', 'NZ_CP094109.1', 'NZ_CP094116.1', 'NZ_CP094177.1', 'NZ_CP094119.1', 'NZ_CP094113.1', 'NZ_CP094175.1', 'NZ_CP094117.1', 'NZ_CP094115.1', 'NZ_CP094111.1', 'NZ_CP094110.1', 'NZ_CP094178.1', 'NZ_CP094132.1', 'NZ_CP094129.1', 'NZ_CP094131.1', 'NZ_CP094130.1', 'NZ_CP094124.1', 'NZ_CP094128.1', 'NZ_CP094121.1', 'NZ_CP094122.1', 'NZ_CP094126.1', 'NZ_CP094134.1', 'NZ_CP094136.1', 'NZ_CP094142.1', 'NZ_CP094135.1', 'NZ_CP094143.1', 'NZ_CP094137.1', 'NZ_CP094144.1', 'NZ_CP094139.1', 'NZ_CP094138.1', 'NZ_CP094140.1', 'NZ_CP094150.1', 'NZ_CP094151.1', 'NZ_CP094147.1', 'NZ_CP094159.1', 'NZ_CP094149.1', 'NZ_CP094153.1', 'NZ_CP094148.1', 'NZ_CP094157.1', 'NZ_CP094156.1', 'NZ_CP094160.1']
+2022-12-05 12:06:47,209 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP055095.1 ------- 
+ rRNA location = 3906665 sign = - & strand interval = [1976205, 3890477) lagging1. Apos Distance to Ori = 110159 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,258 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP092431.1 ------- 
+ rRNA location = 1783184 sign = - & strand interval = [1, 107931)lagging1 & [4273352, 10101517)lagging2. Apos Distance to Ori = 5047224 & rRNA location between dnaApos and Ori = True
+ rRNA location = 2331889 sign = - & strand interval = [1, 107931)lagging1 & [4273352, 10101517)lagging2. Apos Distance to Ori = 5047224 & rRNA location between dnaApos and Ori = True
+ rRNA location = 4136456 sign = - & strand interval = [1, 107931)lagging1 & [4273352, 10101517)lagging2. Apos Distance to Ori = 5047224 & rRNA location between dnaApos and Ori = True
+ rRNA location = 6040675 sign = + & strand interval = [107931, 4273352) leading1. Apos Distance to Ori = 5047224 & rRNA location between dnaApos and Ori = False
+ rRNA location = 7457223 sign = + & strand interval = [107931, 4273352) leading1. Apos Distance to Ori = 5047224 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,268 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP059328.1 ------- 
+ rRNA location = 607828 sign = - & strand interval = [1391804, 2557569) lagging1. Apos Distance to Ori = 533193 & rRNA location between dnaApos and Ori = False
+ rRNA location = 1193968 sign = - & strand interval = [1391804, 2557569) lagging1. Apos Distance to Ori = 533193 & rRNA location between dnaApos and Ori = True
+ rRNA location = 1302597 sign = - & strand interval = [1391804, 2557569) lagging1. Apos Distance to Ori = 533193 & rRNA location between dnaApos and Ori = True
+ rRNA location = 1361367 sign = - & strand interval = [1391804, 2557569) lagging1. Apos Distance to Ori = 533193 & rRNA location between dnaApos and Ori = True
+ rRNA location = 1883793 sign = + & strand interval = [1, 1391804)leading1 & [2557569, 2590906)leading2. Apos Distance to Ori = 533193 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,270 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP059324.1 ------- 
+ rRNA location = 683834 sign = - & strand interval = [1, 9637)lagging1 & [1144594, 2590480)lagging2. Apos Distance to Ori = 564326 & rRNA location between dnaApos and Ori = False
+ rRNA location = 1169854 sign = + & strand interval = [9637, 1144594) leading1. Apos Distance to Ori = 564326 & rRNA location between dnaApos and Ori = True
+ rRNA location = 1206220 sign = + & strand interval = [9637, 1144594) leading1. Apos Distance to Ori = 564326 & rRNA location between dnaApos and Ori = True
+ rRNA location = 1264968 sign = + & strand interval = [9637, 1144594) leading1. Apos Distance to Ori = 564326 & rRNA location between dnaApos and Ori = True
+ rRNA location = 1373585 sign = + & strand interval = [9637, 1144594) leading1. Apos Distance to Ori = 564326 & rRNA location between dnaApos and Ori = True
+ rRNA location = 1959675 sign = + & strand interval = [9637, 1144594) leading1. Apos Distance to Ori = 564326 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,341 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP091368.1 ------- 
+ rRNA location = 1607478 sign = + & strand interval = [1607780, 3590728) leading1. Apos Distance to Ori = 18539 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,352 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP091375.1 ------- 
+ rRNA location = 1280067 sign = - & strand interval = [1, 23409)lagging1 & [1942443, 3995973)lagging2. Apos Distance to Ori = 19734 & rRNA location between dnaApos and Ori = False
+ rRNA location = 1762237 sign = - & strand interval = [1, 23409)lagging1 & [1942443, 3995973)lagging2. Apos Distance to Ori = 19734 & rRNA location between dnaApos and Ori = False
+ rRNA location = 1929482 sign = - & strand interval = [1, 23409)lagging1 & [1942443, 3995973)lagging2. Apos Distance to Ori = 19734 & rRNA location between dnaApos and Ori = False
+ rRNA location = 1981459 sign = + & strand interval = [23409, 1942443) leading1. Apos Distance to Ori = 19734 & rRNA location between dnaApos and Ori = False
+ rRNA location = 2447377 sign = + & strand interval = [23409, 1942443) leading1. Apos Distance to Ori = 19734 & rRNA location between dnaApos and Ori = False
+ rRNA location = 2479740 sign = + & strand interval = [23409, 1942443) leading1. Apos Distance to Ori = 19734 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,394 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP028741.1 ------- 
+ rRNA location = 18887 sign = + & strand interval = [28573, 2438362) leading1. Apos Distance to Ori = 69855 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,397 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP028739.1 ------- 
+ rRNA location = 16173 sign = + & strand interval = [50071, 2768697) leading1. Apos Distance to Ori = 91268 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,488 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP060867.1 ------- 
+ rRNA location = 4827091 sign = - & strand interval = [2281195, 4775894) lagging1. Apos Distance to Ori = 111735 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,555 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP093239.1 ------- 
+ rRNA location = 4979475 sign = - & strand interval = [2262918, 4961672) lagging1. Apos Distance to Ori = 65290 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,573 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP093336.1 ------- 
+ rRNA location = 9788 sign = + & strand interval = [12283, 3081420) leading1. Apos Distance to Ori = 14385 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,586 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP076498.1 ------- 
+ rRNA location = 518439 sign = + & strand interval = [521210, 2041787) leading1. Apos Distance to Ori = 50818 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,588 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP076488.1 ------- 
+ rRNA location = 357039 sign = + & strand interval = [368630, 1875038) leading1. Apos Distance to Ori = 59638 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,591 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP093376.1 ------- 
+ rRNA location = 3920327 sign = + & strand interval = [1, 1770295)leading1 & [3987357, 4315559)leading2. Apos Distance to Ori = 124280 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,594 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP073063.1 ------- 
+ rRNA location = 305174 sign = - & strand interval = [1, 255571)lagging1 & [1982695, 3209445)lagging2. Apos Distance to Ori = 255596 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,599 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP023711.1 ------- 
+ rRNA location = 27414 sign = + & strand interval = [436710, 2757489) leading1. Apos Distance to Ori = 18666 & rRNA location between dnaApos and Ori = False
+ rRNA location = 244287 sign = + & strand interval = [436710, 2757489) leading1. Apos Distance to Ori = 18666 & rRNA location between dnaApos and Ori = False
+ rRNA location = 1980448 sign = - & strand interval = [1, 436710)lagging1 & [2757489, 5793822)lagging2. Apos Distance to Ori = 18666 & rRNA location between dnaApos and Ori = False
+ rRNA location = 2522187 sign = - & strand interval = [1, 436710)lagging1 & [2757489, 5793822)lagging2. Apos Distance to Ori = 18666 & rRNA location between dnaApos and Ori = False
+ rRNA location = 2624320 sign = - & strand interval = [1, 436710)lagging1 & [2757489, 5793822)lagging2. Apos Distance to Ori = 18666 & rRNA location between dnaApos and Ori = False
+ rRNA location = 2726896 sign = - & strand interval = [1, 436710)lagging1 & [2757489, 5793822)lagging2. Apos Distance to Ori = 18666 & rRNA location between dnaApos and Ori = False
+ rRNA location = 3406025 sign = + & strand interval = [436710, 2757489) leading1. Apos Distance to Ori = 18666 & rRNA location between dnaApos and Ori = False
+ rRNA location = 3471362 sign = + & strand interval = [436710, 2757489) leading1. Apos Distance to Ori = 18666 & rRNA location between dnaApos and Ori = False
+ rRNA location = 3793148 sign = + & strand interval = [436710, 2757489) leading1. Apos Distance to Ori = 18666 & rRNA location between dnaApos and Ori = False
+ rRNA location = 3801465 sign = + & strand interval = [436710, 2757489) leading1. Apos Distance to Ori = 18666 & rRNA location between dnaApos and Ori = False
+ rRNA location = 3812682 sign = + & strand interval = [436710, 2757489) leading1. Apos Distance to Ori = 18666 & rRNA location between dnaApos and Ori = False
+ rRNA location = 3910013 sign = + & strand interval = [436710, 2757489) leading1. Apos Distance to Ori = 18666 & rRNA location between dnaApos and Ori = False
+ rRNA location = 4080993 sign = + & strand interval = [436710, 2757489) leading1. Apos Distance to Ori = 18666 & rRNA location between dnaApos and Ori = False
+ rRNA location = 4258351 sign = + & strand interval = [436710, 2757489) leading1. Apos Distance to Ori = 18666 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,602 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP093400.1 ------- 
+ rRNA location = 4800326 sign = - & strand interval = [2336716, 4793646) lagging1. Apos Distance to Ori = 57489 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,613 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP080467.1 ------- 
+ rRNA location = 9635 sign = + & strand interval = [19008, 2387110) leading1. Apos Distance to Ori = 19007 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,615 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP092569.1 ------- 
+ rRNA location = 2843862 sign = - & strand interval = [1197979, 2774362) lagging1. Apos Distance to Ori = 87820 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,629 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP063844.1 ------- 
+ rRNA location = 1012113 sign = - & strand interval = [1, 919)lagging1 & [3306870, 6984674)lagging2. Apos Distance to Ori = 3396192 & rRNA location between dnaApos and Ori = False
+ rRNA location = 1508795 sign = - & strand interval = [1, 919)lagging1 & [3306870, 6984674)lagging2. Apos Distance to Ori = 3396192 & rRNA location between dnaApos and Ori = False
+ rRNA location = 2438037 sign = - & strand interval = [1, 919)lagging1 & [3306870, 6984674)lagging2. Apos Distance to Ori = 3396192 & rRNA location between dnaApos and Ori = False
+ rRNA location = 4189346 sign = + & strand interval = [919, 3306870) leading1. Apos Distance to Ori = 3396192 & rRNA location between dnaApos and Ori = False
+ rRNA location = 5864637 sign = + & strand interval = [919, 3306870) leading1. Apos Distance to Ori = 3396192 & rRNA location between dnaApos and Ori = False
+ rRNA location = 6323170 sign = + & strand interval = [919, 3306870) leading1. Apos Distance to Ori = 3396192 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,630 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP093953.1 ------- 
+ rRNA location = 2873508 sign = - & strand interval = [1398457, 2838208) lagging1. Apos Distance to Ori = 53620 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,632 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP093940.1 ------- 
+ rRNA location = 4805668 sign = + & strand interval = [99690, 2245520) leading1. Apos Distance to Ori = 263242 & rRNA location between dnaApos and Ori = False
+ rRNA location = 4811073 sign = + & strand interval = [99690, 2245520) leading1. Apos Distance to Ori = 263242 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,650 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP089976.1 ------- 
+ rRNA location = 491313 sign = - & strand interval = [1, 30570)lagging1 & [1002636, 2028235)lagging2. Apos Distance to Ori = 11942 & rRNA location between dnaApos and Ori = False
+ rRNA location = 895779 sign = - & strand interval = [1, 30570)lagging1 & [1002636, 2028235)lagging2. Apos Distance to Ori = 11942 & rRNA location between dnaApos and Ori = False
+ rRNA location = 986522 sign = - & strand interval = [1, 30570)lagging1 & [1002636, 2028235)lagging2. Apos Distance to Ori = 11942 & rRNA location between dnaApos and Ori = False
+ rRNA location = 1403735 sign = + & strand interval = [30570, 1002636) leading1. Apos Distance to Ori = 11942 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,654 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP064095.1 ------- 
+ rRNA location = 1012685 sign = - & strand interval = [1, 363)lagging1 & [2022282, 4215581)lagging2. Apos Distance to Ori = 63350 & rRNA location between dnaApos and Ori = False
+ rRNA location = 1323946 sign = - & strand interval = [1, 363)lagging1 & [2022282, 4215581)lagging2. Apos Distance to Ori = 63350 & rRNA location between dnaApos and Ori = False
+ rRNA location = 1787875 sign = - & strand interval = [1, 363)lagging1 & [2022282, 4215581)lagging2. Apos Distance to Ori = 63350 & rRNA location between dnaApos and Ori = False
+ rRNA location = 1792875 sign = - & strand interval = [1, 363)lagging1 & [2022282, 4215581)lagging2. Apos Distance to Ori = 63350 & rRNA location between dnaApos and Ori = False
+ rRNA location = 1798473 sign = - & strand interval = [1, 363)lagging1 & [2022282, 4215581)lagging2. Apos Distance to Ori = 63350 & rRNA location between dnaApos and Ori = False
+ rRNA location = 1862973 sign = - & strand interval = [1, 363)lagging1 & [2022282, 4215581)lagging2. Apos Distance to Ori = 63350 & rRNA location between dnaApos and Ori = False
+ rRNA location = 1868826 sign = - & strand interval = [1, 363)lagging1 & [2022282, 4215581)lagging2. Apos Distance to Ori = 63350 & rRNA location between dnaApos and Ori = False
+ rRNA location = 1929079 sign = - & strand interval = [1, 363)lagging1 & [2022282, 4215581)lagging2. Apos Distance to Ori = 63350 & rRNA location between dnaApos and Ori = False
+ rRNA location = 1949532 sign = - & strand interval = [1, 363)lagging1 & [2022282, 4215581)lagging2. Apos Distance to Ori = 63350 & rRNA location between dnaApos and Ori = False
+ rRNA location = 2996335 sign = + & strand interval = [363, 2022282) leading1. Apos Distance to Ori = 63350 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,674 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP094289.1 ------- 
+ rRNA location = 1638937 sign = + & strand interval = [1, 368895)leading1 & [2384581, 3953528)leading2. Apos Distance to Ori = 1860945 & rRNA location between dnaApos and Ori = False
+ rRNA location = 2914782 sign = - & strand interval = [368895, 2384581) lagging1. Apos Distance to Ori = 1860945 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,696 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP092893.1 ------- 
+ rRNA location = 1167424 sign = + & strand interval = [1, 1142023)leading1 & [2145671, 2260657)leading2. Apos Distance to Ori = 1118633 & rRNA location between dnaApos and Ori = True
+ rRNA location = 1529385 sign = + & strand interval = [1, 1142023)leading1 & [2145671, 2260657)leading2. Apos Distance to Ori = 1118633 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,709 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP094451.1 ------- 
+ rRNA location = 1379658 sign = - & strand interval = [2649207, 5642767) lagging1. Apos Distance to Ori = 22970 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,712 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP094344.1 ------- 
+ rRNA location = 2808162 sign = - & strand interval = [1, 1352)lagging1 & [4765391, 9607551)lagging2. Apos Distance to Ori = 4608956 & rRNA location between dnaApos and Ori = False
+ rRNA location = 4291743 sign = - & strand interval = [1, 1352)lagging1 & [4765391, 9607551)lagging2. Apos Distance to Ori = 4608956 & rRNA location between dnaApos and Ori = False
+ rRNA location = 5283889 sign = + & strand interval = [1352, 4765391) leading1. Apos Distance to Ori = 4608956 & rRNA location between dnaApos and Ori = False
+ rRNA location = 5935529 sign = + & strand interval = [1352, 4765391) leading1. Apos Distance to Ori = 4608956 & rRNA location between dnaApos and Ori = False
+ rRNA location = 7633410 sign = + & strand interval = [1352, 4765391) leading1. Apos Distance to Ori = 4608956 & rRNA location between dnaApos and Ori = False
+ rRNA location = 8120870 sign = + & strand interval = [1352, 4765391) leading1. Apos Distance to Ori = 4608956 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,742 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP094643.1 ------- 
+ rRNA location = 3012912 sign = + & strand interval = [1, 1296768)leading1 & [3018026, 3526749)leading2. Apos Distance to Ori = 21004 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,755 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP094676.1 ------- 
+ rRNA location = 1996213 sign = + & strand interval = [1, 558749)leading1 & [4258627, 8368455)leading2. Apos Distance to Ori = 4109829 & rRNA location between dnaApos and Ori = False
+ rRNA location = 5573076 sign = - & strand interval = [558749, 4258627) lagging1. Apos Distance to Ori = 4109829 & rRNA location between dnaApos and Ori = True
+ rRNA location = 6014091 sign = - & strand interval = [558749, 4258627) lagging1. Apos Distance to Ori = 4109829 & rRNA location between dnaApos and Ori = True
+ rRNA location = 7491697 sign = - & strand interval = [558749, 4258627) lagging1. Apos Distance to Ori = 4109829 & rRNA location between dnaApos and Ori = True
+ rRNA location = 8118907 sign = - & strand interval = [558749, 4258627) lagging1. Apos Distance to Ori = 4109829 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,763 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP094841.1 ------- 
+ rRNA location = 4801138 sign = - & strand interval = [2426919, 4780647) lagging1. Apos Distance to Ori = 65827 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-05 12:06:47,764 WARNING    Nr of records with rRNA and strand non-overlap: 31
