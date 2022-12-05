@@ -1,30 +1,32 @@
- 
+2022-12-05 15:42:04,642 INFO     Logging verbose set to False
+2022-12-05 15:42:04,757 DEBUG    OK! No faulty records from NCBI recorded!
+2022-12-05 15:42:04,819 WARNING   
  -------- The overlap with rRNA and strand is not correct for 2 ------- 
  rRNA location = 7 sign = - & strand interval = [1, 4)lagging1 & [9, 10]lagging2. Apos Distance to Ori = 0 & rRNA location between dnaApos and Ori = False
  rRNA location = 1 sign = + & strand interval = [4, 9) leading1. Apos Distance to Ori = 0 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
- 
+2022-12-05 15:42:04,820 WARNING   
  -------- The overlap with rRNA and strand is not correct for 4 ------- 
  rRNA location = 10 sign = - & strand interval = [4, 9) lagging1. Apos Distance to Ori = 0 & rRNA location between dnaApos and Ori = False
  rRNA location = 4 sign = + & strand interval = [1, 4)leading1 & [9, 10]leading2. Apos Distance to Ori = 0 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
- 
+2022-12-05 15:42:04,824 WARNING   
  -------- The overlap with rRNA and strand is not correct for 6 ------- 
  rRNA location = 5 sign = - & strand interval = [6, 10]lagging1. Apos Distance to Ori = 1 & rRNA location between dnaApos and Ori = False
  rRNA location = 7 sign = + & strand interval = [1, 6)leading1. Apos Distance to Ori = 1 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
- 
+2022-12-05 15:42:04,825 WARNING   
  -------- The overlap with rRNA and strand is not correct for 7 ------- 
  rRNA location = 8 sign = + & strand interval = [1, 7)leading1 & [9, 10]leading2. Apos Distance to Ori = 0 & rRNA location between dnaApos and Ori = False
  rRNA location = 5 sign = - & strand interval = [7, 9) lagging1. Apos Distance to Ori = 0 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
- 
+2022-12-05 15:42:04,825 WARNING   
  -------- The overlap with rRNA and strand is not correct for 8 ------- 
  rRNA location = 9 sign = - & strand interval = [7, 9) lagging1. Apos Distance to Ori = 0 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
- 
+2022-12-05 15:42:04,825 WARNING   
  -------- The overlap with rRNA and strand is not correct for 9 ------- 
  rRNA location = 5 sign = + & strand interval = [2, 5) leading1. Apos Distance to Ori = 2 & rRNA location between dnaApos and Ori = False
  rRNA location = 4 sign = - & strand interval = [1, 2)lagging1 & [5, 10]lagging2. Apos Distance to Ori = 2 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
-  Nr of records with rRNA and strand non-overlap: 6
+2022-12-05 15:42:04,825 WARNING    Nr of records with rRNA and strand non-overlap: 6

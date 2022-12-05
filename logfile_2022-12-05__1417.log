@@ -1,0 +1,9 @@
+2022-12-05 14:17:13,518 INFO     Logging verbose set to False
+2022-12-05 14:17:13,633 DEBUG    OK! No faulty records from NCBI recorded!
+2022-12-05 14:17:38,887 INFO     Logging verbose set to False
+2022-12-05 14:17:38,995 DEBUG    OK! No faulty records from NCBI recorded!
+2022-12-05 14:17:39,017 WARNING   
+ -------- The overlap with rRNA and strand is not correct for 2 ------- 
+ rRNA location = 7 sign = - & strand interval = [1, 4)lagging1 & [9, 10)lagging2. Apos Distance to Ori = 0 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-05 14:17:39,018 WARNING    Nr of records with rRNA and strand non-overlap: 1
