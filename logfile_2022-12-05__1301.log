@@ -1,3 +1,0 @@
-2022-12-05 13:01:39,625 INFO     Logging verbose set to False
-2022-12-05 13:01:39,739 DEBUG    OK! No faulty records from NCBI recorded!
-2022-12-05 13:01:39,749 WARNING    Nr of records with rRNA and strand non-overlap: 0

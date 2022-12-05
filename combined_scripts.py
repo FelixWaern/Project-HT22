@@ -9,8 +9,8 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, verbose=Fal
     from NCBI_DATA_FETCH import main_script as ms
 
     df = fd.fetch_csv_as_df(csv_path) 
-    #Ta från [23000:24000] BATCH 69 börjar det kaosa till slutet och framåt.
-    test_df = df.loc[22000:22100]
+    #Ta från [16000:17000]
+    test_df = df.loc[16000:17000]
     #test_df = df.head(50)
 
     i = 0
