@@ -15,6 +15,19 @@ def rrna_lead_lag(csv_path, rrna_dict):
     import re
     import logging
 
+    #load the temporary dataframe for the rRNA
+    temp_rna_path = "C:/Users/Felix/Documents/rna_dict.csv"
+    df = pd.read_csv(temp_rna_path)
+    rrna_dict = {}
+    for i in range(0, len(df)):
+        rna_row = []
+        for x in df.loc[i]:
+            print(x)
+            rna_row.append(x)
+            print(rna_row)
+        rna_row = rna_row[1:]
+        rrna_dict[i + 1] = rna_row
+
     t0 = time.time()
     # Create log file
     root_logger = logging.getLogger()
@@ -26,16 +39,16 @@ def rrna_lead_lag(csv_path, rrna_dict):
     df_rrna = pd.DataFrame(dict([ (k, pd.Series(v, dtype=pd.StringDtype())) for k, v in rrna_dict.items() ])).transpose()
     df_rrna = df_rrna.reset_index()
     df_rrna.rename(columns = {'index':'name'}, inplace = True)
-    df_rrna.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_with_rrna.csv")
+    #df_rrna.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_with_rrna.csv")
 
     # import the Dataframe columns with values for ori and ter
     temp = fd.fetch_csv_as_df(csv_path)   
-    df_ori_ter = temp[['name', 'siz', 'shift', 'div','Ter', 'Ori']]
-    df_ori_ter.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_double_check_ori_ter.csv")
+    df_ori_ter = temp[['name', 'siz', 'shift', 'div','Ter', 'Ori', 'dnaApos']]
+    #df_ori_ter.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_double_check_ori_ter.csv")
 
     # merge the Dataframe columns with matching accession numbers
     df_rrna_ori_ter = pd.merge(df_rrna, df_ori_ter, on="name")
-    df_rrna_ori_ter.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_double_check_merged.csv")
+    #df_rrna_ori_ter.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_double_check_merged.csv")
 
     # create intervals for leading and lagging strand
     for row in range(len(df_rrna_ori_ter)):
@@ -93,10 +106,12 @@ def rrna_lead_lag(csv_path, rrna_dict):
             # write to Dataframe
             two_s(df_rrna_ori_ter, row, x1, x2, y1, y2)
 
-    df_rrna_ori_ter.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_with_rrna_lead_lag.csv")
+    #df_rrna_ori_ter.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_with_rrna_lead_lag.csv")
 
     # iterate over the Dataframe df_rrna_ori_ter and compare the rRNA intervals with leading/lagging strand
+    j = 0
     for row in range(len(df_rrna_ori_ter)):
+        records = []
         for col in range(0, len(max(rrna_dict.values(), key=len))):
             ter = (df_rrna_ori_ter.loc[row, "siz"] * df_rrna_ori_ter.loc[row, "div"]) + df_rrna_ori_ter.loc[row, "shift"] + 1
             # find the first/last position of the rrna gene with regex
@@ -110,21 +125,28 @@ def rrna_lead_lag(csv_path, rrna_dict):
                 # special case for negative shift 
                 if ter < 0:
                     print("SPEC - NAME", df_rrna_ori_ter.loc[row, "name"])
-                    check_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col)
+                    check_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
                 else:
-                    check_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col)
+                    check_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
             # positive shift
             elif df_rrna_ori_ter.loc[row, "shift"] > 0:
                 # special case for positive shift 
                 if ter > df_rrna_ori_ter.loc[row, "siz"]:
                     print("SPEC + NAME", df_rrna_ori_ter.loc[row, "name"])
-                    check_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col)
+                    check_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
                 else:
-                    check_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col)
+                    check_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
             # no shift
             else:
                 print("no NAME", df_rrna_ori_ter.loc[row, "name"])
-                no_shift_check(df_rrna_ori_ter, rrna, rrna_comp, row, col)
+                no_shift_check(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
+        if records != []:
+            string = ""
+            for i in range(len(records)):
+                string = string + records[i]
+            logging.warning(f" \n -------- The overlap with rRNA and strand is not correct for {df_rrna_ori_ter.loc[row, 'name']} ------- {string} \n -------------------------------------------------------------------------------")    
+            j += 1
+    logging.warning(f"  Nr of records with rRNA and strand non-overlap: {j}")
     t1 = time.time()
     total = t1-t0
     print("rrna lead lag done")
