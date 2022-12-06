@@ -16,17 +16,17 @@ def rrna_lead_lag(csv_path, rrna_dict):
     import logging
 
     #load the temporary dataframe for the rRNA
-    temp_rna_path = "C:/Users/Felix/Documents/rna_dict.csv"
-    df = pd.read_csv(temp_rna_path)
-    rrna_dict = {}
-    for i in range(0, len(df)):
-        rna_row = []
-        for x in df.loc[i]:
-            print(x)
-            rna_row.append(x)
-            print(rna_row)
-        rna_row = rna_row[1:]
-        rrna_dict[i + 1] = rna_row
+    # temp_rna_path = "C:/Users/Felix/Documents/rna_dict.csv"
+    # df = pd.read_csv(temp_rna_path)
+    # rrna_dict = {}
+    # for i in range(0, len(df)):
+    #     rna_row = []
+    #     for x in df.loc[i]:
+    #         print(x)
+    #         rna_row.append(x)
+    #         print(rna_row)
+    #     rna_row = rna_row[1:]
+    #     rrna_dict[i + 1] = rna_row
 
     t0 = time.time()
     # Create log file
@@ -110,6 +110,7 @@ def rrna_lead_lag(csv_path, rrna_dict):
 
     # iterate over the Dataframe df_rrna_ori_ter and compare the rRNA intervals with leading/lagging strand
     j = 0
+    non_overlapping_rrna = []
     for row in range(len(df_rrna_ori_ter)):
         records = []
         for col in range(0, len(max(rrna_dict.values(), key=len))):
@@ -124,7 +125,6 @@ def rrna_lead_lag(csv_path, rrna_dict):
             elif df_rrna_ori_ter.loc[row, "shift"] < 0:
                 # special case for negative shift 
                 if ter < 0:
-                    print("SPEC - NAME", df_rrna_ori_ter.loc[row, "name"])
                     check_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
                 else:
                     check_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
@@ -132,20 +132,21 @@ def rrna_lead_lag(csv_path, rrna_dict):
             elif df_rrna_ori_ter.loc[row, "shift"] > 0:
                 # special case for positive shift 
                 if ter > df_rrna_ori_ter.loc[row, "siz"]:
-                    print("SPEC + NAME", df_rrna_ori_ter.loc[row, "name"])
                     check_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
                 else:
                     check_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
             # no shift
             else:
-                print("no NAME", df_rrna_ori_ter.loc[row, "name"])
                 no_shift_check(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
         if records != []:
             string = ""
             for i in range(len(records)):
                 string = string + records[i]
             logging.warning(f" \n -------- The overlap with rRNA and strand is not correct for {df_rrna_ori_ter.loc[row, 'name']} ------- {string} \n -------------------------------------------------------------------------------")    
-            j += 1
+            j += 1   
+            non_overlapping_rrna.append(df_rrna_ori_ter.loc[row, 'name'])
+    df_non_overlapping = df_rrna_ori_ter.loc[df_rrna_ori_ter['name'].isin(non_overlapping_rrna)]
+    df_non_overlapping.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_with_rrna_lead_lag.csv")
     logging.warning(f"  Nr of records with rRNA and strand non-overlap: {j}")
     t1 = time.time()
     total = t1-t0
