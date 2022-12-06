@@ -2,7 +2,18 @@
 #TODO Email NCBI about the faulty files, KEEP UNTIL LATER SO WE KNOW WE HAVE ONE FAULTY.
 #TODO Perform for larger dataset, investigate faulty or strange records
 #TODO Add optional verbosity as bash commands - Started can be expanded
-#TODO The new dnaA investigation things - 
+#TODO The new dnaA investigation things 
+#TODO Create valididation data to prove that the method works. 
+#TODO Create list for all rRNA which do not follow hypothesis DONE
+#TODO Fix list for the rRNA where no rRNA was found. DONE
+#TODO Output the distance to origin and distance to dnaA of the rRNA gene.  DONE
+#TODO Check if rRNA is between the predicted origin and dnaAPos. DONE
+#TODO MERGE AND RESOLVE ALL THE ISSUES. 
+#TODO Graphical representation. Ashwini does
+#TODO Machine readable file as output. Sara does
+#TODO The code might be wrong during the calculation. Increase checks and redo. 
+#TODO Save output as csv and save the all the information especially dnaA position relative to our predicted Ori and inte start of rRNA interval
+#TODO Fix the 2 special cases. Should be reversed.
 
 import importlib.util
 import argparse
