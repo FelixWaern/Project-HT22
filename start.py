@@ -8,6 +8,7 @@
 #TODO Fix list for the rRNA where no rRNA was found. DONE
 #TODO Output the distance to origin and distance to dnaA of the rRNA gene.  DONE
 #TODO Check if rRNA is between the predicted origin and dnaAPos. DONE
+#TODO MERGE AND RESOLVE ALL THE ISSUES. 
 #TODO Graphical representation. Ashwini does
 #TODO Machine readable file as output. Sara does
 #TODO The code might be wrong during the calculation. Increase checks and redo. 
