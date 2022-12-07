@@ -1,5 +1,5 @@
 # Combining the fetching data & csv_filtered
-def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, verbose=False):
+def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, verbose=False):
     import time
     import sys
     import logging
@@ -7,12 +7,17 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, verbose=Fal
     from skewDB import fetching_data as fd
     sys.path.insert(0, '/NCBI_DATA_FETCH/')
     from NCBI_DATA_FETCH import main_script as ms
-
-    df = fd.fetch_csv_as_df(csv_path) 
+    
+    org_df = fd.fetch_csv_as_df(csv_path) 
     #Ta från [16000:17000]
-    test_df = df.loc[16000:17000]
-    #test_df = df.head(50)
+    #test_df = df.loc[23000:24000]
+    test_df = org_df.head(6000)
 
+    if a_list != None:
+        df = org_df.loc[org_df['name'].isin(a_list)]
+    else:
+        df = org_df
+    
     i = 0
     j = 1
     batch = []

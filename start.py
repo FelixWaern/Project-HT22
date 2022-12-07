@@ -3,17 +3,12 @@
 #TODO Perform for larger dataset, investigate faulty or strange records
 #TODO Add optional verbosity as bash commands - Started can be expanded
 #TODO The new dnaA investigation things 
-#TODO Create valididation data to prove that the method works. 
-#TODO Create list for all rRNA which do not follow hypothesis DONE
-#TODO Fix list for the rRNA where no rRNA was found. DONE
-#TODO Output the distance to origin and distance to dnaA of the rRNA gene.  DONE
-#TODO Check if rRNA is between the predicted origin and dnaAPos. DONE
-#TODO MERGE AND RESOLVE ALL THE ISSUES. 
+#TODO Create valididation data to prove that the method works.
 #TODO Graphical representation. Ashwini does
 #TODO Machine readable file as output. Sara does
+#TODO Fix the no rRNA found warning
 #TODO The code might be wrong during the calculation. Increase checks and redo. 
 #TODO Save output as csv and save the all the information especially dnaA position relative to our predicted Ori and inte start of rRNA interval
-#TODO Fix the 2 special cases. Should be reversed.
 
 import importlib.util
 import argparse
@@ -50,12 +45,16 @@ parser.add_argument('-v', '--verbose',
                     action='store_true',
                     help = 'Toggle verbose logging. Changes the amount of information in the output log file.' )  # on/off flag
 
+parser.add_argument('-l', '--a_list',
+                    nargs='+',
+                    help = 'Option for running the script for a specific list of records. Example: -l NC_034600.1 NC_005780.1' )  # Get a accession nr list  
+
 #Parsing all arguments
 args = parser.parse_args()
 
 
 
-def start(csv_path, email, api_key, local_storage_path, verbose=False):
+def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]):
 
     print("--------------Starting SkewDB rRNA interval match--------------")
     # Start logging
@@ -68,7 +67,6 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False):
                         format="%(asctime)-15s %(levelname)-8s %(message)s")
         
     logging.info(f"Logging verbose set to {verbose}") 
-
 
     #Check if biopython is installed. 
     name = 'Bio'
@@ -97,7 +95,7 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False):
     #Get the rRNA interval dict
     if verbose == True:
         logging.debug(f"\n --------parameters into rrna_dict()--------- \n csv_path = {csv_path} \n email = {email} \n api_key = {api_key} \n local_storage_path = {local_storage_path}")
-    rrna_dict = get_rrna(csv_path, email, api_key, local_storage_path, verbose)
+    rrna_dict = get_rrna(csv_path, email, api_key, local_storage_path, a_list, verbose )
 
 
     # Send to rrna leading lagging script
@@ -106,7 +104,7 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False):
     rll(csv_path, rrna_dict)
 
     print("Everything is done")
-start(args.csv_path, args.email, args.api_key, args.local_storage_path, args.verbose)
+start(args.csv_path, args.email, args.api_key, args.local_storage_path, args.verbose, args.a_list)
 
 
 """
