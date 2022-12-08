@@ -1,0 +1,351 @@
+2022-12-07 14:14:47,105 INFO     Logging verbose set to True
+2022-12-07 14:14:47,106 DEBUG    
+ --------Biopython is installed--------- 
+2022-12-07 14:14:47,106 DEBUG    
+ --------parameters into rrna_dict()--------- 
+ csv_path = C:/Users/Felix/Documents/FilteredDataFile.csv 
+ email = Felix.wae@gmail.com 
+ api_key = 7b4a5e9841f79495be73767323ad485fda08 
+ local_storage_path = D:/
+2022-12-07 14:14:50,671 DEBUG    
+ --------Batch 1 sent to batch_operator--------- 
+ Contains NCBI records: ['NC_018290.1', 'NC_015730.1', 'NC_022112.1', 'NC_022240.1', 'NZ_CP046035.1', 'NC_020911.1', 'NC_020995.1', 'NC_022663.1', 'NZ_CP006882.1', 'NC_022113.1'] 
+2022-12-07 14:14:50,672 DEBUG    
+ Fetching NCBI record: 
+ NC_018290.1 
+2022-12-07 14:14:50,675 DEBUG    
+ Downloading NCBI record: 
+ NC_015730.1 
+2022-12-07 14:14:50,677 DEBUG    
+ Fetching NCBI record: 
+ NC_022112.1 
+2022-12-07 14:14:50,677 DEBUG    
+ Fetching NCBI record: 
+ NC_022240.1 
+2022-12-07 14:14:50,677 DEBUG    
+ Fetching NCBI record: 
+ NC_022663.1 
+2022-12-07 14:14:50,677 DEBUG    
+ Fetching NCBI record: 
+ NC_020911.1 
+2022-12-07 14:14:50,677 DEBUG    
+ Fetching NCBI record: 
+ NC_020995.1 
+2022-12-07 14:14:50,677 DEBUG    
+ Fetching NCBI record: 
+ NZ_CP006882.1 
+2022-12-07 14:14:50,677 DEBUG    
+ Fetching NCBI record: 
+ NZ_CP046035.1 
+2022-12-07 14:14:50,677 DEBUG    
+ Fetching NCBI record: 
+ NC_022113.1 
+2022-12-07 14:14:57,378 DEBUG    
+ --------Batch 2 sent to batch_operator--------- 
+ Contains NCBI records: ['NZ_CP007064.1', 'NC_014618.1', 'NC_014616.1', 'NZ_CP008742.1', 'NC_017455.1', 'NC_014625.1', 'NC_014632.1', 'NC_017451.1', 'NC_014622.2', 'NC_017452.1'] 
+2022-12-07 14:14:57,379 DEBUG    
+ Fetching NCBI record: 
+ NZ_CP007064.1 
+2022-12-07 14:14:57,382 DEBUG    
+ Downloading NCBI record: 
+ NC_014618.1 
+2022-12-07 14:14:57,383 DEBUG    
+ Fetching NCBI record: 
+ NC_017451.1 
+2022-12-07 14:14:57,383 DEBUG    
+ Fetching NCBI record: 
+ NC_014616.1 
+2022-12-07 14:14:57,383 DEBUG    
+ Fetching NCBI record: 
+ NZ_CP008742.1 
+2022-12-07 14:14:57,383 DEBUG    
+ Fetching NCBI record: 
+ NC_017455.1 
+2022-12-07 14:14:57,384 DEBUG    
+ Fetching NCBI record: 
+ NC_014625.1 
+2022-12-07 14:14:57,384 DEBUG    
+ Fetching NCBI record: 
+ NC_014632.1 
+2022-12-07 14:14:57,384 DEBUG    
+ Fetching NCBI record: 
+ NC_014622.2 
+2022-12-07 14:14:57,384 DEBUG    
+ Fetching NCBI record: 
+ NC_017452.1 
+2022-12-07 14:15:02,403 DEBUG    
+ --------Batch 3 sent to batch_operator--------- 
+ Contains NCBI records: ['NC_014638.1', 'NC_017445.1', 'NC_018528.1', 'NC_014640.1', 'NC_017310.1', 'NC_014639.1', 'NC_017506.1', 'NC_014657.1', 'NC_014666.1', 'NC_014652.1'] 
+2022-12-07 14:15:02,405 DEBUG    
+ Fetching NCBI record: 
+ NC_014638.1 
+2022-12-07 14:15:02,412 DEBUG    
+ Downloading NCBI record: 
+ NC_017445.1 
+2022-12-07 14:15:02,413 DEBUG    
+ Fetching NCBI record: 
+ NC_018528.1 
+2022-12-07 14:15:02,413 DEBUG    
+ Fetching NCBI record: 
+ NC_014640.1 
+2022-12-07 14:15:02,413 DEBUG    
+ Fetching NCBI record: 
+ NC_014666.1 
+2022-12-07 14:15:02,414 DEBUG    
+ Fetching NCBI record: 
+ NC_017310.1 
+2022-12-07 14:15:02,414 DEBUG    
+ Fetching NCBI record: 
+ NC_014639.1 
+2022-12-07 14:15:02,414 DEBUG    
+ Fetching NCBI record: 
+ NC_014657.1 
+2022-12-07 14:15:02,414 DEBUG    
+ Fetching NCBI record: 
+ NC_014652.1 
+2022-12-07 14:15:02,415 DEBUG    
+ Fetching NCBI record: 
+ NC_017506.1 
+2022-12-07 14:15:09,080 DEBUG    
+ --------Batch 4 sent to batch_operator--------- 
+ Contains NCBI records: ['NC_014654.1', 'NC_017403.1', 'NC_014655.1', 'NC_016445.1', 'NC_016446.1', 'NZ_CP077685.1', 'NC_014721.1', 'NC_014720.1', 'NZ_CP002007.2', 'NC_017546.1'] 
+2022-12-07 14:15:09,082 DEBUG    
+ Fetching NCBI record: 
+ NC_014654.1 
+2022-12-07 14:15:09,085 DEBUG    
+ Downloading NCBI record: 
+ NC_017403.1 
+2022-12-07 14:15:09,085 DEBUG    
+ Fetching NCBI record: 
+ NC_016445.1 
+2022-12-07 14:15:09,085 DEBUG    
+ Fetching NCBI record: 
+ NC_017546.1 
+2022-12-07 14:15:09,085 DEBUG    
+ Fetching NCBI record: 
+ NC_016446.1 
+2022-12-07 14:15:09,085 DEBUG    
+ Fetching NCBI record: 
+ NC_014655.1 
+2022-12-07 14:15:09,086 DEBUG    
+ Fetching NCBI record: 
+ NC_014721.1 
+2022-12-07 14:15:09,086 DEBUG    
+ Fetching NCBI record: 
+ NZ_CP077685.1 
+2022-12-07 14:15:09,086 DEBUG    
+ Fetching NCBI record: 
+ NZ_CP002007.2 
+2022-12-07 14:15:09,086 DEBUG    
+ Fetching NCBI record: 
+ NC_014720.1 
+2022-12-07 14:15:13,702 DEBUG    
+ --------Batch 5 sent to batch_operator--------- 
+ Contains NCBI records: ['NC_017547.1', 'NC_017545.1', 'NC_017267.2', 'NC_017544.1', 'NC_019551.1', 'NZ_CP018150.1', 'NZ_CP005388.1', 'NC_016023.1', 'NC_017316.1', 'NC_018632.1'] 
+2022-12-07 14:15:13,703 DEBUG    
+ Fetching NCBI record: 
+ NC_017547.1 
+2022-12-07 14:15:13,706 DEBUG    
+ Downloading NCBI record: 
+ NC_017545.1 
+2022-12-07 14:15:13,706 DEBUG    
+ Fetching NCBI record: 
+ NZ_CP018150.1 
+2022-12-07 14:15:13,706 DEBUG    
+ Fetching NCBI record: 
+ NZ_CP005388.1 
+2022-12-07 14:15:13,706 DEBUG    
+ Fetching NCBI record: 
+ NC_017316.1 
+2022-12-07 14:15:13,707 DEBUG    
+ Fetching NCBI record: 
+ NC_018632.1 
+2022-12-07 14:15:13,707 DEBUG    
+ Fetching NCBI record: 
+ NC_019551.1 
+2022-12-07 14:15:13,707 DEBUG    
+ Fetching NCBI record: 
+ NC_017544.1 
+2022-12-07 14:15:13,707 DEBUG    
+ Fetching NCBI record: 
+ NC_016023.1 
+2022-12-07 14:15:13,707 DEBUG    
+ Fetching NCBI record: 
+ NC_017267.2 
+2022-12-07 14:15:18,841 DEBUG    
+ --------Batch 6 sent to batch_operator--------- 
+ Contains NCBI records: ['NZ_CP020896.1', 'NZ_CP020947.1', 'NC_014816.1', 'NC_017960.1', 'NC_017262.1', 'NC_014817.1', 'NC_014915.1', 'NC_014964.1', 'NZ_CP005986.1', 'NC_014837.1'] 
+2022-12-07 14:15:18,843 DEBUG    
+ Fetching NCBI record: 
+ NZ_CP020896.1 
+2022-12-07 14:15:18,847 DEBUG    
+ Downloading NCBI record: 
+ NZ_CP020947.1 
+2022-12-07 14:15:18,848 DEBUG    
+ Fetching NCBI record: 
+ NC_014816.1 
+2022-12-07 14:15:18,848 DEBUG    
+ Fetching NCBI record: 
+ NC_017262.1 
+2022-12-07 14:15:18,848 DEBUG    
+ Fetching NCBI record: 
+ NC_014837.1 
+2022-12-07 14:15:18,848 DEBUG    
+ Fetching NCBI record: 
+ NC_014915.1 
+2022-12-07 14:15:18,848 DEBUG    
+ Fetching NCBI record: 
+ NC_014964.1 
+2022-12-07 14:15:18,848 DEBUG    
+ Fetching NCBI record: 
+ NC_017960.1 
+2022-12-07 14:15:18,848 DEBUG    
+ Fetching NCBI record: 
+ NC_014817.1 
+2022-12-07 14:15:18,848 DEBUG    
+ Fetching NCBI record: 
+ NZ_CP005986.1 
+2022-12-07 14:15:25,190 DEBUG    
+ --------Batch 7 sent to batch_operator--------- 
+ Contains NCBI records: ['NC_015138.1', 'NC_021591.1', 'NC_014844.1', 'NC_015673.1', 'NC_014829.1', 'NC_015953.1', 'NC_014836.1', 'NC_015656.1', 'NC_014828.1', 'NZ_CP029003.1'] 
+2022-12-07 14:15:25,191 DEBUG    
+ Fetching NCBI record: 
+ NC_015138.1 
+2022-12-07 14:15:25,196 DEBUG    
+ Downloading NCBI record: 
+ NC_021591.1 
+2022-12-07 14:15:25,197 DEBUG    
+ Fetching NCBI record: 
+ NZ_CP029003.1 
+2022-12-07 14:15:25,197 DEBUG    
+ Fetching NCBI record: 
+ NC_014836.1 
+2022-12-07 14:15:25,197 DEBUG    
+ Fetching NCBI record: 
+ NC_014829.1 
+2022-12-07 14:15:25,197 DEBUG    
+ Fetching NCBI record: 
+ NC_015656.1 
+2022-12-07 14:15:25,197 DEBUG    
+ Fetching NCBI record: 
+ NC_014844.1 
+2022-12-07 14:15:25,197 DEBUG    
+ Fetching NCBI record: 
+ NC_015953.1 
+2022-12-07 14:15:25,197 DEBUG    
+ Fetching NCBI record: 
+ NC_015673.1 
+2022-12-07 14:15:25,197 DEBUG    
+ Fetching NCBI record: 
+ NC_014828.1 
+2022-12-07 14:15:34,599 DEBUG    
+ --------Batch 8 sent to batch_operator--------- 
+ Contains NCBI records: ['NC_015275.1', 'NC_016901.1', 'NC_016631.1', 'NC_015155.1', 'NC_015064.1', 'NC_014910.1', 'NC_015859.1', 'NC_014963.1', 'NC_014833.1', 'NC_014727.1'] 
+2022-12-07 14:15:34,599 DEBUG    
+ Fetching NCBI record: 
+ NC_015275.1 
+2022-12-07 14:15:34,603 DEBUG    
+ Downloading NCBI record: 
+ NC_016901.1 
+2022-12-07 14:15:34,604 DEBUG    
+ Fetching NCBI record: 
+ NC_015155.1 
+2022-12-07 14:15:34,604 DEBUG    
+ Fetching NCBI record: 
+ NC_014910.1 
+2022-12-07 14:15:34,604 DEBUG    
+ Fetching NCBI record: 
+ NC_014833.1 
+2022-12-07 14:15:34,605 DEBUG    
+ Fetching NCBI record: 
+ NC_016631.1 
+2022-12-07 14:15:34,605 DEBUG    
+ Fetching NCBI record: 
+ NC_015859.1 
+2022-12-07 14:15:34,605 DEBUG    
+ Fetching NCBI record: 
+ NC_014963.1 
+2022-12-07 14:15:34,606 DEBUG    
+ Fetching NCBI record: 
+ NC_015064.1 
+2022-12-07 14:15:34,606 DEBUG    
+ Fetching NCBI record: 
+ NC_014727.1 
+2022-12-07 14:15:43,223 DEBUG    
+ --------Batch 9 sent to batch_operator--------- 
+ Contains NCBI records: ['NC_017563.1', 'NC_014738.1', 'NC_014734.1', 'NC_017253.1', 'NC_014751.1', 'NC_014758.1', 'NC_014774.1', 'NC_014759.1', 'NC_017634.1', 'NC_014762.1'] 
+2022-12-07 14:15:43,224 DEBUG    
+ Fetching NCBI record: 
+ NC_017563.1 
+2022-12-07 14:15:43,227 DEBUG    
+ Downloading NCBI record: 
+ NC_014738.1 
+2022-12-07 14:15:43,228 DEBUG    
+ Fetching NCBI record: 
+ NC_017253.1 
+2022-12-07 14:15:43,228 DEBUG    
+ Fetching NCBI record: 
+ NC_014758.1 
+2022-12-07 14:15:43,228 DEBUG    
+ Fetching NCBI record: 
+ NC_014762.1 
+2022-12-07 14:15:43,228 DEBUG    
+ Fetching NCBI record: 
+ NC_014774.1 
+2022-12-07 14:15:43,228 DEBUG    
+ Fetching NCBI record: 
+ NC_014751.1 
+2022-12-07 14:15:43,229 DEBUG    
+ Fetching NCBI record: 
+ NC_017634.1 
+2022-12-07 14:15:43,229 DEBUG    
+ Fetching NCBI record: 
+ NC_014759.1 
+2022-12-07 14:15:43,229 DEBUG    
+ Fetching NCBI record: 
+ NC_014734.1 
+2022-12-07 14:15:47,875 DEBUG    
+ --------Remaining NCBI records sent to batch_operator--------- 
+ Contains NCBI records: ['NC_017530.1'] 
+2022-12-07 14:15:51,171 WARNING   
+ -------- No rRNA was found for: --------  
+ NC_016446.1 
+ -------------------------------------------------------------------------------
+2022-12-07 14:15:51,176 WARNING  Faulty records from NCBI: ['NC_015730.1', 'NC_014618.1', 'NC_017445.1', 'NC_017403.1', 'NC_017545.1', 'NZ_CP020947.1', 'NC_021591.1', 'NC_016901.1', 'NC_014738.1', 'NC_017403.1', 'NC_014738.1', 'NC_017545.1', 'NC_015730.1', 'NC_017445.1', 'NC_016901.1', 'NC_021591.1', 'NC_014618.1', 'NZ_CP020947.1']
+2022-12-07 14:15:51,184 DEBUG    
+ parameters into rrna_dict: 
+ csv_path = C:/Users/Felix/Documents/FilteredDataFile.csv 
+ rrna_dict = rrna_dict, too long to display
+2022-12-07 14:15:52,687 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NC_020995.1 ------- 
+ rRNA location = 3399101 sign = - & strand interval = [1725150, 3392728) lagging1. Apos Distance to Ori = 34648 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-07 14:15:52,688 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NC_020911.1 ------- 
+ rRNA location = 24045 sign = + & strand interval = [141581, 2372909)leading1. Apos Distance to Ori = 141480 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-07 14:15:52,711 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP005388.1 ------- 
+ rRNA location = 39134 sign = + & strand interval = [42548, 792480)leading1. Apos Distance to Ori = 42547 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-07 14:15:52,718 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NC_017262.1 ------- 
+ rRNA location = 1784939 sign = + & strand interval = [920646, 1750614)leading1. Apos Distance to Ori = 920372 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-07 14:15:52,727 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NC_015673.1 ------- 
+ rRNA location = 117258 sign = - & strand interval = [1, 113662)lagging1 & [1285677, 2601310]lagging2. Apos Distance to Ori = 113661 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-07 14:15:52,733 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NC_015953.1 ------- 
+ rRNA location = 921976 sign = - & strand interval = [1, 651)lagging1 & [3012522, 7414439]lagging2. Apos Distance to Ori = 3692369 & rRNA location between dnaApos and Ori = True
+ rRNA location = 1379323 sign = - & strand interval = [1, 651)lagging1 & [3012522, 7414439]lagging2. Apos Distance to Ori = 3692369 & rRNA location between dnaApos and Ori = True
+ rRNA location = 2799332 sign = - & strand interval = [1, 651)lagging1 & [3012522, 7414439]lagging2. Apos Distance to Ori = 3692369 & rRNA location between dnaApos and Ori = True
+ rRNA location = 3971014 sign = + & strand interval = [651, 3012522)leading1. Apos Distance to Ori = 3692369 & rRNA location between dnaApos and Ori = False
+ rRNA location = 5454863 sign = + & strand interval = [651, 3012522)leading1. Apos Distance to Ori = 3692369 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-07 14:15:52,735 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NC_014833.1 ------- 
+ rRNA location = 3676965 sign = - & strand interval = [2136634, 3390107) lagging1. Apos Distance to Ori = 295307 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-07 14:15:52,748 WARNING    Nr of records with rRNA and strand non-overlap: 7

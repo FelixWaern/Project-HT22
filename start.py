@@ -8,6 +8,7 @@
 #TODO Machine readable file as output. Sara does
 #TODO Fix the no rRNA found warning
 #TODO The code might be wrong during the calculation. Increase checks and redo. 
+#TODO Fix all the errors that appear when doing large scale proccessing
 #TODO Save output as csv and save the all the information especially dnaA position relative to our predicted Ori and inte start of rRNA interval
 
 import importlib.util
