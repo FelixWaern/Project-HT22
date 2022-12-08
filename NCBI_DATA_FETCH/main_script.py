@@ -23,14 +23,12 @@ def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, l
         
         net_handle = Entrez.efetch(
             db="nucleotide", id=accession_numbers, rettype="gbwithparts", retmode="text"
-        )
-        print("Not found on path: ",os.path.join(path, accession_numbers+".gbff.gz"))
-        out_handle = gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "wt") #ERROR WHEN TRYING CERTAIN RECORDS!. 
+        ) 
+        out_handle = gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "wt") #This one does not work for every eleventh record 
         out_handle.write(net_handle.read()) 
         out_handle.close()
         net_handle.close()
         print("Saved")
-    print(os.path.join(path, accession_numbers+".gbff.gz"))
     # Local variables
     rrna_16s = []
     rrna_other = []
@@ -102,7 +100,7 @@ else:
 email = "Felix.wae@gmail.com"
 api_key = "7b4a5e9841f79495be73767323ad485fda08"
 local_storage_path = 'D:/'
-batch = ["NC_002506.1"]
+batch = ["NC_000913.3"]
 #["NC_015730.1"] Does not work. Is not on flash drive
 #["NC_014618.1"] Does not work. 
 #["NC_002506.1"]

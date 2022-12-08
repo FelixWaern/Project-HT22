@@ -11,13 +11,7 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     org_df = fd.fetch_csv_as_df(csv_path) 
     #Ta från [22000:23000]
     #test_df = org_df.iloc[900:1000] # [700:800] Did not work :/ 
-    test_df = org_df.head(1000) #No issue. 
-    # Test if NC_015730.1 exists after head(1000) run. Does not even appear after 1000. :/
-    # Tredje recorded förstörs ibland av någon anledning
-    # VARFÖR FINNS INTE VISSA RECORDS.
-    # Hmm när man tar 600-800 så förstars 4an
-    # loc fungerar inte som jag tror den gör
-    # 900 - 1000 fungerar inte 2an
+    test_df = org_df.head(100) 
 
     if a_list != None:
         df = org_df.loc[org_df['name'].isin(a_list)]
@@ -32,7 +26,7 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     t_tot = []
     no_16s = []
     t_fin_1 = time.time()
-    for index, row in test_df.iterrows():
+    for index, row in org_df.iterrows():
         if i == 9:
             batch.append(row["name"])
             print(batch)
@@ -68,29 +62,6 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
         res = ms.batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s)
         dict.update(res)
     
-    #Retry for the faulty records
-    if faulty == []:
-        pass
-    else:
-        print("\nFaulty records retry ")
-        i = 0
-        batch = []
-        for x in faulty:
-            if i == 10:
-                print(batch)
-                res = ms.batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s ,verbose )
-                dict.update(res)
-                i = 0
-                batch = []
-            else:
-                i += 1
-                batch.append(x)
-        # Adding the records of unfinished last batch
-        if len(batch) > 0:
-            print(batch)
-            res = ms.batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s)
-            dict.update(res)
-
     if no_16s != []:
             string = ""
             for i in range(len(no_16s)):
