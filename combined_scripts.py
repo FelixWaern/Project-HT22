@@ -11,7 +11,7 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     org_df = fd.fetch_csv_as_df(csv_path) 
     #Ta från [22000:23000]
     #test_df = org_df.iloc[900:1000] # [700:800] Did not work :/ 
-    test_df = org_df.head(100) 
+    test_df = org_df.head(10000) 
 
     if a_list != None:
         df = org_df.loc[org_df['name'].isin(a_list)]
@@ -26,10 +26,9 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     t_tot = []
     no_16s = []
     t_fin_1 = time.time()
-    for index, row in org_df.iterrows():
+    for index, row in test_df.iterrows():
         if i == 9:
             batch.append(row["name"])
-            print(batch)
             if verbose == True:
                 logging.debug(f"\n --------Batch {j} sent to batch_operator--------- \n Contains NCBI records: {batch} ")
             t0 = time.time()

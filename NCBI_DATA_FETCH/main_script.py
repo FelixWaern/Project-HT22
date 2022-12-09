@@ -15,53 +15,53 @@ def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, l
     path = local_storage_path #Path to local storage
     result = {}
     absolute_path = path + accession_numbers + ".gbff.gz" 
-    #try: 
-    # Check if it downloaded to local storage
-    if not os.path.isfile(absolute_path):
+    try: 
+        # Check if it downloaded to local storage
+        if not os.path.isfile(absolute_path):
+            if verbose == True:
+                logging.debug(f"\n Downloading NCBI record: \n {accession_numbers} ")
+            
+            net_handle = Entrez.efetch(
+                db="nucleotide", id=accession_numbers, rettype="gbwithparts", retmode="text"
+            ) 
+            out_handle = gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "wt") #This one does not work for every eleventh record 
+            out_handle.write(net_handle.read()) 
+            out_handle.close()
+            net_handle.close()
+            print("Saved")
+        # Local variables
+        rrna_16s = []
+        rrna_other = []
+        # Open the file locally
         if verbose == True:
-            logging.debug(f"\n Downloading NCBI record: \n {accession_numbers} ")
-        
-        net_handle = Entrez.efetch(
-            db="nucleotide", id=accession_numbers, rettype="gbwithparts", retmode="text"
-        ) 
-        out_handle = gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "wt") #This one does not work for every eleventh record 
-        out_handle.write(net_handle.read()) 
-        out_handle.close()
-        net_handle.close()
-        print("Saved")
-    # Local variables
-    rrna_16s = []
-    rrna_other = []
-    # Open the file locally
-    if verbose == True:
-        logging.debug(f"\n Fetching NCBI record: \n {accession_numbers} ")
-    with gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "rt") as input_handle:
-        for index, seq_record in enumerate(SeqIO.parse(input_handle, "gb")):
-            temp = []
-            for feature in seq_record.features: 
-                if feature.type == "rRNA":
-                    for product in feature.qualifiers.get("product"):
-                        if "16S" in product:
-                            temp.append(str(feature.location +1)) #Plus 1 in both start and end of sequence to match python indexing
-                            rrna_16s.append(str(feature.location +1)) #Plus 1 in both start and end of sequence to match python indexing
-                        elif "RNA" in product:
-                            rrna_other.append(product)  
-            result[seq_record.id] = temp     
-            res[seq_record.id] = temp 
-    # Print warning or info to log file
-    if len(rrna_16s) == 0:
-        if len(rrna_other) == 0: 
-            no_16s.append(f" \n {accession_numbers}")
-        else:
-            l = []
-            for e in rrna_other:
-                l.append(e)
-            logging.warning(f" \nNo 16S rRNA genes were found for {accession_numbers}, but these products were found: {str(l)}") 
-                
-    # except Exception:
-    #     # Adding faulty NCBI file to list for error log
-    #     faulty.append(accession_numbers)
-    #     sys.stderr.write("Error! Cannot fetch: %s        \n" % accession_numbers)
+            logging.debug(f"\n Fetching NCBI record: \n {accession_numbers} ")
+        with gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "rt") as input_handle:
+            for index, seq_record in enumerate(SeqIO.parse(input_handle, "gb")):
+                temp = []
+                for feature in seq_record.features: 
+                    if feature.type == "rRNA":
+                        for product in feature.qualifiers.get("product"):
+                            if "16S" in product:
+                                temp.append(str(feature.location +1)) #Plus 1 in both start and end of sequence to match python indexing
+                                rrna_16s.append(str(feature.location +1)) #Plus 1 in both start and end of sequence to match python indexing
+                            elif "RNA" in product:
+                                rrna_other.append(product)  
+                result[seq_record.id] = temp     
+                res[seq_record.id] = temp 
+        # Print warning or info to log file
+        if len(rrna_16s) == 0:
+            if len(rrna_other) == 0: 
+                no_16s.append(f" \n {accession_numbers}")
+            else:
+                l = []
+                for e in rrna_other:
+                    l.append(e)
+                logging.warning(f" \nNo 16S rRNA genes were found for {accession_numbers}, but these products were found: {str(l)}") 
+                    
+    except Exception:
+        # Adding faulty NCBI file to list for error log
+        faulty.append(accession_numbers)
+        sys.stderr.write("Error! Cannot fetch: %s        \n" % accession_numbers)
 #----------------------------------------------------------------------------------------
 
 def batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s, verbose=False ):
