@@ -76,7 +76,7 @@ def check_ori_dnaapos(df_rrna_ori_ter, row, rna):
     apos = df_rrna_ori_ter.loc[row, "dnaApos"]
     size = df_rrna_ori_ter.loc[row, "siz"]
     rna_between = False
-
+    
     if apos > ori:
         path_dis = apos - ori
         other_path_dis = (size - apos) + ori
@@ -85,7 +85,7 @@ def check_ori_dnaapos(df_rrna_ori_ter, row, rna):
                 rna_between = True
             return [path_dis, rna_between]
         else:
-            if rna > apos and rna < ori:
+            if rna > apos and rna < ori:# This case looks wierd. Recheck it. Should be or?
                 rna_between = True
             return [other_path_dis, rna_between]
     else:

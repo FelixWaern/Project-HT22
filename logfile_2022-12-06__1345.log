@@ -1,0 +1,18 @@
+2022-12-06 13:45:17,248 INFO     Logging verbose set to False
+2022-12-06 13:45:19,525 DEBUG    OK! No faulty records from NCBI recorded!
+2022-12-06 13:45:20,896 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NC_004088.1 ------- 
+ rRNA location = 12015 sign = + & strand interval = [248823, 2262716)leading1. Apos Distance to Ori = 283070 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-06 13:45:20,896 WARNING    Nr of records with rRNA and strand non-overlap: 1
+2022-12-06 13:45:57,260 INFO     Logging verbose set to False
+2022-12-06 13:45:59,841 DEBUG    OK! No faulty records from NCBI recorded!
+2022-12-06 13:46:01,214 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NC_006300.1 ------- 
+ rRNA location = 2312119 sign = + & strand interval = [47557, 1009102)leading1. Apos Distance to Ori = 400404 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-06 13:46:01,215 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NC_004088.1 ------- 
+ rRNA location = 12015 sign = + & strand interval = [248823, 2262716)leading1. Apos Distance to Ori = 283070 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-06 13:46:01,215 WARNING    Nr of records with rRNA and strand non-overlap: 2

@@ -1,0 +1,26 @@
+2022-12-06 13:38:08,294 INFO     Logging verbose set to False
+2022-12-06 13:38:33,545 WARNING   
+No rRNA was found for NC_005824.1
+2022-12-06 13:38:36,710 DEBUG    OK! No faulty records from NCBI recorded!
+2022-12-06 13:38:39,119 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NC_004088.1 ------- 
+ rRNA location = 12015 sign = + & strand interval = [248823, 2262716)leading1. Apos Distance to Ori = 283070 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-06 13:38:39,141 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NC_006300.1 ------- 
+ rRNA location = 2312119 sign = + & strand interval = [47557, 1009102)leading1. Apos Distance to Ori = 400404 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-06 13:38:39,147 WARNING    Nr of records with rRNA and strand non-overlap: 2
+2022-12-06 13:38:44,787 INFO     Logging verbose set to False
+2022-12-06 13:39:13,416 WARNING   
+No rRNA was found for NC_005824.1
+2022-12-06 13:39:17,005 DEBUG    OK! No faulty records from NCBI recorded!
+2022-12-06 13:39:18,876 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NC_004088.1 ------- 
+ rRNA location = 12015 sign = + & strand interval = [248823, 2262716)leading1. Apos Distance to Ori = 283070 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-06 13:39:18,897 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NC_006300.1 ------- 
+ rRNA location = 2312119 sign = + & strand interval = [47557, 1009102)leading1. Apos Distance to Ori = 400404 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-06 13:39:18,899 WARNING    Nr of records with rRNA and strand non-overlap: 2

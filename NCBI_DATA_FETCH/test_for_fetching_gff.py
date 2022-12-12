@@ -12,11 +12,17 @@ from Bio import SeqIO
 Entrez.email = "Felix.wae@gmail.com" #Tell NCBI who you are
 Entrez.api_key = "7b4a5e9841f79495be73767323ad485fda08"
 
-handle = Entrez.efetch(db="nucleotide", id="NC_000913.3", rettype="gbwithparts", retmode="text")
-#info = handle.read()
-#print(type(info))
-#print(info)
+handle = Entrez.efetch(db="nucleotide", id="NC_002506.1", rettype="gbwithparts", retmode="text")
+# ["NC_015730.1"] Does not work. Is not on flash drive. Seems to work here. 
+# NC_000913.3 <-works
+info = handle.read()
+print(type(info))
+print(info)
 
+
+
+
+"""
 print("-----")
 seq_record = SeqIO.parse(handle, "gb")
 for x in seq_record:
@@ -26,7 +32,7 @@ for x in seq_record:
                     if feature.type == "rRNA":
                         print(feature.qualifiers.get("product"), feature.location) 
 
-
+"""
 #for seq_record in SeqIO.parse(handle, "gb"):
 #    print(len(seq_record))
 #    print(len(seq_record.features))

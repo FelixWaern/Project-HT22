@@ -9,7 +9,7 @@ import sys # Should be imported once
 import gzip  # Should be imported once
 import logging
 
-def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, local_storage_path, verbose=False):
+def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, local_storage_path, no_16s ,verbose=False):
     Entrez.email = email #Always tell NCBI who you are
     Entrez.api_key = api_key #Always use API key
     path = local_storage_path #Path to local storage
@@ -20,15 +20,16 @@ def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, l
         if not os.path.isfile(absolute_path):
             if verbose == True:
                 logging.debug(f"\n Downloading NCBI record: \n {accession_numbers} ")
+            
             net_handle = Entrez.efetch(
                 db="nucleotide", id=accession_numbers, rettype="gbwithparts", retmode="text"
-            )
-            out_handle = gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "wt") 
+            ) 
+            out_handle = gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "wt") #This one does not work for every eleventh record 
             out_handle.write(net_handle.read()) 
             out_handle.close()
             net_handle.close()
             print("Saved")
-         # Local variables
+        # Local variables
         rrna_16s = []
         rrna_other = []
         # Open the file locally
@@ -50,20 +51,20 @@ def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, l
         # Print warning or info to log file
         if len(rrna_16s) == 0:
             if len(rrna_other) == 0: 
-                logging.warning(f" \nNo rRNA was found for {accession_numbers}") 
+                no_16s.append(f" \n {accession_numbers}")
             else:
                 l = []
                 for e in rrna_other:
                     l.append(e)
                 logging.warning(f" \nNo 16S rRNA genes were found for {accession_numbers}, but these products were found: {str(l)}") 
-                
+                    
     except Exception:
         # Adding faulty NCBI file to list for error log
         faulty.append(accession_numbers)
         sys.stderr.write("Error! Cannot fetch: %s        \n" % accession_numbers)
 #----------------------------------------------------------------------------------------
 
-def batch_operator(batch, faulty, email, api_key, local_storage_path, verbose=False):
+def batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s, verbose=False ):
     # The batch operator recieves a list of accession numbers and returns them as a dictionary with the accession numbers as keys
     # with the rRNA intervals for each chromosmes as the content. The functions uses multithreading, one thread per accession number.
     # Input: ["NC_002516.2", "NZ_CP041016.1"]
@@ -72,7 +73,7 @@ def batch_operator(batch, faulty, email, api_key, local_storage_path, verbose=Fa
     res = {}
     threads = {}
     for x in batch:
-        threads[x] = threading.Thread(target = accession_to_rRNA_interval, args =(x, res, faulty, email, api_key, local_storage_path, verbose))
+        threads[x] = threading.Thread(target = accession_to_rRNA_interval, args =(x, res, faulty, email, api_key, local_storage_path, no_16s, verbose))
     for x in threads:
         threads[x].start() 
     for x in threads:
@@ -99,10 +100,17 @@ else:
 email = "Felix.wae@gmail.com"
 api_key = "7b4a5e9841f79495be73767323ad485fda08"
 local_storage_path = 'D:/'
-batch = ["NC_000913.3", "NC_000964.3", "NC_002516.2", "NZ_CP041016.1", "NZ_AP023438.1", "NC_022737.1", "NZ_CP013444.1", "NZ_CP086979.1", "NZ_CP085753.1", "NZ_CP012026.1"]
+batch = ["NC_000913.3"]
+#["NC_015730.1"] Does not work. Is not on flash drive
+#["NC_014618.1"] Does not work. 
+#["NC_002506.1"]
+
+#["NC_000913.3"] Works
+no_16s = []
+#["NC_000913.3", "NC_000964.3", "NC_002516.2", "NZ_CP041016.1", "NZ_AP023438.1", "NC_022737.1", "NZ_CP013444.1", "NZ_CP086979.1", "NZ_CP085753.1", "NZ_CP012026.1"]
 faulty = []
 t0 = time.time()
-res = batch_operator(batch, faulty, email, api_key, local_storage_path)
+res = batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s)
 print("")
 print("Testing if the functions works as intended")  
 for x in res:
