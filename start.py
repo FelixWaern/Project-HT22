@@ -3,14 +3,11 @@
 #TODO Perform for larger dataset, investigate faulty or strange records
 #TODO Add optional verbosity as bash commands - Started can be expanded
 #TODO The new dnaA investigation things 
-#TODO Create valididation data to prove that the method works.
-#TODO Graphical representation. Ashwini does
-#TODO Machine readable file as output. Sara does
-#TODO Fix the no rRNA found warning
 #TODO The code might be wrong during the calculation. Increase checks and redo. 
 #TODO Fix all the errors that appear when doing large scale proccessing
 #TODO Fix the dnaApos check since there was some missing cases.
 #TODO Save output as csv and save the all the information especially dnaA position relative to our predicted Ori and inte start of rRNA interval
+#TODO Gör så att test simulated datan är som en flagga istället. 
 
 import importlib.util
 import argparse

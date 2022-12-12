@@ -63,9 +63,10 @@ def no_shift_check_rrna_dir(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
             #logging.warning(f" \nThe overlap with rRNA and lagging1 strand is not correct for {df_rrna_ori_ter.loc[row, 'name']}") 
 
 def check_ori_dnaapos(df_rrna_ori_ter, row, rna):
-    # Checks the distance between rrna and dnaApos and if the rRNA location is between the two. 
-    # Returns the distance between rrna and dnaApos and True if the rRNA location is between the two locations
+    # Checks the distance between Ori and dnaApos and if the rRNA location is between the two. 
+    # Returns the distance between Ori and dnaApos and True if the rRNA location is between the two locations
     # and False if not.   
+    # Returns distance rRNA - Ori
 
     # row for the record
     # rna must be the rna location to be checked. 
@@ -76,26 +77,29 @@ def check_ori_dnaapos(df_rrna_ori_ter, row, rna):
     apos = df_rrna_ori_ter.loc[row, "dnaApos"]
     size = df_rrna_ori_ter.loc[row, "siz"]
     rna_between = False
-    
+    if rna > apos:
+            rna_apos_dis_1 = rna - apos
+            rna_apos_dis_2 = (size - rna) + apos
+            rna_apos_dis = min(rna_apos_dis_1, rna_apos_dis_2)
     if apos > ori:
         path_dis = apos - ori
         other_path_dis = (size - apos) + ori
         if path_dis < other_path_dis:
             if rna < apos and rna > ori:
                 rna_between = True
-            return [path_dis, rna_between]
+            return [path_dis, rna_between, rna_apos_dis]
         else:
-            if rna > apos and rna < ori:# This case looks wierd. Recheck it. Should be or?
+            if rna > apos or rna < ori:
                 rna_between = True
-            return [other_path_dis, rna_between]
+            return [other_path_dis, rna_between, rna_apos_dis]
     else:
         path_dis = ori - apos
         other_path_dis = (size - ori) + apos
         if path_dis < other_path_dis:
             if rna < ori and rna > apos:
                 rna_between = True
-            return [path_dis, rna_between]
+            return [path_dis, rna_between, rna_apos_dis]
         else:
-            if rna > ori and rna > apos:
+            if rna > ori or rna > apos:
                 rna_between = True
-            return [other_path_dis, rna_between]
+            return [other_path_dis, rna_between, rna_apos_dis]
