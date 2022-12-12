@@ -1,5 +1,6 @@
 import logging
 
+
 def check_rrna_two_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records):
     # Compare with one strand
     if df_rrna_ori_ter.loc[row, col][-2] == "-":
@@ -62,6 +63,7 @@ def no_shift_check_rrna_dir(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
             records.append(f"\n rRNA location = {int(rrna_comp[0])} sign = {'-'} & strand interval = {df_rrna_ori_ter.loc[row, 'lagging1']}{'lagging1'}. Apos Distance to Ori = {apos_check[0]} & rRNA location between dnaApos and Ori = {apos_check[1]}") 
             #logging.warning(f" \nThe overlap with rRNA and lagging1 strand is not correct for {df_rrna_ori_ter.loc[row, 'name']}") 
 
+
 def check_ori_dnaapos(df_rrna_ori_ter, row, rna):
     # Checks the distance between Ori and dnaApos and if the rRNA location is between the two. 
     # Returns the distance between Ori and dnaApos and True if the rRNA location is between the two locations
@@ -77,29 +79,34 @@ def check_ori_dnaapos(df_rrna_ori_ter, row, rna):
     apos = df_rrna_ori_ter.loc[row, "dnaApos"]
     size = df_rrna_ori_ter.loc[row, "siz"]
     rna_between = False
-    if rna > apos:
-            rna_apos_dis_1 = rna - apos
-            rna_apos_dis_2 = (size - rna) + apos
-            rna_apos_dis = min(rna_apos_dis_1, rna_apos_dis_2)
+    if rna:
+        rna_ori_dis_1 = rna - ori
+        rna_ori_dis_2 = (size - rna) + ori
+        rna_ori_dis = min(rna_ori_dis_1, rna_ori_dis_2)
+        df_rrna_ori_ter.loc[row, "dist_ori_rna"] = rna_ori_dis
     if apos > ori:
         path_dis = apos - ori
         other_path_dis = (size - apos) + ori
         if path_dis < other_path_dis:
+            df_rrna_ori_ter.loc[row, "dist_dnaA_ori"] = path_dis
             if rna < apos and rna > ori:
                 rna_between = True
-            return [path_dis, rna_between, rna_apos_dis]
+            return [path_dis, rna_between, rna_ori_dis]
         else:
+            df_rrna_ori_ter.loc[row, "dist_dnaA_ori"] = other_path_dis
             if rna > apos or rna < ori:
                 rna_between = True
-            return [other_path_dis, rna_between, rna_apos_dis]
+            return [other_path_dis, rna_between, rna_ori_dis]
     else:
         path_dis = ori - apos
         other_path_dis = (size - ori) + apos
         if path_dis < other_path_dis:
+            df_rrna_ori_ter.loc[row, "dist_dnaA_ori"] = path_dis
             if rna < ori and rna > apos:
                 rna_between = True
-            return [path_dis, rna_between, rna_apos_dis]
+            return [path_dis, rna_between, rna_ori_dis]
         else:
+            df_rrna_ori_ter.loc[row, "dist_dnaA_ori"] = other_path_dis
             if rna > ori or rna > apos:
                 rna_between = True
-            return [other_path_dis, rna_between, rna_apos_dis]
+            return [other_path_dis, rna_between, rna_ori_dis]
