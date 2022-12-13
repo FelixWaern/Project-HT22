@@ -11,7 +11,7 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     org_df = fd.fetch_csv_as_df(csv_path) 
     #Ta från [22000:23000]
     #test_df = org_df.iloc[900:1000] # [700:800] Did not work :/ 
-    test_df = org_df.head(10)
+    test_df = org_df.head(15000)
 
     if a_list != None:
         df = org_df.loc[org_df['name'].isin(a_list)]
@@ -23,6 +23,7 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     batch = []
     faulty = []
     dict = {}
+    locus = {}
     t_tot = []
     no_16s = []
     t_fin_1 = time.time()
@@ -33,7 +34,8 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
                 logging.debug(f"\n --------Batch {j} sent to batch_operator--------- \n Contains NCBI records: {batch} ")
             t0 = time.time()
             res = ms.batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s ,verbose )
-            dict.update(res)
+            dict.update(res[0])
+            locus.update(res[1])
             i = 0
             batch = []
             t1 = time.time()
@@ -59,7 +61,8 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
         if verbose == True:
                 logging.debug(f"\n --------Remaining NCBI records sent to batch_operator--------- \n Contains NCBI records: {batch} ")
         res = ms.batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s)
-        dict.update(res)
+        dict.update(res[0])
+        locus.update(res[1])
     
     if no_16s != []:
             string = ""
@@ -79,5 +82,5 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
         logging.warning("Faulty records from NCBI: "+ str(faulty))
     print("")
     print("------------------rRNA fetch done----------------")
-    return(dict)
+    return([dict, locus])
 

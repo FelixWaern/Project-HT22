@@ -9,7 +9,7 @@ import sys # Should be imported once
 import gzip  # Should be imported once
 import logging
 
-def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, local_storage_path, no_16s ,verbose=False):
+def accession_to_rRNA_interval(accession_numbers, res, locus, faulty, email, api_key, local_storage_path, no_16s ,verbose=False):
     Entrez.email = email #Always tell NCBI who you are
     Entrez.api_key = api_key #Always use API key
     path = local_storage_path #Path to local storage
@@ -38,16 +38,19 @@ def accession_to_rRNA_interval(accession_numbers, res, faulty, email, api_key, l
         with gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "rt") as input_handle:
             for index, seq_record in enumerate(SeqIO.parse(input_handle, "gb")):
                 temp = []
+                temp_locus = []
                 for feature in seq_record.features: 
                     if feature.type == "rRNA":
                         for product in feature.qualifiers.get("product"):
                             if "16S" in product:
                                 temp.append(str(feature.location +1)) #Plus 1 in both start and end of sequence to match python indexing
                                 rrna_16s.append(str(feature.location +1)) #Plus 1 in both start and end of sequence to match python indexing
+                                temp_locus.append(str(feature.qualifiers.get("locus_tag")))
                             elif "RNA" in product:
                                 rrna_other.append(product)  
                 result[seq_record.id] = temp     
                 res[seq_record.id] = temp 
+                locus[seq_record.id] = temp_locus
         # Print warning or info to log file
         if len(rrna_16s) == 0:
             if len(rrna_other) == 0: 
@@ -71,14 +74,15 @@ def batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s, ve
     # Output: {"NC_002516.2": ['[722095:723631](+)', '[4792195:4793731](-)', '[5267723:5269259](-)', '[6043207:6044743](-)']
     # , "NZ_CP041016.1: ['[1399531:1401046](-)', '[2622584:2624099](-)', '[5379840:5381355](+)']"}
     res = {}
+    locus = {}
     threads = {}
     for x in batch:
-        threads[x] = threading.Thread(target = accession_to_rRNA_interval, args =(x, res, faulty, email, api_key, local_storage_path, no_16s, verbose))
+        threads[x] = threading.Thread(target = accession_to_rRNA_interval, args =(x, res, locus, faulty, email, api_key, local_storage_path, no_16s, verbose))
     for x in threads:
         threads[x].start() 
     for x in threads:
         threads[x].join()
-    return(res)
+    return([res, locus])
 #---------------------------------------------------------------------------------------
 
 # For some operating systems this was required as to not get errors when fetching the NCBI files. 

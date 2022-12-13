@@ -67,7 +67,7 @@ def no_shift_check_rrna_dir(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
 def check_ori_dnaapos(df_rrna_ori_ter, row, rna):
     # Checks the distance between Ori and dnaApos and if the rRNA location is between the two. 
     # Returns the distance between Ori and dnaApos and True if the rRNA location is between the two locations
-    # and False if not.   
+    # and False if not.
     # Returns distance rRNA - Ori
 
     # row for the record
@@ -79,11 +79,14 @@ def check_ori_dnaapos(df_rrna_ori_ter, row, rna):
     apos = df_rrna_ori_ter.loc[row, "dnaApos"]
     size = df_rrna_ori_ter.loc[row, "siz"]
     rna_between = False
-    if rna:
+    if rna > ori:
         rna_ori_dis_1 = rna - ori
         rna_ori_dis_2 = (size - rna) + ori
         rna_ori_dis = min(rna_ori_dis_1, rna_ori_dis_2)
-        df_rrna_ori_ter.loc[row, "dist_ori_rna"] = rna_ori_dis
+    else:
+        rna_ori_dis_1 = ori - rna
+        rna_ori_dis_2 = (size - ori) +  rna 
+        rna_ori_dis = min(rna_ori_dis_1, rna_ori_dis_2)
     if apos > ori:
         path_dis = apos - ori
         other_path_dis = (size - apos) + ori

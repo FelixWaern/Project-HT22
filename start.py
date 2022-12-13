@@ -4,12 +4,13 @@
 #TODO Add optional verbosity as bash commands - Started can be expanded
 #TODO The new dnaA investigation things 
 #TODO The code might be wrong during the calculation. Increase checks and redo. 
-#TODO Fix all the errors that appear when doing large scale proccessing
-#TODO Fix the dnaApos check since there was some missing cases.
+#TODO Extend the test set
 #TODO Save output as csv and save the all the information especially dnaA position relative to our predicted Ori and inte start of rRNA interval
 #TODO Gör så att test simulated datan är som en flagga istället. 
+#TODO fix locus
 
 import importlib.util
+import pandas as pd
 import argparse
 import sys
 import os
@@ -48,12 +49,16 @@ parser.add_argument('-l', '--a_list',
                     nargs='+',
                     help = 'Option for running the script for a specific list of records. Example: -l NC_034600.1 NC_005780.1' )  # Get a accession nr list  
 
+parser.add_argument('-t', '--test_set',
+                    action='store_true',
+                    help = 'Test the script by running it on a artificial dataset. Specify test_chromosome_set.csv location instead of csv_path' )  # Runs the script on a test data set. 
+
 #Parsing all arguments
 args = parser.parse_args()
 
 
 
-def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]):
+def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[], test_set=False):
 
     print("--------------Starting SkewDB rRNA interval match--------------")
     # Start logging
@@ -84,26 +89,46 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
         sys.exit()
 
     #Check if csv is downloaded & filtered 
-    if not os.path.isfile(csv_path):
+    # Skip if running on test set
+    if test_set == True:
+        pass
+    else: 
+        if not os.path.isfile(csv_path):
+            if verbose == True:
+                logging.debug(f"\n --------Filtered csv file not found--------- \n run_downloaded_filtered_csvfile input: {csv_path} ")
+            download_filtered.run_download_filtered_csvfile(csv_path)
+            print("csv filtered downloaded")
+
+
+    # Get the rRNA interval dict
+    # Skip if running on test set
+    if test_set == True:
+        pass
+    else:
         if verbose == True:
-            logging.debug(f"\n --------Filtered csv file not found--------- \n run_downloaded_filtered_csvfile input: {csv_path} ")
-        download_filtered.run_download_filtered_csvfile(csv_path)
-        print("csv filtered downloaded")
-
-
-    #Get the rRNA interval dict
-    if verbose == True:
-        logging.debug(f"\n --------parameters into rrna_dict()--------- \n csv_path = {csv_path} \n email = {email} \n api_key = {api_key} \n local_storage_path = {local_storage_path}")
-    rrna_dict = get_rrna(csv_path, email, api_key, local_storage_path, a_list, verbose )
-
-
-    # Send to rrna leading lagging script
+            logging.debug(f"\n --------parameters into rrna_dict()--------- \n csv_path = {csv_path} \n email = {email} \n api_key = {api_key} \n local_storage_path = {local_storage_path}")
+        rrna_dict = get_rrna(csv_path, email, api_key, local_storage_path, a_list, verbose) #rna dict is list. 0 is the position and 1 is the locus_tag. And change inputs.
+    
+    if test_set == True:
+        #load the temporary dataframe for the rRNA
+        temp_rna_path = "C:/Users/Felix/Documents/rna_dict.csv"
+        df = pd.read_csv(temp_rna_path)
+        rrna_dict = {}
+        for i in range(0, len(df)):
+             rna_row = []
+             for x in df.loc[i]:
+                 print(x)
+                 rna_row.append(x)
+                 print(rna_row)
+             rna_row = rna_row[1:]
+             rrna_dict[i + 1] = rna_row
+             rll(csv_path, rrna_dict) # Need to change the rll so that True uses only test set. Add if statment in rll. 
     if verbose == True:
          logging.debug(f"\n parameters into rrna_dict: \n csv_path = {csv_path} \n rrna_dict = rrna_dict, too long to display")
-    rll(csv_path, rrna_dict)
+    rll(csv_path, rrna_dict) # Need to specicfy which in the list now. 
 
     print("Everything is done")
-start(args.csv_path, args.email, args.api_key, args.local_storage_path, args.verbose, args.a_list)
+start(args.csv_path, args.email, args.api_key, args.local_storage_path, args.verbose, args.a_list, args.test_set)
 
 
 """

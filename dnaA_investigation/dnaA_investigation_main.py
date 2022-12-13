@@ -19,6 +19,11 @@ sys.path.insert(1,'C:/Users/Felix/Documents/GitHub/Project-HT22/')
 from skewDB import dowloading_filtered_csvFile as download_filtered
 from skewDB import fetching_data as fd
 
+from kneed import KneeLocator
+from sklearn.datasets import make_blobs
+from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
+from sklearn.preprocessing import StandardScaler
 
 def main(csv_path):
 
@@ -72,12 +77,12 @@ def main(csv_path):
     test_df['Relative Distance'] = relative_distance
     
     # Explore clustering using dendogram. 
-    new_df = test_df[['Relative Distance', 'realm5']].copy()
+    new_df = test_df[['Relative Distance', 'realm4']].copy()
     #['realm2, 'realm3', 'realm4', 'realm5']
     
     
     # Remove the clade from the DataFrame, save for later
-    varieties = list(new_df.pop('realm5'))
+    varieties = list(new_df.pop('realm4'))
 
     # Extract the measurements as a NumPy array
     samples = new_df.values
@@ -93,6 +98,12 @@ def main(csv_path):
     
     # Record observations from different dendograms with different parameters.
     # Seems like between 12-20 seems appropriate
+features, true_labels = make_blobs(
+   n_samples=200,
+   centers=3,
+   cluster_std=2.75,
+   random_state=42)
+
 
  
 csv_path = 'C:/Users/Felix/Documents/FilteredDataFile.csv'
