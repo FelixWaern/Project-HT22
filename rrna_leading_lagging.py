@@ -152,8 +152,10 @@ def rrna_lead_lag(csv_path, rrna_locus_list):
             logging.warning(f" \n -------- The overlap with rRNA and strand is not correct for {df_rrna_ori_ter.loc[row, 'name']} ------- {string} \n -------------------------------------------------------------------------------")    
             j += 1   
             non_overlapping_rrna.append(df_rrna_ori_ter.loc[row, 'name'])
-
-        frac_rrna = (no_rrna-len(records))/no_rrna
+        if no_rrna != 0:
+            frac_rrna = (no_rrna-len(records))/no_rrna
+        else:
+            frac_rrna = "No rRNA found"
         df_rrna_ori_ter.loc[row, "frac_co_orient"] = frac_rrna
     print(df_rrna_ori_ter)
     df_chromosomes = df_rrna_ori_ter[['name', 'fullname', 'shift',  'div', 'siz', 'dnaApos',
