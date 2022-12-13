@@ -7,7 +7,7 @@ from check_direction import no_shift_check_rrna_dir as no_shift_check
 import time 
 
 
-def rrna_lead_lag(csv_path, rrna_dict):
+def rrna_lead_lag(csv_path, rrna_locus_list):
     import sys
     sys.path.insert(0, '/skewDB/')
     from skewDB import fetching_data as fd
@@ -36,6 +36,8 @@ def rrna_lead_lag(csv_path, rrna_dict):
     handler = logging.FileHandler(f'leading_lagging.log', 'w', 'utf-8')
     root_logger.addHandler(handler)
 
+    rrna_dict = rrna_locus_list[0]
+    locus_dict = rrna_locus_list[1]
     # create a Dataframe object with intervals for the rrna genes
     df_rrna = pd.DataFrame(dict([ (k, pd.Series(v, dtype=pd.StringDtype())) for k, v in rrna_dict.items() ])).transpose()
     df_rrna = df_rrna.reset_index()
