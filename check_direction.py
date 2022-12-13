@@ -77,33 +77,33 @@ def check_ori_dnaapos(df_rrna_ori_ter, row, rna):
     apos = df_rrna_ori_ter.loc[row, "dnaApos"]
     size = df_rrna_ori_ter.loc[row, "siz"]
     rna_between = False
-    if rna > apos:
-        rna_apos_dis_1 = rna - apos
-        rna_apos_dis_2 = (size - rna) + apos
-        rna_apos_dis = min(rna_apos_dis_1, rna_apos_dis_2)
+    if rna > ori:
+        rna_ori_dis_1 = rna - ori
+        rna_ori_dis_2 = (size - rna) + ori
+        rna_ori_dis = min(rna_ori_dis_1, rna_ori_dis_2)
     else:
-        rna_apos_dis_1 = apos - rna
-        rna_apos_dis_2 = (size - apos) +  rna 
-        rna_apos_dis = min(rna_apos_dis_1, rna_apos_dis_2) # FAST NU ÄR DE FEL EGENTLIGEN
+        rna_ori_dis_1 = ori - rna
+        rna_ori_dis_2 = (size - ori) +  rna 
+        rna_ori_dis = min(rna_ori_dis_1, rna_ori_dis_2)
     if apos > ori:
         path_dis = apos - ori
         other_path_dis = (size - apos) + ori
         if path_dis < other_path_dis:
             if rna < apos and rna > ori:
                 rna_between = True
-            return [path_dis, rna_between, rna_apos_dis]
+            return [path_dis, rna_between, rna_ori_dis]
         else:
             if rna > apos or rna < ori:
                 rna_between = True
-            return [other_path_dis, rna_between, rna_apos_dis]
+            return [other_path_dis, rna_between, rna_ori_dis]
     else:
         path_dis = ori - apos
         other_path_dis = (size - ori) + apos
         if path_dis < other_path_dis:
             if rna < ori and rna > apos:
                 rna_between = True
-            return [path_dis, rna_between, rna_apos_dis]
+            return [path_dis, rna_between, rna_ori_dis]
         else:
             if rna > ori or rna > apos:
                 rna_between = True
-            return [other_path_dis, rna_between, rna_apos_dis]
+            return [other_path_dis, rna_between, rna_ori_dis]
