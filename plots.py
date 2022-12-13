@@ -28,9 +28,9 @@ rRNAs= {
     'dist_to_ori':[1, 2, 3, 4, 5, 6],
     'betn_dnaA_ori':[False, False, False, False, False, False]
           }
-df_rRNA = pd.DataFrame(rRNAs)
-df_rRNA.to_csv("C:/Ashwini/Applied_bioinformatics/rRNA.csv")
-print(df_rRNA)
+df_rRNA = pd.read_csv("C:/Ashwini/Applied_bioinformatics/rRNA.csv")
+#df_rRNA.to_csv("C:/Ashwini/Applied_bioinformatics/rRNA.csv")
+#print(df_rRNA)
 
 chromosomes = {
     'accession_number':["NC_006300.1"],
@@ -48,14 +48,16 @@ chromosomes = {
     'Ori':["47557"],
     'Ter':["1009102"],
     'lead1':["[47557, 1009102)"],
-    'lead2':["[1, 47557)"],
+    'lead2':[""],
     'lagg1':["[1009102, 2314077]"],
-    'lagg2':[""],
+    'lagg2':["[1, 47557)"],
     'dist_dnaa_ori':["1"],
     'fraction':["5/6"],
     'median':["100"]
 }
-df_chromo = pd.DataFrame(chromosomes)
+#df_chromo = pd.DataFrame(chromosomes)
+#df_chromo.to_csv("C:/Ashwini/Applied_bioinformatics/chromosome.csv")
+df_chromo = pd.read_csv("C:/Ashwini/Applied_bioinformatics/chromosome.csv")
 print(df_chromo)
 
 #Declaring lists used
@@ -134,29 +136,33 @@ print(new_csv_files)
 
 #plotting graph for matched accession numbers
 for acc_num in new_csv_files:
+    print(acc_num)
     full_path = gcfit_path + acc_num + "_fit.csv"
     df = pd.read_csv(full_path)
     us=new_df[new_df.accession_number==acc_num]
     chromo = df_chromo[df_chromo.accession_number==acc_num]
     #Creating new dataframe for the rrnas for the accession number
-    df_rrna_plot = new_df.loc[new_df["accession_number"] == acc_num,["rRNA", "co-oriented", "rRNAPos"]]
-
+    df_rrna_plot = new_df.loc[new_df["accession_number"] == acc_num,["accession_number","rRNA", "co-oriented", "rRNAPos"]]
+    
+    print(df_rrna_plot)
     # for marking rrna
-    for row in range(len(df_rrna_plot)):
-        if df_rrna_plot.loc[row, "co-oriented"] == True:
-            mark_rrna = df_rrna_plot.loc[row,"rRNAPos"]
+    for ind in df_rrna_plot.index:
+        if df_rrna_plot["co-oriented"][ind] == True:
+            mark_rrna = df_rrna_plot["rRNAPos"][ind]
             #temp_rrna.append(mark_rrna)
             #num_rrna = df_rrna_plot.loc[row,"rRNA"]
             #temp_num.append(num_rrna)
             plt.axvline(int(mark_rrna), ls='-', color='yellow')
         else:
-            non_overlap_rrna = df_rrna_plot.loc[row,"rRNAPos"]
+            print("not co-oriented")
+            non_overlap_rrna = df_rrna_plot["rRNAPos"][ind]
             #temp_non_rrna.append(non_overlap_rrna)
             #non_overlap_num = df_rrna_plot.loc[row,"rRNA"]
             #temp_non_num.append(non_overlap_num)
             plt.axvline(int(non_overlap_rrna), ls='-', color='blue')
-    print(temp_rrna)
+    print(mark_rrna)
     # for marking shift
+    print(chromo)
     leshift=chromo["shift"].item()
     print(leshift)
     if int(leshift) > 0:
