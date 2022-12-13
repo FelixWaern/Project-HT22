@@ -10,6 +10,7 @@
 #TODO fix locus
 
 import importlib.util
+import pandas as pd
 import argparse
 import sys
 import os
@@ -108,14 +109,23 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
             logging.debug(f"\n --------parameters into rrna_dict()--------- \n csv_path = {csv_path} \n email = {email} \n api_key = {api_key} \n local_storage_path = {local_storage_path}")
         rrna_dict = get_rrna(csv_path, email, api_key, local_storage_path, a_list, verbose) #rna dict is list. 0 is the position and 1 is the locus_tag. And change inputs.
     
-
-    rrna_dict_test = rrna_dict[0]
-    # Send to rrna leading lagging script
     if test_set == True:
-        rll(csv_path, True) # Need to change the rll so that True uses only test set. Add if statment in rll. 
+        #load the temporary dataframe for the rRNA
+        temp_rna_path = "C:/Users/Felix/Documents/rna_dict.csv"
+        df = pd.read_csv(temp_rna_path)
+        rrna_dict = {}
+        for i in range(0, len(df)):
+             rna_row = []
+             for x in df.loc[i]:
+                 print(x)
+                 rna_row.append(x)
+                 print(rna_row)
+             rna_row = rna_row[1:]
+             rrna_dict[i + 1] = rna_row
+             rll(csv_path, rrna_dict) # Need to change the rll so that True uses only test set. Add if statment in rll. 
     if verbose == True:
          logging.debug(f"\n parameters into rrna_dict: \n csv_path = {csv_path} \n rrna_dict = rrna_dict, too long to display")
-    rll(csv_path, rrna_dict_test) # Need to specicfy which in the list now. 
+    rll(csv_path, rrna_dict) # Need to specicfy which in the list now. 
 
     print("Everything is done")
 start(args.csv_path, args.email, args.api_key, args.local_storage_path, args.verbose, args.a_list, args.test_set)
