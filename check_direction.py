@@ -1,10 +1,11 @@
 import logging
 
 
-def check_rrna_two_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records):
+def check_rrna_two_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dist):
     # Compare with one strand
     if df_rrna_ori_ter.loc[row, col][-2] == "-":
         apos_check = check_ori_dnaapos(df_rrna_ori_ter, row, int(rrna_comp[0]))
+        dist.append(apos_check[2])
         if int(rrna_comp[0]) in df_rrna_ori_ter.loc[row, "lagging1"]:
             pass
         else:
@@ -13,6 +14,7 @@ def check_rrna_two_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records):
     # Compare with two strands
     elif str(df_rrna_ori_ter.loc[row, col][-2]) == "+":
         apos_check = check_ori_dnaapos(df_rrna_ori_ter, row, int(rrna[0]))
+        dist.append(apos_check[2])
         if int(rrna[0]) in df_rrna_ori_ter.loc[row, "leading1"]:
             pass
         else:
@@ -23,10 +25,11 @@ def check_rrna_two_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records):
                 # logging.warning(f" \nThe overlap with rRNA {int(rrna[0])} and leading1/leading2 strand {df_rrna_ori_ter.loc[row, 'leading1']}/{df_rrna_ori_ter.loc[row, 'leading2']} is not correct for {df_rrna_ori_ter.loc[row, 'name']}") 
 
 
-def check_rrna_two_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col, records):
+def check_rrna_two_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dist):
     # Compare with one strand
     if df_rrna_ori_ter.loc[row, col][-2] == "+":
         apos_check = check_ori_dnaapos(df_rrna_ori_ter, row, int(rrna[0]))
+        dist.append(apos_check[2])
         if int(rrna[0]) in df_rrna_ori_ter.loc[row, "leading1"]:
             pass
         else:
@@ -35,6 +38,7 @@ def check_rrna_two_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col, records):
     # Compare with two strands
     elif str(df_rrna_ori_ter.loc[row, col][-2]) == "-":
         apos_check = check_ori_dnaapos(df_rrna_ori_ter, row, int(rrna_comp[0]))
+        dist.append(apos_check[2])
         if int(rrna_comp[0]) in df_rrna_ori_ter.loc[row, "lagging1"]:
             pass
         else:
@@ -45,10 +49,11 @@ def check_rrna_two_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col, records):
                 # logging.warning(f" \nThe overlap with rRNA {int(rrna_comp[0])} and lagging1/lagging2 strand {df_rrna_ori_ter.loc[row, 'lagging1']}/{df_rrna_ori_ter.loc[row, 'lagging2']} is not correct for {df_rrna_ori_ter.loc[row, 'name']}") 
 
 
-def no_shift_check_rrna_dir(df_rrna_ori_ter, rrna, rrna_comp, row, col, records):
+def no_shift_check_rrna_dir(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dist):
     # Compare with first strand
     if df_rrna_ori_ter.loc[row, col][-2] == "+":
         apos_check = check_ori_dnaapos(df_rrna_ori_ter, row, int(rrna[0]))
+        dist.append(apos_check[2])
         if int(rrna[0]) in df_rrna_ori_ter.loc[row, "leading1"]:
             pass
         else:
@@ -57,6 +62,7 @@ def no_shift_check_rrna_dir(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
     # Compare with second strand
     elif str(df_rrna_ori_ter.loc[row, col][-2]) == "-":
         apos_check = check_ori_dnaapos(df_rrna_ori_ter, row, int(rrna[0]))
+        dist.append(apos_check[2])
         if int(rrna_comp[0]) in df_rrna_ori_ter.loc[row, "lagging1"]:
             pass
         else:
