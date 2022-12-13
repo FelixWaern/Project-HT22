@@ -160,7 +160,7 @@ def rrna_lead_lag(csv_path, rrna_locus_list):
                                     'taxonid', 'realm1', 'realm2', 'realm3', 'realm4', 'realm5', 'Ori', 
                                     'Ter', 'leading1', 'lagging1', 'lagging2', 'leading2', 'dist_ori_rna', "frac_co_orient", 'dist_dnaA_ori']]
     print(df_chromosomes)
-    df_chromosomes.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/chromosomes.csv")
+    df_chromosomes.to_csv("chromosomes.csv")
     df_non_overlapping = df_rrna_ori_ter.loc[df_rrna_ori_ter['name'].isin(non_overlapping_rrna)]
     #df_non_overlapping.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_with_rrna_lead_lag.csv")
     logging.warning(f"  Nr of records with rRNA and strand non-overlap: {j}")

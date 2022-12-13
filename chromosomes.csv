@@ -1,0 +1,11 @@
+,name,fullname,shift,div,siz,dnaApos,taxonid,realm1,realm2,realm3,realm4,realm5,Ori,Ter,leading1,lagging1,lagging2,leading2,dist_ori_rna,frac_co_orient,dist_dnaA_ori
+0,1,Bacteria1,2,0.5,10,2,1,Bacteria,realm_21,realm_211,realm_2111,realm_21111,3,8,"[3, 8)","[1, 3)","[8, 10]",,3.0,1.0,1.0
+1,2,Bacteria2,3,0.5,10,4,2,Bacteria,realm_21,realm_212,realm_2121,realm_21211,4,9,"[4, 9)","[1, 4)","[9, 10]",,3.0,0.0,0.0
+2,3,Bacteria3,-2,0.5,10,9,3,Bacteria,realm_21,realm_213,realm_2131,realm_21311,9,4,"[1, 4)","[4, 9)",,"[9, 10]",3.0,1.0,0.0
+3,4,Bacteria4,-2,0.5,10,9,4,Bacteria,realm_22,realm_221,realm_2211,realm_22111,9,4,"[1, 4)","[4, 9)",,"[9, 10]",5.0,0.0,0.0
+4,5,Bacteria5,0,0.5,10,2,5,Bacteria,realm_22,realm_221,realm_2112,realm_21121,1,6,"[1, 6)","[6, 10]",,,4.0,1.0,1.0
+5,6,Bacteria6,0,0.5,10,2,6,Bacteria,realm_22,realm_222,realm_2221,realm_22211,1,6,"[1, 6)","[6, 10]",,,4.0,0.0,1.0
+6,7,Bacteria7,-4,0.2,10,7,7,Bacteria,realm_23,realm_231,realm_2311,realm_23111,7,9,"[7, 9)","[1, 7)","[9, 10]",,2.0,1.0,0.0
+7,8,Bacteria8,-4,0.2,10,7,8,Bacteria,realm_23,realm_231,realm_2312,realm_23121,7,9,"[7, 9)","[1, 7)","[9, 10]",,5.0,0.0,0.0
+8,9,Bacteria9,4,0.7,10,3,9,Bacteria,realm_23,realm_232,realm_2321,realm_23211,5,2,"[1, 2)","[2, 5)",,"[5, 10]",1.0,1.0,2.0
+9,10,Bacteria10,4,0.7,10,3,10,Bacteria,realm_23,realm_233,realm_2331,realm_23311,5,2,"[1, 2)","[2, 5)",,"[5, 10]",3.0,0.0,2.0

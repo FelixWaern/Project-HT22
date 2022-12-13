@@ -1,7 +1,0 @@
-2022-12-12 13:54:58,862 INFO     Logging verbose set to False
-2022-12-12 13:56:01,791 WARNING   
- -------- No rRNA was found for: --------  
- NC_002506.1 
- NC_005824.1 
- -------------------------------------------------------------------------------
-2022-12-12 13:56:01,791 DEBUG    OK! No faulty records from NCBI recorded!

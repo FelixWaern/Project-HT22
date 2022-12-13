@@ -1,13 +1,12 @@
 # The top script which calls and checks 
 #TODO Email NCBI about the faulty files, KEEP UNTIL LATER SO WE KNOW WE HAVE ONE FAULTY.
 #TODO Perform for larger dataset, investigate faulty or strange records
-#TODO Add optional verbosity as bash commands - Started can be expanded
+
 #TODO The new dnaA investigation things 
-#TODO The code might be wrong during the calculation. Increase checks and redo. 
-#TODO Extend the test set
-#TODO Save output as csv and save the all the information especially dnaA position relative to our predicted Ori and inte start of rRNA interval
-#TODO Gör så att test simulated datan är som en flagga istället. 
-#TODO fix locus
+#TODO Extend the test set <----
+#TODO Fix comments. Can add more if possible. 
+#TODO Create locus csv and test it. <-----
+
 
 import importlib.util
 import pandas as pd
@@ -59,8 +58,13 @@ args = parser.parse_args()
 
 
 def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[], test_set=False):
+    """ Starting the script which matches the strands for the chromosomes from SkewDB against the 16S rRNA locations from
+    NCBI records corresponding to the chromosomes. The script is started from the command line.
+    Use python start.py -help for instructions on setup and running the script.
+    """
 
     print("--------------Starting SkewDB rRNA interval match--------------")
+
     # Start logging
     if __name__ == "__main__":
         # Starting main log file
@@ -69,7 +73,6 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
         log_file_name = str("logfile_" + start_datetime + ".log")
         logging.basicConfig(level=logging.DEBUG, filename=log_file_name, filemode="a+",
                         format="%(asctime)-15s %(levelname)-8s %(message)s")
-        
     logging.info(f"Logging verbose set to {verbose}") 
 
     #Check if biopython is installed. 
@@ -78,7 +81,6 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
         if verbose == True:
             logging.debug(f"\n --------Biopython already loaded---------")
         print(f"{name!r} already in sys.modules") 
-
     elif (spec := importlib.util.find_spec(name)) is not None: #Check if package exists on machine
         if verbose == True:
             logging.debug(f"\n --------Biopython is installed--------- ")
@@ -87,6 +89,10 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
         print(f"can't find the {name!r} module, not installed")
         logging.warning("BIOPYTHON NEEDS TO BE INSTALLED BEFORE RUNNING START.PY")
         sys.exit()
+
+    # Checks if the processes are to be run using the test set available. 
+    if test_set == True:
+        print("Running script on test set.")
 
     #Check if csv is downloaded & filtered 
     # Skip if running on test set
@@ -109,23 +115,37 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
             logging.debug(f"\n --------parameters into rrna_dict()--------- \n csv_path = {csv_path} \n email = {email} \n api_key = {api_key} \n local_storage_path = {local_storage_path}")
         rrna_dict = get_rrna(csv_path, email, api_key, local_storage_path, a_list, verbose) #rna dict is list. 0 is the position and 1 is the locus_tag. And change inputs.
     
+    
     if test_set == True:
-        #load the temporary dataframe for the rRNA
-        temp_rna_path = "C:/Users/Felix/Documents/rna_dict.csv"
+        # Loading both test rrna csv and locus csv and loading it as a dataframe
+        # Starting the matching process using a dictionary of all chromosomes and rRNAs, and strand data
+        temp_rna_path = "test_rna_dict.csv"
         df = pd.read_csv(temp_rna_path)
-        rrna_dict = {}
+        temp_rrna_dict = {}
+        locus_dict = {}
         for i in range(0, len(df)):
              rna_row = []
+             locus_tag_row =[]
              for x in df.loc[i]:
-                 print(x)
-                 rna_row.append(x)
-                 print(rna_row)
+                if (x[0]) == "l": # Check if locus or rRNA position. All locus for test set should start with l.
+                    print(x)
+                    locus_tag_row.append(x)
+                    print(locus_tag_row)
+                else:
+                    print(x)
+                    rna_row.append(x)
+                    print(rna_row)
              rna_row = rna_row[1:]
-             rrna_dict[i + 1] = rna_row
-             rll(csv_path, rrna_dict) # Need to change the rll so that True uses only test set. Add if statment in rll. 
-    if verbose == True:
-         logging.debug(f"\n parameters into rrna_dict: \n csv_path = {csv_path} \n rrna_dict = rrna_dict, too long to display")
-    rll(csv_path, rrna_dict) # Need to specicfy which in the list now. 
+             temp_rrna_dict[i + 1] = rna_row
+             locus_dict[i + 1] = locus_tag_row
+        rrna_dict = [temp_rrna_dict, locus_dict]
+        rll(csv_path, rrna_dict) # Need to change the rll so that True uses only test set. Add if statment in rll. 
+
+    else:
+        # Starting the matching process using a dictionary of all chromosomes and rRNAs, and strand data
+        if verbose == True:
+            logging.debug(f"\n parameters into rrna_dict: \n csv_path = {csv_path} \n rrna_dict = rrna_dict, too long to display")
+        rll(csv_path, rrna_dict) # Need to specicfy which in the list now. 
 
     print("Everything is done")
 start(args.csv_path, args.email, args.api_key, args.local_storage_path, args.verbose, args.a_list, args.test_set)
