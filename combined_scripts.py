@@ -11,7 +11,7 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     org_df = fd.fetch_csv_as_df(csv_path) 
     #Ta från [22000:23000]
     #test_df = org_df.iloc[900:1000] # [700:800] Did not work :/ 
-    test_df = org_df.head(50)
+    test_df = org_df.head(800)
 
     if a_list != None:
         df = org_df.loc[org_df['name'].isin(a_list)]
@@ -82,5 +82,6 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
         logging.warning("Faulty records from NCBI: "+ str(faulty))
     print("")
     print("------------------rRNA fetch done----------------")
+    print("rrna", len(dict))
+    print("locus", len(locus))
     return([dict, locus])
-

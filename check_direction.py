@@ -3,6 +3,9 @@ import math
 
 
 def check_rrna_two_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dist, count_rrna, df_rrna_csv):
+    """Function that check if the rrna genes are co-oriented with replication
+        if there are two intervals for the leading strand and one interval for
+        the lagging strand in the circular bacterial chromosome"""
     # Compare with one strand
     if df_rrna_ori_ter.loc[row, col][-2] == "-":
         sign = -1
@@ -33,6 +36,9 @@ def check_rrna_two_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dis
 
 
 def check_rrna_two_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dist, count_rrna, df_rrna_csv):
+    """Function that check if the rrna genes are co-oriented with replication
+        if there are two intervals for the lagging strand and one interval for
+        the leading strand in the chromosome"""
     # Compare with one strand
     if df_rrna_ori_ter.loc[row, col][-2] == "+":
         sign = 1
@@ -63,6 +69,9 @@ def check_rrna_two_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dist
 
 
 def no_shift_check_rrna_dir(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dist, count_rrna, df_rrna_csv):
+    """Function that check if the rrna genes are co-oriented with replication
+        if there are one interval for the lagging strand and one for the leading strand
+        in the chromosome"""
     # Compare with first strand
     if df_rrna_ori_ter.loc[row, col][-2] == "+":
         sign = 1

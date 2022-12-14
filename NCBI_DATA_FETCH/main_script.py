@@ -47,10 +47,11 @@ def accession_to_rRNA_interval(accession_numbers, res, locus, faulty, email, api
                                 rrna_16s.append(str(feature.location +1)) #Plus 1 in both start and end of sequence to match python indexing
                                 temp_locus.append(str(feature.qualifiers.get("locus_tag")))
                             elif "RNA" in product:
-                                rrna_other.append(product)  
-                result[seq_record.id] = temp     
-                res[seq_record.id] = temp 
-                locus[seq_record.id] = temp_locus
+                                rrna_other.append(product)
+                    if temp != []:
+                        result[seq_record.id] = temp     
+                        res[seq_record.id] = temp 
+                        locus[seq_record.id] = temp_locus
         # Print warning or info to log file
         if len(rrna_16s) == 0:
             if len(rrna_other) == 0: 
