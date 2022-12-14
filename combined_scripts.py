@@ -15,7 +15,7 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     org_df = fd.fetch_csv_as_df(csv_path) 
     #Ta från [22000:23000]
     #test_df = org_df.iloc[900:1000] # [700:800] Did not work :/ 
-    test_df = org_df.head(15000)
+    test_df = org_df.head(200)
 
     if a_list != None:
         df = org_df.loc[org_df['name'].isin(a_list)]
@@ -40,20 +40,24 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
             t0 = time.time()
             # Sending a batch of 10 accession number to the fetching script
             res = ms.batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s ,verbose )
+            print("")
+            print(len(res[0]))
+
             dict.update(res[0])
             locus.update(res[1])
             i = 0
             batch = []
             t1 = time.time()
             total = t1-t0
-            t_tot.append(total)
-            
-            print("")
+            t_tot.append(total)  
+
             print("Batch:",j, "done!")
             print("Batch:",j, "took:", total, "seconds!")
             print("Estimated time left: ", ((sum(t_tot)/len(t_tot))*2700)-((sum(t_tot)/len(t_tot))*j) ,"seconds")
             print("Estimated mean total time: ", ((sum(t_tot)/len(t_tot))*2700),"seconds")
+            print("Estimated precentage done", ((1-(((sum(t_tot)/len(t_tot))*2700)-((sum(t_tot)/len(t_tot))*j))/((sum(t_tot)/len(t_tot))*2700))*100), "%")
             print("Current faulty records: ", faulty)
+            
             
 
             j += 1
@@ -90,5 +94,7 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     print("")
     print("------------------rRNA fetch done----------------")
     # Returning a list containing both rRNA dictionary and locus tag dictionary
+    print(len(dict))
+    print(len(locus))
     return([dict, locus])
 

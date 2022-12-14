@@ -13,17 +13,15 @@
 import sys
 import os
 from scipy.cluster.hierarchy import linkage, dendrogram
+from collections import defaultdict
 
 import matplotlib.pyplot as plt
 sys.path.insert(1,'C:/Users/Felix/Documents/GitHub/Project-HT22/')
 from skewDB import dowloading_filtered_csvFile as download_filtered
 from skewDB import fetching_data as fd
-
-from kneed import KneeLocator
-from sklearn.datasets import make_blobs
 from sklearn.cluster import KMeans
-from sklearn.metrics import silhouette_score
-from sklearn.preprocessing import StandardScaler
+import pandas as pd
+
 
 def main(csv_path):
 
@@ -35,16 +33,10 @@ def main(csv_path):
     #Get the data as a dataframe
     df = fd.fetch_csv_as_df(csv_path) 
 
-    # checking the calculation for the selected bacterias
-    E_coli = df.loc[df["name"] == "NC_000913.3",["dnaApos","siz","div","shift","Ori", "Ter"]]
-    print(E_coli)
-    B_subtilis = df.loc[df["name"] == "NC_000964.3",["siz","div","shift","Ori", "Ter", "dnaApos"]]
-    print(B_subtilis)
-    P_aeruginosa = df.loc[df["name"] == "NC_002516.2",["siz","div","shift","Ori", "Ter", "dnaApos"]]
-    print(P_aeruginosa)
+    
 
     # Add distance and relative distance to the datafram
-    test_df = df.head(200).copy()
+    test_df = df.copy()
     
     distance = []
     relative_distance = []
@@ -77,32 +69,79 @@ def main(csv_path):
     test_df['Relative Distance'] = relative_distance
     
     # Explore clustering using dendogram. 
-    new_df = test_df[['Relative Distance', 'realm4']].copy()
     #['realm2, 'realm3', 'realm4', 'realm5']
+    realm = 'realm3'
+
+    new_df = test_df[['Relative Distance', 'Distance', 'realm4']].copy()
+    x = list(test_df['Relative Distance'])
+    y = list(test_df['Distance'])
+    label = list(test_df[realm])
     
     
     # Remove the clade from the DataFrame, save for later
-    varieties = list(new_df.pop('realm4'))
+    #varieties = list(new_df.pop('realm4'))
 
     # Extract the measurements as a NumPy array
-    samples = new_df.values
-
+    #samples = new_df.values
+    """
     mergings = linkage(samples, method='complete')
-
     dendrogram(mergings,
             labels=varieties,
             leaf_rotation=90,
             leaf_font_size=6,
             )
     plt.show()
-    
+    """
+
     # Record observations from different dendograms with different parameters.
     # Seems like between 12-20 seems appropriate
-features, true_labels = make_blobs(
-   n_samples=200,
-   centers=3,
-   cluster_std=2.75,
-   random_state=42)
+    
+    # New tests from other tutorial
+    data = list(zip(x,y))
+    inertias = []
+
+    for i in range(1,11):
+        kmeans = KMeans(n_clusters=i)
+        kmeans.fit(data)
+        inertias.append(kmeans.inertia_)
+
+    plt.plot(range(1,11), inertias, marker='o')
+    plt.title('Elbow method')
+    plt.xlabel('Number of clusters')
+    plt.ylabel('Inertia')
+    plt.show()
+
+    
+    kmeans = KMeans(n_clusters=3)
+    kmeans.fit(data)
+    plt.scatter(x, y, c=kmeans.labels_)
+    plt.show()
+
+    cluster_map = pd.DataFrame()
+    cluster_map[realm] = label
+    cluster_map['cluster'] = kmeans.labels_
+    third = cluster_map[cluster_map.cluster == 2]
+    second = cluster_map[cluster_map.cluster == 1]
+    first = cluster_map[cluster_map.cluster == 0]
+
+    print("")
+    print("Testing function Third")
+    find_most_common(third, realm, 3)
+    print("Testing function Second")
+    find_most_common(second, realm, 2)
+    print("Testing function First")
+    find_most_common(first, realm, 1)
+
+
+
+
+def find_most_common(cluster, realm, nr):
+        temp = defaultdict(int)
+        for x in list(cluster[realm]):
+            temp[x] += 1
+        res = max(temp, key=temp.get)
+        percentage = (temp[res])/(len(list(cluster[realm])))*100
+        print("The most common of for cluster",nr  ,"is", res, "with a percentage of", percentage)
 
 
  

@@ -6,7 +6,8 @@
 #TODO Extend the test set <----
 #TODO Fix comments. Can add more if possible. 
 #TODO Create locus csv and test it. <-----
-
+#TODO Report
+#TODO Won't open. 
 
 import importlib.util
 import pandas as pd

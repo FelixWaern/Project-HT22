@@ -43,8 +43,9 @@ def accession_to_rRNA_interval(accession_numbers, res, locus, faulty, email, api
         # Open the file locally
         if verbose == True:
             logging.debug(f"\n Fetching NCBI record: \n {accession_numbers} ")
+        
         with gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "rt") as input_handle:
-            for index, seq_record in enumerate(SeqIO.parse(input_handle, "gb")): 
+            for index, seq_record in enumerate(SeqIO.parse(input_handle, "gb")):
                 temp = []
                 temp_locus = []
                 for feature in seq_record.features: # Iterating over the features of the Genbank flat file
@@ -55,10 +56,12 @@ def accession_to_rRNA_interval(accession_numbers, res, locus, faulty, email, api
                                 rrna_16s.append(str(feature.location +1)) #Plus 1 in both start and end of sequence to match python indexing
                                 temp_locus.append(str(feature.qualifiers.get("locus_tag")))
                             elif "RNA" in product:
-                                rrna_other.append(product)  
-                result[seq_record.id] = temp     
-                res[seq_record.id] = temp # Saving to output directory
-                locus[seq_record.id] = temp_locus # Saving to output directory
+                                rrna_other.append(product)
+                if temp != []:
+                    result[seq_record.id] = temp     
+                    res[seq_record.id] = temp # Saving to output directory
+                    locus[seq_record.id] = temp_locus # Saving to output directory
+
         # Print warning or info to log file
         if len(rrna_16s) == 0:
             if len(rrna_other) == 0: 
