@@ -1,24 +1,47 @@
- 
- -------- The overlap with rRNA and strand is not correct for NC_004088.1 ------- 
- rRNA location = 12015 sign = + & strand interval = [248823, 2262716)leading1. Apos Distance to Ori = 283070 & rRNA location between dnaApos and Ori = True 
+2022-12-15 15:35:20,033 INFO     Logging verbose set to False
+2022-12-15 15:48:49,410 WARNING   
+ -------- No rRNA was found for: --------  
+ NC_007164.1 
+ NC_002488.3 
+ NC_004088.1 
+ NC_002516.2 
+ NC_000913.3 
+ NC_013791.2 
+ NC_002505.1 
+ NC_002506.1 
+ NC_005824.1 
+ NC_006576.1 
+ NC_007907.1 
+ NC_007705.1 
+ NC_009342.1 
+ NC_007712.1 
+ NC_009662.1 
+ NC_011837.1 
+ NC_007953.1 
+ NC_009456.1 
+ NC_011983.1 
+ NC_010845.1 
+ NC_010843.1 
+ NC_012580.1 
+ NC_012583.1 
+ NC_012667.1 
+ NC_013526.1 
+ NC_004343.2 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:49,412 WARNING  Faulty records from NCBI: ['NC_010804.1', 'NC_010117.1', 'NC_010742.1', 'NC_010184.1', 'NC_011567.1', 'NC_010322.1', 'NC_010516.1', 'NC_010512.1', 'NC_011283.1', 'NC_011244.1', 'NC_010524.1', 'NC_010717.2', 'NC_010571.1', 'NC_010582.1', 'NC_010551.1', 'NC_010557.1', 'NC_010622.1', 'NC_010655.1', 'NC_010698.2', 'NC_012026.1', 'NC_010814.1']
+2022-12-15 15:48:54,105 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_006300.1 ------- 
  rRNA location = 2312119 sign = + & strand interval = [47557, 1009102)leading1. Apos Distance to Ori = 400404 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:54,254 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_005835.1 ------- 
  rRNA location = 1766608 sign = - & strand interval = [613069, 1547442) lagging1. Apos Distance to Ori = 24412 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:54,784 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_002163.1 ------- 
  rRNA location = 39249 sign = + & strand interval = [45763, 792577)leading1. Apos Distance to Ori = 45762 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
- -------- The overlap with rRNA and strand is not correct for NC_011837.1 ------- 
- rRNA location = 9349 sign = + & strand interval = [57203, 1691181)leading1. Apos Distance to Ori = 57202 & rRNA location between dnaApos and Ori = True 
- -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:55,704 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_010572.1 ------- 
  rRNA location = 2103828 sign = - & strand interval = [1, 35)lagging1 & [3972473, 8545928]lagging2. Apos Distance to Ori = 4223419 & rRNA location between dnaApos and Ori = False
  rRNA location = 4592148 sign = + & strand interval = [35, 3972473)leading1. Apos Distance to Ori = 4223419 & rRNA location between dnaApos and Ori = True
@@ -27,109 +50,109 @@
  rRNA location = 6683058 sign = + & strand interval = [35, 3972473)leading1. Apos Distance to Ori = 4223419 & rRNA location between dnaApos and Ori = True
  rRNA location = 7243307 sign = + & strand interval = [35, 3972473)leading1. Apos Distance to Ori = 4223419 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:55,920 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_003450.3 ------- 
  rRNA location = 3151205 sign = - & strand interval = [1536929, 3090136) lagging1. Apos Distance to Ori = 219265 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:56,127 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_003912.7 ------- 
  rRNA location = 37398 sign = + & strand interval = [59803, 883850)leading1. Apos Distance to Ori = 59802 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:56,234 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_003911.12 ------- 
  rRNA location = 4015972 sign = - & strand interval = [2077360, 3915009) lagging1. Apos Distance to Ori = 358758 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:56,852 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_007946.1 ------- 
  rRNA location = 4202676 sign = + & strand interval = [1, 1696719)leading1 & [4229219, 5065740]leading2. Apos Distance to Ori = 83922 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:57,041 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_008150.1 ------- 
  rRNA location = 14226 sign = + & strand interval = [71072, 1653063)leading1. Apos Distance to Ori = 105069 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:57,497 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_008700.1 ------- 
  rRNA location = 4282137 sign = - & strand interval = [2155566, 4274222) lagging1. Apos Distance to Ori = 42694 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:57,618 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_008787.1 ------- 
  rRNA location = 39157 sign = + & strand interval = [42446, 798563)leading1. Apos Distance to Ori = 42445 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:57,704 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_008709.1 ------- 
  rRNA location = 130 sign = + & strand interval = [8768, 2304306)leading1. Apos Distance to Ori = 44155 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:58,054 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_009436.1 ------- 
  rRNA location = 4471259 sign = - & strand interval = [2218432, 4453441) lagging1. Apos Distance to Ori = 65845 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:58,148 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_009706.1 ------- 
  rRNA location = 9349 sign = + & strand interval = [51721, 1687248)leading1. Apos Distance to Ori = 51720 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:58,312 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_009708.1 ------- 
  rRNA location = 12000 sign = + & strand interval = [27009, 2206276)leading1. Apos Distance to Ori = 60035 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:58,563 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_009839.1 ------- 
  rRNA location = 37567 sign = + & strand interval = [47208, 800807)leading1. Apos Distance to Ori = 47207 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:58,613 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_009778.1 ------- 
  rRNA location = 3976747 sign = + & strand interval = [1, 1801826)leading1 & [4021265, 4368372]leading2. Apos Distance to Ori = 95826 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:58,777 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_009767.1 ------- 
  rRNA location = 5183505 sign = + & strand interval = [465028, 3156391)leading1. Apos Distance to Ori = 464658 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:59,116 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_010175.1 ------- 
  rRNA location = 5131300 sign = + & strand interval = [2001856, 4679136)leading1. Apos Distance to Ori = 2001520 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:59,236 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_010337.2 ------- 
  rRNA location = 1123468 sign = + & strand interval = [1243147, 2522916)leading1. Apos Distance to Ori = 154930 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:48:59,499 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_011035.1 ------- 
  rRNA location = 1954340 sign = + & strand interval = [1, 849055)leading1 & [1955978, 2232024]leading2. Apos Distance to Ori = 276204 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:00,035 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_011138.3 ------- 
  rRNA location = 34379 sign = + & strand interval = [42839, 2328990)leading1. Apos Distance to Ori = 42876 & rRNA location between dnaApos and Ori = True
  rRNA location = 2840836 sign = + & strand interval = [42839, 2328990)leading1. Apos Distance to Ori = 42876 & rRNA location between dnaApos and Ori = False
  rRNA location = 3694905 sign = + & strand interval = [42839, 2328990)leading1. Apos Distance to Ori = 42876 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:00,443 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_011369.1 ------- 
  rRNA location = 4146699 sign = + & strand interval = [78489, 1700955)leading1. Apos Distance to Ori = 77869 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:00,507 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_014034.1 ------- 
  rRNA location = 160325 sign = + & strand interval = [275465, 2034113)leading1. Apos Distance to Ori = 275114 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:00,518 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_011831.1 ------- 
  rRNA location = 835788 sign = + & strand interval = [1, 247883)leading1 & [2433937, 4684930]leading2. Apos Distance to Ori = 2251201 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:00,643 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_011898.1 ------- 
  rRNA location = 4057467 sign = - & strand interval = [1924394, 4040964) lagging1. Apos Distance to Ori = 27786 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:00,941 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_014029.1 ------- 
  rRNA location = 12264 sign = + & strand interval = [28729, 1963820)leading1. Apos Distance to Ori = 62727 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:00,959 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_017154.1 ------- 
  rRNA location = 12264 sign = + & strand interval = [21030, 2505471)leading1. Apos Distance to Ori = 21031 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:01,246 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_012850.1 ------- 
  rRNA location = 4429021 sign = + & strand interval = [93151, 1935618)leading1. Apos Distance to Ori = 93096 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:01,274 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_013093.1 ------- 
  rRNA location = 219643 sign = + & strand interval = [1, 138827)leading1 & [3976317, 8248143]leading2. Apos Distance to Ori = 3976219 & rRNA location between dnaApos and Ori = True
  rRNA location = 1008767 sign = + & strand interval = [1, 138827)leading1 & [3976317, 8248143]leading2. Apos Distance to Ori = 3976219 & rRNA location between dnaApos and Ori = True
@@ -137,53 +160,53 @@
  rRNA location = 6131208 sign = - & strand interval = [138827, 3976317) lagging1. Apos Distance to Ori = 3976219 & rRNA location between dnaApos and Ori = False
  rRNA location = 6469862 sign = - & strand interval = [138827, 3976317) lagging1. Apos Distance to Ori = 3976219 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:01,565 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_013205.1 ------- 
  rRNA location = 10782 sign = + & strand interval = [17520, 1666481)leading1. Apos Distance to Ori = 17405 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:01,710 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_013946.1 ------- 
  rRNA location = 592266 sign = - & strand interval = [1, 2651)lagging1 & [1612018, 3097456]lagging2. Apos Distance to Ori = 2614 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:01,822 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_013421.1 ------- 
  rRNA location = 4964491 sign = - & strand interval = [2562326, 4908791) lagging1. Apos Distance to Ori = 155153 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:01,888 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_013525.1 ------- 
  rRNA location = 815525 sign = - & strand interval = [1, 227873)lagging1 & [1248345, 2026946]lagging2. Apos Distance to Ori = 227788 & rRNA location between dnaApos and Ori = False
  rRNA location = 1141748 sign = - & strand interval = [1, 227873)lagging1 & [1248345, 2026946]lagging2. Apos Distance to Ori = 227788 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:02,098 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_017279.1 ------- 
  rRNA location = 39262 sign = + & strand interval = [47725, 795267)leading1. Apos Distance to Ori = 47724 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:02,278 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_006138.1 ------- 
  rRNA location = 1463851 sign = - & strand interval = [1, 668120)lagging1 & [2265206, 3523382]lagging2. Apos Distance to Ori = 364857 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
- 
- -------- The overlap with rRNA and strand is not correct for NC_011750.1 ------- 
- rRNA location = 482496 sign = - & strand interval = [1923638, 4444740) lagging1. Apos Distance to Ori = 39327 & rRNA location between dnaApos and Ori = False 
- -------------------------------------------------------------------------------
- 
- -------- The overlap with rRNA and strand is not correct for NC_011742.1 ------- 
- rRNA location = 4150181 sign = + & strand interval = [1, 1622715)leading1 & [4154846, 5032267]leading2. Apos Distance to Ori = 62039 & rRNA location between dnaApos and Ori = True 
- -------------------------------------------------------------------------------
- 
- -------- The overlap with rRNA and strand is not correct for NC_011601.1 ------- 
- rRNA location = 4238425 sign = + & strand interval = [1, 1715118)leading1 & [4268072, 4965552]leading2. Apos Distance to Ori = 87019 & rRNA location between dnaApos and Ori = True 
- -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:02,615 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_011740.1 ------- 
  rRNA location = 4161341 sign = + & strand interval = [1, 1569971)leading1 & [4168879, 4588710]leading2. Apos Distance to Ori = 65323 & rRNA location between dnaApos and Ori = True 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:02,659 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NC_011742.1 ------- 
+ rRNA location = 4150181 sign = + & strand interval = [1, 1622715)leading1 & [4154846, 5032267]leading2. Apos Distance to Ori = 62039 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-15 15:49:02,681 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NC_011750.1 ------- 
+ rRNA location = 482496 sign = - & strand interval = [1923638, 4444740) lagging1. Apos Distance to Ori = 39327 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+2022-12-15 15:49:02,703 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NC_011601.1 ------- 
+ rRNA location = 4238425 sign = + & strand interval = [1, 1715118)leading1 & [4268072, 4965552]leading2. Apos Distance to Ori = 87019 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-15 15:49:03,749 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_014212.1 ------- 
  rRNA location = 3154466 sign = + & strand interval = [34432, 1992552)leading1. Apos Distance to Ori = 34306 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
- 
+2022-12-15 15:49:03,854 WARNING   
  -------- The overlap with rRNA and strand is not correct for NC_014221.1 ------- 
  rRNA location = 624145 sign = - & strand interval = [1, 24475)lagging1 & [1613870, 3260397]lagging2. Apos Distance to Ori = 24309 & rRNA location between dnaApos and Ori = False 
  -------------------------------------------------------------------------------
-  Nr of records with rRNA and strand non-overlap: 44
+2022-12-15 15:49:04,076 WARNING    Nr of records with rRNA and strand non-overlap: 42
