@@ -177,12 +177,12 @@ def rrna_lead_lag(csv_path, rrna_locus_list):
             frac_rrna = "No rRNA found"
         df_rrna_ori_ter.loc[row, "frac_co_orient"] = frac_rrna
     # write to csv file
-    df_rrna_csv.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/rrna.csv")
+    df_rrna_csv.to_csv("rrna.csv")
     # create new dataframe
     df_chromosomes = df_rrna_ori_ter[['name', 'fullname', 'shift',  'div', 'siz', 'dnaApos',
                                     'taxonid', 'realm1', 'realm2', 'realm3', 'realm4', 'realm5', 'Ori', 
                                     'Ter', 'leading1', 'lagging1', 'lagging2', 'leading2', 'dist_dnaA_ori', "frac_co_orient", 'median_dist_ori_rrna']]
     # write to csv file
-    df_chromosomes.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/chromosomes.csv")
+    df_chromosomes.to_csv("chromosomes.csv")
     logging.warning(f"  Nr of records with rRNA and strand non-overlap: {tot}")
     print("rrna lead lag done")

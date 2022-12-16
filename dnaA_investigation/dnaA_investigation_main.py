@@ -121,7 +121,7 @@ def realm_cluster(x, y, label, realm):
     kmeans.fit(data)
     
 
-    plt.scatter(x, y, c=kmeans.labels_, label=kmeans.labels_ )
+    plt.scatter(x, y, c=kmeans.labels_, label=1 )
     plt.title(realm)
     plt.legend()
     plt.show()
