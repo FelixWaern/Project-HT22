@@ -14,6 +14,7 @@ from combined_scripts import get_rRNA_intervals as rRNA_interval
 from random import shuffle
 import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
+from collections import Counter
 plt.rcParams['figure.figsize'] = [9.5, 7]
 
 # Read csv output files for chromosomes and rRNAs
@@ -23,6 +24,7 @@ df_rRNA = pd.read_csv("C:/Ashwini/Applied_bioinformatics/rRNA.csv")
 #df_chromo = pd.DataFrame(chromosomes)
 #df_chromo.to_csv("C:/Ashwini/Applied_bioinformatics/chromosome.csv")
 df_chromo = pd.read_csv("C:/Ashwini/Applied_bioinformatics/chromosomes.csv")
+num_records = len(df_chromo)
 
 #Declaring lists used
 accession=[]
@@ -33,13 +35,12 @@ stop_compliment = []
 unique_acc_rrna = []
 gcfits_accession = []
 new_csv_files = []
-#temp_rrna =[]
-#temp_num = []
-#temp_non_rrna =[]
-#temp_non_num = []
 betn_ori_dnaA = []
 unique_orient = []
 taxa_non_orient = []
+list_not_orient = []
+list_betn_ori_dnaA = []
+common_list = []
 
 # Creating new dataframe
 for file in range(len(df_rRNA)):
@@ -74,21 +75,32 @@ for ind in df_orient.index:
     unique_orient.append(df_orient["name"][ind])
 
 unique_orient = list(dict.fromkeys(unique_orient))
-print(len(unique_orient))
-print("accession numbers of rrna that is not co-oriented")
-print(unique_orient)
 
 #Fetching unique accession numbers from new_df dataframe 
 unique_acc_rrna = new_df["name"].unique()
 #unique_acc_rrna = new_df["name"].unique()
 #print("unique acc numbers from rrna output file")
-print(len(unique_acc_rrna))
+#print(len(unique_acc_rrna))
 
 #Creating path from csv_path
 csv_path = "C:/Ashwini/Applied_bioinformatics/FilteredDataFile.csv"
 file_path = csv_path.rstrip("FilteredDataFile.csv")
 gcfit_path = file_path + "gcfits\\"
 #print(gcfit_path)
+
+df_csv = pd.read_csv(csv_path)
+count_realm2_proteo = 0
+for ind in df_csv.index:   
+     if df_csv["realm2"][ind] == "Proteobacteria":
+        count_realm2_proteo += 1
+print("count realm2 proteo")
+print(count_realm2_proteo)
+count_realm2_Terra = 0
+for ind in df_csv.index:   
+     if df_csv["realm2"][ind] == "Terrabacteria group":
+        count_realm2_Terra += 1
+print("count realm2 terra")
+print(count_realm2_Terra)
 
 # Get CSV files list from a gcfit folder
 csv_files = glob.glob(gcfit_path + "*.csv")
@@ -119,7 +131,7 @@ for acc_num in new_csv_files:
     us=new_df[new_df.name==acc_num]
     chromo = df_chromo[df_chromo.name==acc_num]
     #Fetching taxanomical details (realm2-phylum, realm3-class)
-    taxon = chromo["realm2"].item()
+    taxon = chromo["realm5"].item()
     taxa_non_orient.append(taxon)
     #Creating new dataframe for the rrnas for the accession number
     df_rrna_plot = new_df.loc[new_df["name"] == acc_num,["name","between_dnaA_ori", "co-orient", "rRNAPos"]]
@@ -129,17 +141,18 @@ for acc_num in new_csv_files:
     for ind in df_rrna_plot.index:
         if df_rrna_plot["co-orient"][ind] == True:
             mark_rrna = df_rrna_plot["rRNAPos"][ind]
-            #temp_rrna.append(mark_rrna)
-            #num_rrna = df_rrna_plot.loc[row,"rRNA"]
-            #temp_num.append(num_rrna)
-            plt.axvline(int(mark_rrna), ls='-', color='yellow')
+            plt.axvline(int(mark_rrna), ls='-', color='orange')
         else:
             if df_rrna_plot["between_dnaA_ori"][ind] == False:
+                temp = df_rrna_plot["name"][ind]
+                list_not_orient.append(temp)
                 non_overlap_rrna = df_rrna_plot["rRNAPos"][ind]
                 plt.axvline(int(non_overlap_rrna), ls='-', color='blue')
             else:
+                temp_1 = df_rrna_plot["name"][ind]
+                list_betn_ori_dnaA.append(temp_1)
                 non_overlap_rrna = df_rrna_plot["rRNAPos"][ind]
-                plt.axvline(int(non_overlap_rrna), ls='-', color='pink')
+                plt.axvline(int(non_overlap_rrna), ls='-', color='brown')
     
     # for marking shift
     #print(chromo)
@@ -163,9 +176,9 @@ for acc_num in new_csv_files:
     dnaA = mlines.Line2D([], [], color='red', label='dnaA')
     shift = mlines.Line2D([], [], color='black', label='Shift')
     ter = mlines.Line2D([], [], color='green', label='Terminus')
-    pos_rrna = mlines.Line2D([], [], color='yellow', label='rRNA genes co-oriented with replication')
+    pos_rrna = mlines.Line2D([], [], color='orange', label='rRNA genes co-oriented with replication')
     pos_non_rrna = mlines.Line2D([], [], color='blue', label='rRNA genes not co-oriented with replication')
-    pos_non_rrna_betn_ori = mlines.Line2D([], [], color='pink', label='rRNA genes locates between ori and dnaA that are not co-oriented with replication')
+    pos_non_rrna_betn_ori = mlines.Line2D([], [], color='brown', label='rRNA genes locates between ori and dnaA that are not co-oriented with replication')
     plt.legend(handles=[dnaA, shift, ter, pos_rrna, pos_non_rrna, pos_non_rrna_betn_ori])
 
     # labelling x and y axis
@@ -177,31 +190,54 @@ for acc_num in new_csv_files:
     
     #fixing title
     plt.title(str(chromo["fullname"].item()))
-    plt.grid()
+    #plt.grid()
     plt.savefig("figures\\"+ str(acc_num) + ".png")
     plt.savefig("D:\\figures\\"+ str(acc_num) + ".png")
     plt.clf()
     #plt.show()
 
-print(taxa_non_orient)
+"""# compare lists
+for i in list_not_orient:
+    for j in list_betn_ori_dnaA:
+        if i == j:
+            common_list.append(i)"""
 
-"""df_skewdb = pd.read_csv(csv_path)
-taxa = df_skewdb["realm2"].unique()
-print(taxa)
+list_not_orient = list(dict.fromkeys(list_not_orient))
+list_betn_ori_dnaA = list(dict.fromkeys(list_betn_ori_dnaA))
+
+# calculating part, where there is no rrna that locates betn ori and dnaA
+no_ori_dnaA = len(list_not_orient) + len(common_list)   
+#Calculating the percentage
+percent = (100 * len(list_not_orient))/num_records
+            
+# printing results
+print("total number of chromosomes")
+print(num_records)
+print("Number of accession numbers that is not co-oriented")
+print(len(unique_orient))
+#print(unique_orient)
+print("list of not co-oriented rrna")
+#print(list_not_orient)
+print("number of chromosomes where atleast one rrna is not co-orinted")
+print(len(list_not_orient))
+print("list of not co-oriented rrna that locates betn ori and dnaA")
+#print(list_betn_ori_dnaA)
+print("number of chromosomes where atleast one rrna is not co-oriented becuase it locates betn ori and dnaA")
+print(len(list_betn_ori_dnaA))
+
+"""print("chromosomes where we have both rrna which are not cooriented and locates betn ori and dnaA")
+print(len(common_list))
+print("number of chromosomes(not-cooriented) where there are no rrnas locates betn ori and dnaA")
+print(no_ori_dnaA)"""
+print("percentage of chromosomes which are not co-oriented")
+print(percent)
+
+#print(taxa_non_orient)
+taxa_dict = Counter(taxa_non_orient)
+print(taxa_dict)
+plt.bar(list(taxa_dict.keys()), taxa_dict.values(), color='g')
+plt.show()
 
 
-#plotting histogram
-for acc_num in new_csv_files:
-    print(acc_num)
-    chromo_histo = df_chromo[df_chromo.name==acc_num]
-    taxa_1 = chromo_histo["realm4"].unique()
-    print(taxa_1)
-print(taxa_1)
-x_pos = chromo_histo["realm4"].unique()
-plt.hist(taxa_1, bins=50, density=True)
-plt.grid()
-plt.title("Histogram")
-# Show graph
-plt.show() """
 
 
