@@ -9,3 +9,10 @@ name,fullname,taxonid,realm1,realm2,realm3,realm4,realm5,shift,siz,div,dnaApos,O
 8,Bacteria8,8,Bacteria,realm_23,realm_231,realm_2312,realm_23121,-4,10,0.2,7,-3,-1
 9,Bacteria9,9,Bacteria,realm_23,realm_232,realm_2321,realm_23211,4,10,0.7,3,5,12
 10,Bacteria10,10,Bacteria,realm_23,realm_233,realm_2331,realm_23311,4,10,0.7,3,5,12
+11,Bacteria11,11,Bacteria,realm_24,realm_241,realm_2411,realm_24111,1,10,0.5,9,1,6
+12,Bacteria12,12,Bacteria,realm_24,realm_241,realm_2412,realm_24121,-1,10,0.5,1,9,4
+13,Bacteria13,13,Bacteria,realm_24,realm_242,realm_2421,realm_24211,1,10,0.5,4,1,6
+14,Bacteria14,14,Bacteria,realm_25,realm_251,realm_2511,realm_25111,1,10,0.5,3,1,6
+15,Bacteria15,15,Bacteria,realm_25,realm_251,realm_2512,realm_25121,1,10,0.4,7,1,5
+16,Bacteria16,16,Bacteria,realm_25,realm_252,realm_2521,realm_25211,4,10,0.5,1,4,9
+17,Bactera17,17,Bacteria,realm_25,realm_252,realm_2522,realm_25221,-3,10,0.6,1,7,3

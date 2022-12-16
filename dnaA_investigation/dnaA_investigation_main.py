@@ -70,12 +70,17 @@ def main(csv_path):
     
     # Explore clustering using dendogram. 
     #['realm2, 'realm3', 'realm4', 'realm5']
-    realm = 'realm3'
+   
 
     new_df = test_df[['Relative Distance', 'Distance', 'realm4']].copy()
     x = list(test_df['Relative Distance'])
     y = list(test_df['Distance'])
-    label = list(test_df[realm])
+    realm = ['realm2', 'realm3', 'realm4', 'realm5']
+    label = [list(test_df[realm[0]]), list(test_df[realm[1]]), list(test_df[realm[2]]), list(test_df[realm[2]])]
+    realm_cluster(x, y, label[0], realm[0])
+    realm_cluster(x, y, label[1], realm[1])
+    realm_cluster(x, y, label[2], realm[2])
+    realm_cluster(x, y, label[3], realm[3])
     
     
     # Remove the clade from the DataFrame, save for later
@@ -96,10 +101,11 @@ def main(csv_path):
     # Record observations from different dendograms with different parameters.
     # Seems like between 12-20 seems appropriate
     
-    # New tests from other tutorial
+    
+def realm_cluster(x, y, label, realm):
     data = list(zip(x,y))
+    """
     inertias = []
-
     for i in range(1,11):
         kmeans = KMeans(n_clusters=i)
         kmeans.fit(data)
@@ -110,26 +116,30 @@ def main(csv_path):
     plt.xlabel('Number of clusters')
     plt.ylabel('Inertia')
     plt.show()
-
-    
+    """
     kmeans = KMeans(n_clusters=3)
     kmeans.fit(data)
-    plt.scatter(x, y, c=kmeans.labels_)
+    
+
+    plt.scatter(x, y, c=kmeans.labels_, label=kmeans.labels_ )
+    plt.title(realm)
+    plt.legend()
     plt.show()
 
+    
     cluster_map = pd.DataFrame()
     cluster_map[realm] = label
     cluster_map['cluster'] = kmeans.labels_
     third = cluster_map[cluster_map.cluster == 2]
     second = cluster_map[cluster_map.cluster == 1]
     first = cluster_map[cluster_map.cluster == 0]
-
     print("")
-    print("Testing function Third")
+    print("Realm clustering for ", realm)
+    print("Testing function Third cluster")
     find_most_common(third, realm, 3)
-    print("Testing function Second")
+    print("Testing function Second cluster")
     find_most_common(second, realm, 2)
-    print("Testing function First")
+    print("Testing function First cluster")
     find_most_common(first, realm, 1)
 
 

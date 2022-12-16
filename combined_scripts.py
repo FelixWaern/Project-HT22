@@ -4,6 +4,7 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
         Also fetching the locus tags for all rRNAs as a dictionary using accession number as keys and rRNA locus tags as values. 
     """
     import time
+    from collections import defaultdict
     import sys
     import logging
     sys.path.insert(0, '/skewDB/')
@@ -13,10 +14,10 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     
     # Fetching the SkewDB data as a dataframe
     org_df = fd.fetch_csv_as_df(csv_path) 
-    #Ta från [22000:23000]
-    #test_df = org_df.iloc[900:1000] # [700:800] Did not work :/ 
-    test_df = org_df.head(200)
+    
 
+
+    test_df = org_df.loc[14000:21000].copy()
     if a_list != None:
         df = org_df.loc[org_df['name'].isin(a_list)]
     else:
@@ -53,8 +54,8 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
 
             print("Batch:",j, "done!")
             print("Batch:",j, "took:", total, "seconds!")
-            print("Estimated time left: ", ((sum(t_tot)/len(t_tot))*2700)-((sum(t_tot)/len(t_tot))*j) ,"seconds")
-            print("Estimated mean total time: ", ((sum(t_tot)/len(t_tot))*2700),"seconds")
+            print("Estimated time left: ", (((sum(t_tot)/len(t_tot))*2700)-((sum(t_tot)/len(t_tot))*j))/60 ,"minutes")
+            print("Estimated mean total time: ", ((sum(t_tot)/len(t_tot))*2700)/60,"minutes")
             print("Estimated precentage done", ((1-(((sum(t_tot)/len(t_tot))*2700)-((sum(t_tot)/len(t_tot))*j))/((sum(t_tot)/len(t_tot))*2700))*100), "%")
             print("Current faulty records: ", faulty)
             

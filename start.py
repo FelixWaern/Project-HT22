@@ -3,11 +3,11 @@
 #TODO Perform for larger dataset, investigate faulty or strange records
 
 #TODO The new dnaA investigation things 
-#TODO Extend the test set <----
 #TODO Fix comments. Can add more if possible. 
-#TODO Create locus csv and test it. <-----
+#TODO Run the entire thing
 #TODO Report
 #TODO Won't open. 
+#TODO Stratified sampling flag and create stratified sampling in combined scripts. 
 
 import importlib.util
 import pandas as pd
@@ -122,23 +122,23 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
         # Starting the matching process using a dictionary of all chromosomes and rRNAs, and strand data
         temp_rna_path = "test_rna_dict.csv"
         df = pd.read_csv(temp_rna_path)
+        skip = df.iloc[:,0]
         temp_rrna_dict = {}
         locus_dict = {}
         for i in range(0, len(df)):
-             rna_row = []
-             locus_tag_row =[]
-             for x in df.loc[i]:
-                if (x[0]) == "l": # Check if locus or rRNA position. All locus for test set should start with l.
-                    print(x)
-                    locus_tag_row.append(x)
-                    print(locus_tag_row)
+            rna_row = []
+            locus_tag_row =[]
+            for x in df.loc[i]:
+                if x == skip[i]:
+                    pass
                 else:
-                    print(x)
-                    rna_row.append(x)
-                    print(rna_row)
-             rna_row = rna_row[1:]
-             temp_rrna_dict[i + 1] = rna_row
-             locus_dict[i + 1] = locus_tag_row
+                    if (x[0]) == "l": # Check if locus or rRNA position. All locus for test set should start with l.
+                        locus_tag_row.append(x)
+                    else:
+                        rna_row.append(x)
+            #rna_row = rna_row[1:]
+            temp_rrna_dict[i + 1] = rna_row
+            locus_dict[i + 1] = locus_tag_row
         rrna_dict = [temp_rrna_dict, locus_dict]
         rll(csv_path, rrna_dict) # Need to change the rll so that True uses only test set. Add if statment in rll. 
 
@@ -147,6 +147,8 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
         if verbose == True:
             logging.debug(f"\n parameters into rrna_dict: \n csv_path = {csv_path} \n rrna_dict = rrna_dict, too long to display")
         rll(csv_path, rrna_dict) # Need to specicfy which in the list now. 
+
+    # Creating graphical representation. 
 
     print("Everything is done")
 start(args.csv_path, args.email, args.api_key, args.local_storage_path, args.verbose, args.a_list, args.test_set)
