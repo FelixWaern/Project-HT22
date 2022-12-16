@@ -94,8 +94,6 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
         logging.warning("Faulty records from NCBI: "+ str(faulty))
     print("")
     print("------------------rRNA fetch done----------------")
-    # Returning a list containing both rRNA dictionary and locus tag dictionary
-    print(len(dict))
-    print(len(locus))
+    print("rrna", len(dict))
+    print("locus", len(locus))
     return([dict, locus])
-

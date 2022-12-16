@@ -8,6 +8,9 @@ import time
 
 
 def rrna_lead_lag(csv_path, rrna_locus_list):
+    """ Function that takes a csv file with information about all chromosomes 
+        and a dictionary with information about the rrna genes as input and 
+        creates chromosomes.csv, rrna.csv and a log file as output"""
     import sys
     sys.path.insert(0, '/skewDB/')
     from skewDB import fetching_data as fd
@@ -15,47 +18,44 @@ def rrna_lead_lag(csv_path, rrna_locus_list):
     import re
     import logging
     import numpy as np
+    import statistics
 
-    #load the temporary dataframe for the rRNA
-    # temp_rna_path = "C:/Users/Felix/Documents/rna_dict.csv"
-    # df = pd.read_csv(temp_rna_path)
-    # rrna_dict = {}
-    # for i in range(0, len(df)):
-    #     rna_row = []
-    #     for x in df.loc[i]:
-    #         print(x)
-    #         rna_row.append(x)
-    #         print(rna_row)
-    #     rna_row = rna_row[1:]
-    #     rrna_dict[i + 1] = rna_row
-
-    t0 = time.time()
     # Create log file
     root_logger = logging.getLogger()
     root_logger.setLevel(logging.DEBUG)
     handler = logging.FileHandler(f'leading_lagging.log', 'w', 'utf-8')
     root_logger.addHandler(handler)
 
+    # dictionaries for rrna and locus tags
     rrna_dict = rrna_locus_list[0]
     locus_dict = rrna_locus_list[1]
+
     # create a Dataframe object with intervals for the rrna genes
     df_rrna = pd.DataFrame(dict([ (k, pd.Series(v, dtype=pd.StringDtype())) for k, v in rrna_dict.items() ])).transpose()
     df_rrna = df_rrna.reset_index()
     df_rrna.rename(columns = {'index':'name'}, inplace = True)
-    #df_rrna.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_with_rrna.csv")
+    print('len of df_rrna:', len(df_rrna))
+    df_rrna.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/rrna_genes.csv")
 
-    # import the needed columns from the csv-file with ori and ter 
+    # create a Dataframe object with the locus tags
+    df_locus = pd.DataFrame(dict([ (k, pd.Series(v, dtype=pd.StringDtype())) for k, v in locus_dict.items() ])).transpose()
+    df_locus = df_locus.reset_index()
+    df_locus.rename(columns = {'index':'name'}, inplace = True)
+    print('len of df_locus:', len(df_locus))
+    df_locus.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/locus.csv")
+
+    # import needed columns from the csv-file with ori and ter 
     temp = fd.fetch_csv_as_df(csv_path)  
-    #df_ori_ter = temp[['name', 'siz', 'shift', 'div','Ter', 'Ori', 'dnaApos']] 
     df_ori_ter = temp[['name', 'fullname', 'shift',  'div', 'siz', 'dnaApos', 'taxonid', 'realm1', 'realm2', 'realm3', 'realm4', 'realm5', 'Ori', 'Ter']]
-    #df_ori_ter.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_double_check_ori_ter.csv")
 
     # merge the Dataframe columns with matching accession numbers
     df_rrna_ori_ter = pd.merge(df_rrna, df_ori_ter, on="name")
-    #df_rrna_ori_ter.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_double_check_merged.csv")
+    print('len of df_rrna_ori_ter:', len(df_rrna_ori_ter))
+    df_rrna_ori_ter.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/rrna_ori_ter.csv")
 
     # create intervals for leading and lagging strand
     for row in range(len(df_rrna_ori_ter)):
+        # calculate Ter manually
         ter = (df_rrna_ori_ter.loc[row, "siz"] * df_rrna_ori_ter.loc[row, "div"]) + df_rrna_ori_ter.loc[row, "shift"] + 1
         # negative shift
         if df_rrna_ori_ter.loc[row, "shift"] < 0:
@@ -110,20 +110,32 @@ def rrna_lead_lag(csv_path, rrna_locus_list):
             # write to Dataframe
             two_s(df_rrna_ori_ter, row, x1, x2, y1, y2)
 
+    tot = 0 # count total amount of non co-oriented rrnas
+    non_cooriented_rrna = [] # empty list for storing non_overlapping rrnas
+    df_rrna_csv = pd.DataFrame() # empty df for storing rrna output
+    count_rrna = 0 # counter to keep track of the number of rrnas added in df_rrna_csv
     # iterate over the Dataframe df_rrna_ori_ter and compare the rRNA intervals with leading/lagging strand
-    j = 0
-    non_overlapping_rrna = []
-    df_rrna_ori_ter["frac_co_orient"] = np.nan
     for row in range(len(df_rrna_ori_ter)):
+        acc_nr = df_rrna_ori_ter.loc[row, "name"]
         records = []
-        no_rrna = 0
+        dist = []
+        nr_rrna = 0 # count number of rrnas for this record
         for col in range(0, len(max(rrna_dict.values(), key=len))):
+            # calculate Ter manually
             ter = (df_rrna_ori_ter.loc[row, "siz"] * df_rrna_ori_ter.loc[row, "div"]) + df_rrna_ori_ter.loc[row, "shift"] + 1
             # find the first/last position of the rrna gene with regex
             rrna = re.findall(r'(?<=\[)[0-9]+', str(df_rrna_ori_ter.loc[row, col]))
             rrna_comp = re.findall(r'(?<=\:)[0-9]+', str(df_rrna_ori_ter.loc[row, col]))
+            # rrna in this column
             if rrna:
-                no_rrna += 1
+                count_rrna += 1
+                nr_rrna += 1
+                df_rrna_csv.loc[count_rrna, "name"] = acc_nr
+                #print(df_locus.loc[row, col])
+                df_rrna_csv.loc[count_rrna, "locus_tag"] = df_locus.loc[row, col]
+                #df_rrna_csv.loc[count_rrna, "locus_tag"] = df_locus.loc[row, col][2:-2]
+                df_rrna_csv.loc[count_rrna, "start"] = rrna[0]
+                df_rrna_csv.loc[count_rrna, "stop"] = rrna_comp[0]
             # no rrna in this column
             if len(rrna) == 0: 
                 pass
@@ -131,39 +143,46 @@ def rrna_lead_lag(csv_path, rrna_locus_list):
             elif df_rrna_ori_ter.loc[row, "shift"] < 0:
                 # special case for negative shift 
                 if ter < 0:
-                    check_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
+                    check_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dist, count_rrna, df_rrna_csv)
                 else:
-                    check_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
+                    check_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dist, count_rrna, df_rrna_csv)
             # positive shift
             elif df_rrna_ori_ter.loc[row, "shift"] > 0:
                 # special case for positive shift 
                 if ter > df_rrna_ori_ter.loc[row, "siz"]:
-                    check_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
+                    check_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dist, count_rrna, df_rrna_csv)
                 else:
-                    check_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
+                    check_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dist, count_rrna, df_rrna_csv)
             # no shift
             else:
-                no_shift_check(df_rrna_ori_ter, rrna, rrna_comp, row, col, records)
-
+                no_shift_check(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dist, count_rrna, df_rrna_csv)
         if records != []:
             string = ""
+            # iterate over the records that are not co-oriented and print to log
             for i in range(len(records)):
                 string = string + records[i]
             logging.warning(f" \n -------- The overlap with rRNA and strand is not correct for {df_rrna_ori_ter.loc[row, 'name']} ------- {string} \n -------------------------------------------------------------------------------")    
-            j += 1   
-            non_overlapping_rrna.append(df_rrna_ori_ter.loc[row, 'name'])
-
-        frac_rrna = (no_rrna-len(records))/no_rrna
+            tot += 1   
+            non_cooriented_rrna.append(df_rrna_ori_ter.loc[row, 'name'])
+        # calculate median distance between ori and rna
+        if dist != []:
+            dist.sort()
+            median_dist = statistics.median(dist)
+            # write to dataframe
+            df_rrna_ori_ter.loc[row, "median_dist_ori_rrna"] = median_dist
+        # calculate the fraction of co-oriented rrnas for the record
+        if nr_rrna != 0:
+            frac_rrna = (nr_rrna-len(records))/nr_rrna
+        else:
+            frac_rrna = "No rRNA found"
         df_rrna_ori_ter.loc[row, "frac_co_orient"] = frac_rrna
-    print(df_rrna_ori_ter)
+    # write to csv file
+    df_rrna_csv.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/rrna.csv")
+    # create new dataframe
     df_chromosomes = df_rrna_ori_ter[['name', 'fullname', 'shift',  'div', 'siz', 'dnaApos',
                                     'taxonid', 'realm1', 'realm2', 'realm3', 'realm4', 'realm5', 'Ori', 
-                                    'Ter', 'leading1', 'lagging1', 'lagging2', 'leading2', 'dist_ori_rna', "frac_co_orient", 'dist_dnaA_ori']]
-    print(df_chromosomes)
-    df_chromosomes.to_csv("chromosomes.csv")
-    df_non_overlapping = df_rrna_ori_ter.loc[df_rrna_ori_ter['name'].isin(non_overlapping_rrna)]
-    #df_non_overlapping.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_with_rrna_lead_lag.csv")
-    logging.warning(f"  Nr of records with rRNA and strand non-overlap: {j}")
-    t1 = time.time()
-    total = t1-t0
+                                    'Ter', 'leading1', 'lagging1', 'lagging2', 'leading2', 'dist_dnaA_ori', "frac_co_orient", 'median_dist_ori_rrna']]
+    # write to csv file
+    df_chromosomes.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/chromosomes.csv")
+    logging.warning(f"  Nr of records with rRNA and strand non-overlap: {tot}")
     print("rrna lead lag done")
