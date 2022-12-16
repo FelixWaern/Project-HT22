@@ -9,7 +9,8 @@ import numpy as np
 import re
 from skewDB import fetching_data as csv
 import platform
-
+import logging
+logging.getLogger('matplotlib.font_manager').setLevel(logging.ERROR)
 from random import shuffle
 import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
@@ -259,7 +260,7 @@ def plotting_graphs(csv_path):
     plt.bar(list(taxa_dict.keys()), taxa_dict.values(), color='g', label = "Bar plot")
     plt.xlabel('Taxa')
     #plt.ylabel('Height', fontsize=16)
-    plt.title('Barchart - Distribution of taxas',fontsize=18)
+    plt.title('Barchart - Distribution of taxas')
     #plt.legend(taxa_list)
     #plt.show()
 
@@ -288,7 +289,7 @@ def plotting_graphs(csv_path):
     #Plotting histogram for the bottom 10 taxas
     plt.bar(list(bottom10.keys()), bottom10.values(), color='g')
     plt.xlabel('Taxa')
-    plt.title('Barchart - Distribution of taxas',fontsize=18)
+    plt.title('Barchart - Distribution of taxas')
     #plt.show()
 
 
