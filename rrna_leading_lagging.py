@@ -34,15 +34,11 @@ def rrna_lead_lag(csv_path, rrna_locus_list):
     df_rrna = pd.DataFrame(dict([ (k, pd.Series(v, dtype=pd.StringDtype())) for k, v in rrna_dict.items() ])).transpose()
     df_rrna = df_rrna.reset_index()
     df_rrna.rename(columns = {'index':'name'}, inplace = True)
-    print('len of df_rrna:', len(df_rrna))
-    df_rrna.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/rrna_genes.csv")
 
     # create a Dataframe object with the locus tags
     df_locus = pd.DataFrame(dict([ (k, pd.Series(v, dtype=pd.StringDtype())) for k, v in locus_dict.items() ])).transpose()
     df_locus = df_locus.reset_index()
     df_locus.rename(columns = {'index':'name'}, inplace = True)
-    print('len of df_locus:', len(df_locus))
-    df_locus.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/locus.csv")
 
     # import needed columns from the csv-file with ori and ter 
     temp = fd.fetch_csv_as_df(csv_path)  
@@ -50,8 +46,6 @@ def rrna_lead_lag(csv_path, rrna_locus_list):
 
     # merge the Dataframe columns with matching accession numbers
     df_rrna_ori_ter = pd.merge(df_rrna, df_ori_ter, on="name")
-    print('len of df_rrna_ori_ter:', len(df_rrna_ori_ter))
-    df_rrna_ori_ter.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/rrna_ori_ter.csv")
 
     # create intervals for leading and lagging strand
     for row in range(len(df_rrna_ori_ter)):
