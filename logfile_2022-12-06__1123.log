@@ -1,7 +1,0 @@
-2022-12-06 11:23:33,514 INFO     Logging verbose set to False
-2022-12-06 11:23:41,037 DEBUG    OK! No faulty records from NCBI recorded!
-2022-12-06 11:23:42,462 WARNING   
- -------- The overlap with rRNA and strand is not correct for NC_004088.1 ------- 
- rRNA location = 12015 sign = + & strand interval = [248823, 2262716)leading1. Apos Distance to Ori = 283070 & rRNA location between dnaApos and Ori = False 
- -------------------------------------------------------------------------------
-2022-12-06 11:23:42,464 WARNING    Nr of records with rRNA and strand non-overlap: 1

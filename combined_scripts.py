@@ -1,6 +1,10 @@
 # Combining the fetching data & csv_filtered
 def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, verbose=False):
+    """ Iterating over all chromosomes and retreiving rRNAs as a dictionary with accession number as keys and rRNA locations as values.
+        Also fetching the locus tags for all rRNAs as a dictionary using accession number as keys and rRNA locus tags as values. 
+    """
     import time
+    from collections import defaultdict
     import sys
     import logging
     sys.path.insert(0, '/skewDB/')
@@ -8,11 +12,12 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     sys.path.insert(0, '/NCBI_DATA_FETCH/')
     from NCBI_DATA_FETCH import main_script as ms
     
+    # Fetching the SkewDB data as a dataframe
     org_df = fd.fetch_csv_as_df(csv_path) 
-    #Ta från [22000:23000]
-    #test_df = org_df.iloc[900:1000] # [700:800] Did not work :/ 
-    test_df = org_df.head(50)
+    
 
+
+    test_df = org_df.loc[14000:21000].copy()
     if a_list != None:
         df = org_df.loc[org_df['name'].isin(a_list)]
     else:
@@ -27,27 +32,33 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     t_tot = []
     no_16s = []
     t_fin_1 = time.time()
+    # Fetching the rRNA data in batches of 10 from NCBI since 10 is the maximum number of fetches per second using an ordinary API-key
     for index, row in test_df.iterrows():
         if i == 9:
             batch.append(row["name"])
             if verbose == True:
                 logging.debug(f"\n --------Batch {j} sent to batch_operator--------- \n Contains NCBI records: {batch} ")
             t0 = time.time()
+            # Sending a batch of 10 accession number to the fetching script
             res = ms.batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s ,verbose )
+            print("")
+            print(len(res[0]))
+
             dict.update(res[0])
             locus.update(res[1])
             i = 0
             batch = []
             t1 = time.time()
             total = t1-t0
-            t_tot.append(total)
-            
-            print("")
+            t_tot.append(total)  
+
             print("Batch:",j, "done!")
             print("Batch:",j, "took:", total, "seconds!")
-            print("Estimated time left: ", ((sum(t_tot)/len(t_tot))*2700)-((sum(t_tot)/len(t_tot))*j) ,"seconds")
-            print("Estimated mean total time: ", ((sum(t_tot)/len(t_tot))*2700),"seconds")
+            print("Estimated time left: ", (((sum(t_tot)/len(t_tot))*2700)-((sum(t_tot)/len(t_tot))*j))/60 ,"minutes")
+            print("Estimated mean total time: ", ((sum(t_tot)/len(t_tot))*2700)/60,"minutes")
+            print("Estimated precentage done", ((1-(((sum(t_tot)/len(t_tot))*2700)-((sum(t_tot)/len(t_tot))*j))/((sum(t_tot)/len(t_tot))*2700))*100), "%")
             print("Current faulty records: ", faulty)
+            
             
 
             j += 1
@@ -63,7 +74,8 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
         res = ms.batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s)
         dict.update(res[0])
         locus.update(res[1])
-    
+
+    # Recording the records without 16S rRNAs
     if no_16s != []:
             string = ""
             for i in range(len(no_16s)):
@@ -82,5 +94,8 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
         logging.warning("Faulty records from NCBI: "+ str(faulty))
     print("")
     print("------------------rRNA fetch done----------------")
+    # Returning a list containing both rRNA dictionary and locus tag dictionary
+    print(len(dict))
+    print(len(locus))
     return([dict, locus])
 

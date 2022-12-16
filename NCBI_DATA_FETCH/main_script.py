@@ -10,6 +10,14 @@ import gzip  # Should be imported once
 import logging
 
 def accession_to_rRNA_interval(accession_numbers, res, locus, faulty, email, api_key, local_storage_path, no_16s ,verbose=False):
+    """
+    This function recieves a accession number and checks if that accession number already exists on the local storage as a file.
+    If it does not exists then it will download that accession numbers GenbBank flat file from NCBI, gzip it and save it to the local storage.
+    Afterwards it it will open the file and look for 16S rRNAs and the location of them and if they are on the primary or complementary strand.
+    It will create a list of all rRNAs which exists for that accession number and insert them into the res dictionary using the accession number
+    as a key and the list of rRNA locations and strand informaation as values. 
+    It will also at the same time record the locus tag of said rRNAs in a similiar fashion and save them to a seperate dictionary. 
+    """
     Entrez.email = email #Always tell NCBI who you are
     Entrez.api_key = api_key #Always use API key
     path = local_storage_path #Path to local storage
@@ -35,22 +43,25 @@ def accession_to_rRNA_interval(accession_numbers, res, locus, faulty, email, api
         # Open the file locally
         if verbose == True:
             logging.debug(f"\n Fetching NCBI record: \n {accession_numbers} ")
+        
         with gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "rt") as input_handle:
             for index, seq_record in enumerate(SeqIO.parse(input_handle, "gb")):
                 temp = []
                 temp_locus = []
-                for feature in seq_record.features: 
+                for feature in seq_record.features: # Iterating over the features of the Genbank flat file
                     if feature.type == "rRNA":
-                        for product in feature.qualifiers.get("product"):
+                        for product in feature.qualifiers.get("product"): # Iterating over the products among the features
                             if "16S" in product:
                                 temp.append(str(feature.location +1)) #Plus 1 in both start and end of sequence to match python indexing
                                 rrna_16s.append(str(feature.location +1)) #Plus 1 in both start and end of sequence to match python indexing
                                 temp_locus.append(str(feature.qualifiers.get("locus_tag")))
                             elif "RNA" in product:
-                                rrna_other.append(product)  
-                result[seq_record.id] = temp     
-                res[seq_record.id] = temp 
-                locus[seq_record.id] = temp_locus
+                                rrna_other.append(product)
+                if temp != []:
+                    result[seq_record.id] = temp     
+                    res[seq_record.id] = temp # Saving to output directory
+                    locus[seq_record.id] = temp_locus # Saving to output directory
+
         # Print warning or info to log file
         if len(rrna_16s) == 0:
             if len(rrna_other) == 0: 
@@ -68,11 +79,12 @@ def accession_to_rRNA_interval(accession_numbers, res, locus, faulty, email, api
 #----------------------------------------------------------------------------------------
 
 def batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s, verbose=False ):
-    # The batch operator recieves a list of accession numbers and returns them as a dictionary with the accession numbers as keys
-    # with the rRNA intervals for each chromosmes as the content. The functions uses multithreading, one thread per accession number.
-    # Input: ["NC_002516.2", "NZ_CP041016.1"]
-    # Output: {"NC_002516.2": ['[722095:723631](+)', '[4792195:4793731](-)', '[5267723:5269259](-)', '[6043207:6044743](-)']
-    # , "NZ_CP041016.1: ['[1399531:1401046](-)', '[2622584:2624099](-)', '[5379840:5381355](+)']"}
+    """ The batch operator recieves a list of accession numbers and returns them as a dictionary with the accession numbers as keys
+         with the rRNA intervals for each chromosmes as the content. The functions uses multithreading, one thread per accession number.
+     Input: ["NC_002516.2", "NZ_CP041016.1"]
+     Output: {"NC_002516.2": ['[722095:723631](+)', '[4792195:4793731](-)', '[5267723:5269259](-)', '[6043207:6044743](-)']
+     , "NZ_CP041016.1: ['[1399531:1401046](-)', '[2622584:2624099](-)', '[5379840:5381355](+)']"} 
+     """
     res = {}
     locus = {}
     threads = {}
