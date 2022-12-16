@@ -7,7 +7,6 @@
 #TODO Run the entire thing
 #TODO Report
 #TODO Won't open. 
-#TODO Stratified sampling flag and create stratified sampling in combined scripts. 
 
 import importlib.util
 import pandas as pd
@@ -20,6 +19,8 @@ from combined_scripts import get_rRNA_intervals as get_rrna
 sys.path.insert(0, '/skewDB/')
 from skewDB import dowloading_filtered_csvFile as download_filtered
 from rrna_leading_lagging import rrna_lead_lag as rll
+from download_gcfits import run_download_gcfits as rdg
+from plots import plotting_graphs
 
 
 parser = argparse.ArgumentParser(description='The start.py script downloads chromosomes data from the SkewDB by Bert Hubert. It filters it, calculates leading and lagging strand, and passes it '
@@ -148,7 +149,24 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
             logging.debug(f"\n parameters into rrna_dict: \n csv_path = {csv_path} \n rrna_dict = rrna_dict, too long to display")
         rll(csv_path, rrna_dict) # Need to specicfy which in the list now. 
 
+
     # Creating graphical representation. 
+    if test_set == True:
+        logging.debug(f"\n --------Graphical representation is not available for for test set-------------- ")
+        pass
+    else: 
+        file_path = csv_path.rstrip("FilteredDataFile.csv")
+        gcfit_path = file_path + "gcfits.csv"
+        
+        #Check if gc_fits.csv is downloaded
+        if not os.path.isfile(gcfit_path):
+            if verbose == True:
+                logging.debug(f"\n --------Filtered csv file not found--------- \n run_download_gcfits input: {gcfit_path} ")
+            #download_filtered.run_download_filtered_csvfile(csv_path)
+            rdg(file_path)
+            print("gcfits downloaded")
+        # Run the graphical representation script
+        plotting_graphs(csv_path)
 
     print("Everything is done")
 start(args.csv_path, args.email, args.api_key, args.local_storage_path, args.verbose, args.a_list, args.test_set)
