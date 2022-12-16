@@ -156,10 +156,10 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
         pass
     else: 
         file_path = csv_path.rstrip("FilteredDataFile.csv")
-        gcfit_path = file_path + "gcfits.csv"
+        gcfit_path = file_path + "gcfits"
         
         #Check if gc_fits.csv is downloaded
-        if not os.path.isfile(gcfit_path):
+        if not os.path.isdir(gcfit_path):
             if verbose == True:
                 logging.debug(f"\n --------Filtered csv file not found--------- \n run_download_gcfits input: {gcfit_path} ")
             #download_filtered.run_download_filtered_csvfile(csv_path)
