@@ -23,9 +23,9 @@ def run_download_gcfits(file_path):
         zip_ref.extractall(file_path)
 
 # Testing the script
-csv_path = "C:/Users/Felix/Documents/FilteredDataFile.csv"
-file_path = csv_path.rstrip("FilteredDataFile.csv")
-run_download_gcfits(file_path)
+#csv_path = "C:/Users/Felix/Documents/FilteredDataFile.csv"
+#file_path = csv_path.rstrip("FilteredDataFile.csv")
+#run_download_gcfits(file_path)
 
 
 
