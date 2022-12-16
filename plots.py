@@ -1,6 +1,5 @@
 #TODO instructions for using this script
 #TODO help for script
-#TODO saving images to hard drive
 #TODO check the taxa for chromosomes where the rrna is not overlapping with leading strand
 
 # Import libraries
@@ -9,20 +8,17 @@ import pandas as pd
 import numpy as np
 import re
 from skewDB import fetching_data as csv
-from rrna_leading_lagging import rrna_lead_lag as rRNA
-from combined_scripts import get_rRNA_intervals as rRNA_interval
+
 from random import shuffle
 import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 from collections import Counter
+from itertools import islice
+import operator
 plt.rcParams['figure.figsize'] = [9.5, 7]
 
 # Read csv output files for chromosomes and rRNAs
-
 df_rRNA = pd.read_csv("C:/Ashwini/Applied_bioinformatics/rRNA.csv")
-#df_rRNA.to_csv("C:/Ashwini/Applied_bioinformatics/rRNA.csv")
-#df_chromo = pd.DataFrame(chromosomes)
-#df_chromo.to_csv("C:/Ashwini/Applied_bioinformatics/chromosome.csv")
 df_chromo = pd.read_csv("C:/Ashwini/Applied_bioinformatics/chromosomes.csv")
 num_records = len(df_chromo)
 
@@ -40,7 +36,7 @@ unique_orient = []
 taxa_non_orient = []
 list_not_orient = []
 list_betn_ori_dnaA = []
-common_list = []
+exclude_file = []
 
 # Creating new dataframe
 for file in range(len(df_rRNA)):
@@ -78,9 +74,6 @@ unique_orient = list(dict.fromkeys(unique_orient))
 
 #Fetching unique accession numbers from new_df dataframe 
 unique_acc_rrna = new_df["name"].unique()
-#unique_acc_rrna = new_df["name"].unique()
-#print("unique acc numbers from rrna output file")
-#print(len(unique_acc_rrna))
 
 #Creating path from csv_path
 csv_path = "C:/Ashwini/Applied_bioinformatics/FilteredDataFile.csv"
@@ -88,19 +81,20 @@ file_path = csv_path.rstrip("FilteredDataFile.csv")
 gcfit_path = file_path + "gcfits\\"
 #print(gcfit_path)
 
+#counting the total number of phylums from the csv file
 df_csv = pd.read_csv(csv_path)
 count_realm2_proteo = 0
 for ind in df_csv.index:   
      if df_csv["realm2"][ind] == "Proteobacteria":
         count_realm2_proteo += 1
-print("count realm2 proteo")
-print(count_realm2_proteo)
+#print("count realm2 proteo")
+#print(count_realm2_proteo)
 count_realm2_Terra = 0
 for ind in df_csv.index:   
      if df_csv["realm2"][ind] == "Terrabacteria group":
         count_realm2_Terra += 1
-print("count realm2 terra")
-print(count_realm2_Terra)
+#print("count realm2 terra")
+#print(count_realm2_Terra)
 
 # Get CSV files list from a gcfit folder
 csv_files = glob.glob(gcfit_path + "*.csv")
@@ -121,7 +115,7 @@ for fil in csv_files:
     st = st.rstrip("_fit.csv")
     if st in unique_orient:
         new_csv_files.append(st)
-print(new_csv_files)
+#print(new_csv_files)
 
 #plotting graph for matched accession numbers
 for acc_num in new_csv_files:
@@ -196,47 +190,100 @@ for acc_num in new_csv_files:
     plt.clf()
     #plt.show()
 
-"""# compare lists
-for i in list_not_orient:
-    for j in list_betn_ori_dnaA:
-        if i == j:
-            common_list.append(i)"""
+# checking for the files which are repeated in both the lists
+for fil in list_not_orient:
+    if fil in list_betn_ori_dnaA:
+        exclude_file.append(fil)
 
+# Removing duplicates
+exclude_file = list(dict.fromkeys(exclude_file))
 list_not_orient = list(dict.fromkeys(list_not_orient))
 list_betn_ori_dnaA = list(dict.fromkeys(list_betn_ori_dnaA))
 
-# calculating part, where there is no rrna that locates betn ori and dnaA
-no_ori_dnaA = len(list_not_orient) + len(common_list)   
-#Calculating the percentage
+#Removing the files which are repeated in the list_betn_ori_dnaA
+for acc in list_betn_ori_dnaA:
+    if acc in exclude_file:
+        list_betn_ori_dnaA.remove(acc)
+   
+#Calculating the percentage for non co-oriented chromosomes
 percent = (100 * len(list_not_orient))/num_records
+
+#Calculating the percentage for chromosomes, where rrna locates betn ori and dnaA
+percent_dnaa = (100 * len(list_betn_ori_dnaA))/num_records
             
-# printing results
+"""# printing results
 print("total number of chromosomes")
 print(num_records)
+
 print("Number of accession numbers that is not co-oriented")
 print(len(unique_orient))
-#print(unique_orient)
-print("list of not co-oriented rrna")
-#print(list_not_orient)
+
 print("number of chromosomes where atleast one rrna is not co-orinted")
 print(len(list_not_orient))
-print("list of not co-oriented rrna that locates betn ori and dnaA")
-#print(list_betn_ori_dnaA)
+
 print("number of chromosomes where atleast one rrna is not co-oriented becuase it locates betn ori and dnaA")
 print(len(list_betn_ori_dnaA))
 
-"""print("chromosomes where we have both rrna which are not cooriented and locates betn ori and dnaA")
-print(len(common_list))
-print("number of chromosomes(not-cooriented) where there are no rrnas locates betn ori and dnaA")
-print(no_ori_dnaA)"""
+print("excluded files are")
+print(exclude_file)
+
 print("percentage of chromosomes which are not co-oriented")
 print(percent)
 
+print("percentage of chromosomes where the rrna are located betn ori and dnaa")
+print(percent_dnaa)"""
+
+#creating new csv files for the chromosomes that are not co-oriented with the replication
+data = {'No_of_chromosomes':  [num_records],
+        'No_of_non_cooriented_chromosomes':[len(unique_orient)],
+        'No_of_non_cooriented_chromosomes_andNotBetnOriandDnaA': [len(list_not_orient)],
+        'Percentage_of_non_cooriented_chromosomes':[percent],
+        'No_of_chromosomes_has_rrnaBetnOriandDnaA':[len(list_betn_ori_dnaA)],
+        'Percentage_of_chromosomes_has_rrnaBetnOriandDnaA':[percent_dnaa]
+        }
+df_table = pd.DataFrame(data)
+df_table.to_csv("C:/Ashwini/Applied_bioinformatics/result.csv", mode='a')
+
+
 #print(taxa_non_orient)
 taxa_dict = Counter(taxa_non_orient)
-print(taxa_dict)
-plt.bar(list(taxa_dict.keys()), taxa_dict.values(), color='g')
-plt.show()
+
+#plotting histogram for all the taxas
+#taxa_list = taxa_dict.keys()
+plt.bar(list(taxa_dict.keys()), taxa_dict.values(), color='g', label = "Bar plot")
+plt.xlabel('Taxa')
+#plt.ylabel('Height', fontsize=16)
+plt.title('Barchart - Distribution of taxas',fontsize=18)
+#plt.legend(taxa_list)
+#plt.show()
+
+#sorting taxa dictionary
+taxa_dict = sorted(taxa_dict.items(), key=lambda x:x[1])
+taxa_dict = (dict(taxa_dict))
+
+#Taking top 10 taxas
+desc_taxa_dict = dict( sorted(taxa_dict.items(), key=operator.itemgetter(1),reverse=True))
+
+#Taking only the bottom 10 records of lowest values
+def take(n, iterable):
+    """Return the first n items of the iterable as a list."""
+    return list(islice(iterable, n))
+
+# calling take fuction to fetch top 10 taxas
+top10 = take(10, desc_taxa_dict.items())
+top10 = dict(top10)
+print(top10)
+
+# calling take function to fetch bottom 10 records
+bottom10 = take(10, taxa_dict.items())
+bottom10 = dict(bottom10)
+print(bottom10)
+
+#Plotting histogram for the bottom 10 taxas
+plt.bar(list(bottom10.keys()), bottom10.values(), color='g')
+plt.xlabel('Taxa')
+plt.title('Barchart - Distribution of taxas',fontsize=18)
+#plt.show()
 
 
 
