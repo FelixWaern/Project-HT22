@@ -14,6 +14,7 @@ import sys
 import os
 from scipy.cluster.hierarchy import linkage, dendrogram
 from collections import defaultdict
+import platform
 
 import matplotlib.pyplot as plt
 sys.path.insert(1,'C:/Users/Felix/Documents/GitHub/Project-HT22/')
@@ -126,6 +127,8 @@ def realm_cluster(x, y, label, realm):
     plt.legend()
     plt.show()
 
+
+
     
     cluster_map = pd.DataFrame()
     cluster_map[realm] = label
@@ -154,6 +157,6 @@ def find_most_common(cluster, realm, nr):
         print("The most common of for cluster",nr  ,"is", res, "with a percentage of", percentage)
 
 
- 
+
 csv_path = 'C:/Users/Felix/Documents/FilteredDataFile.csv'
 main(csv_path)
