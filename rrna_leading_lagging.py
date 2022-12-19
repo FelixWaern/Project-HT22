@@ -4,21 +4,19 @@ from find_lead_lag import two_strands as two_s
 from check_direction import check_rrna_two_lead as check_lead
 from check_direction import check_rrna_two_lag as check_lag
 from check_direction import no_shift_check_rrna_dir as no_shift_check
-import time 
+import sys
+from skewDB import fetching_data as fd
+import pandas as pd
+import re
+import logging
+import statistics
+sys.path.insert(0, '/skewDB/')
 
 
 def rrna_lead_lag(csv_path, rrna_locus_list):
     """ Function that takes a csv file with information about all chromosomes 
         and a dictionary with information about the rrna genes as input and 
         creates chromosomes.csv, rrna.csv and a log file as output"""
-    import sys
-    sys.path.insert(0, '/skewDB/')
-    from skewDB import fetching_data as fd
-    import pandas as pd
-    import re
-    import logging
-    import numpy as np
-    import statistics
 
     # Create log file
     root_logger = logging.getLogger()
@@ -108,6 +106,7 @@ def rrna_lead_lag(csv_path, rrna_locus_list):
     non_cooriented_rrna = [] # empty list for storing non_overlapping rrnas
     df_rrna_csv = pd.DataFrame() # empty df for storing rrna output
     count_rrna = 0 # counter to keep track of the number of rrnas added in df_rrna_csv
+    
     # iterate over the Dataframe df_rrna_ori_ter and compare the rRNA intervals with leading/lagging strand
     for row in range(len(df_rrna_ori_ter)):
         acc_nr = df_rrna_ori_ter.loc[row, "name"]
@@ -125,11 +124,10 @@ def rrna_lead_lag(csv_path, rrna_locus_list):
                 count_rrna += 1
                 nr_rrna += 1
                 df_rrna_csv.loc[count_rrna, "name"] = acc_nr
-                #print(df_locus.loc[row, col])
-                #df_rrna_csv.loc[count_rrna, "locus_tag"] = df_locus.loc[row, col]
                 df_rrna_csv.loc[count_rrna, "locus_tag"] = df_locus.loc[row, col][2:-2]
                 df_rrna_csv.loc[count_rrna, "start"] = rrna[0]
                 df_rrna_csv.loc[count_rrna, "stop"] = rrna_comp[0]
+
             # no rrna in this column
             if len(rrna) == 0: 
                 pass

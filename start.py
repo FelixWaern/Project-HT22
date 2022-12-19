@@ -16,11 +16,11 @@ import os
 import logging
 import datetime
 from combined_scripts import get_rRNA_intervals as get_rrna
-sys.path.insert(0, '/skewDB/')
 from skewDB import dowloading_filtered_csvFile as download_filtered
 from rrna_leading_lagging import rrna_lead_lag as rll
 from download_gcfits import run_download_gcfits as rdg
 from plots import plotting_graphs
+sys.path.insert(0, '/skewDB/')
 
 
 parser = argparse.ArgumentParser(description='The start.py script downloads chromosomes data from the SkewDB by Bert Hubert. It filters it, calculates leading and lagging strand, and passes it '
@@ -56,7 +56,6 @@ parser.add_argument('-t', '--test_set',
 
 #Parsing all arguments
 args = parser.parse_args()
-
 
 
 def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[], test_set=False):
@@ -107,7 +106,6 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
             download_filtered.run_download_filtered_csvfile(csv_path)
             print("csv filtered downloaded")
 
-
     # Get the rRNA interval dict
     # Skip if running on test set
     if test_set == True:
@@ -116,7 +114,6 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
         if verbose == True:
             logging.debug(f"\n --------parameters into rrna_dict()--------- \n csv_path = {csv_path} \n email = {email} \n api_key = {api_key} \n local_storage_path = {local_storage_path}")
         rrna_dict = get_rrna(csv_path, email, api_key, local_storage_path, a_list, verbose) #rna dict is list. 0 is the position and 1 is the locus_tag. And change inputs.
-    
     
     if test_set == True:
         # Loading both test rrna csv and locus csv and loading it as a dataframe
@@ -170,12 +167,3 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
 
     print("Everything is done")
 start(args.csv_path, args.email, args.api_key, args.local_storage_path, args.verbose, args.a_list, args.test_set)
-
-
-"""
-csv_path = 'C:/Users/Felix/Documents/FilteredDataFile.csv'
-email = "Felix.wae@gmail.com"
-api_key = "7b4a5e9841f79495be73767323ad485fda08"
-local_storage_path = 'D:/'
-start(csv_path, email, api_key, local_storage_path)
-"""

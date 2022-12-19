@@ -1,16 +1,18 @@
-#import module
 import pandas as pd
-#import numpy as np
+
+
 def fetch_csv_as_df(csv_path):
+    """ Function that reads the filtered csv file and creates a DataFrame,
+        then calculates ori and ter for all sequences and writes to the DataFrame """
 
     # Reading filtered csv file
     df = pd.read_csv(csv_path)
 
-    #Finding ori and terminus for all chromosomes
+    # Finding ori and terminus for all chromosomes
     ter = []
     ori = []
 
-    #Method defined for calculating the origin of replication based on the positive/negative value of shift
+    # Method defined for calculating the origin of replication based on the positive/negative value of shift
     def shift_value(shift, siz):
         if shift > 0:
             origin = shift + 1
@@ -20,7 +22,7 @@ def fetch_csv_as_df(csv_path):
             origin = 1
         return origin
 
-    #Method defined for calculate the size after adding the shift value 
+    # Method defined for calculate the size after adding the shift value 
     def shift_value_terminus(shift, siz):
         ter = (siz * df.loc[i, "div"]) + shift + 1
         if ter > siz:
@@ -32,7 +34,7 @@ def fetch_csv_as_df(csv_path):
         else:
             return ter
 
-    #For loop for iterating over all chromosomes
+    # For loop for iterating over all chromosomes
     for i in range(len(df)):
         shift = df.loc[i, "shift"]
         siz = df.loc[i, "siz"]
@@ -42,7 +44,7 @@ def fetch_csv_as_df(csv_path):
         rounded_terminus = round(terminus)
         ter.append(rounded_terminus)
         
-    #Checking the range for ori and ter and assigning those to dataframe
+    # Checking the range for ori and ter and assigning those to dataframe
     if any(item <= siz and item > 0 for item in ori):
         print("Ori is within range")
         df["Ori"] = ori
@@ -57,16 +59,5 @@ def fetch_csv_as_df(csv_path):
     else:
         print("terminus is not within the range")
     
-
-    # checking the calculation for the selected bacterias
-    # E_coli = df.loc[df["name"] == "NC_000913.3",["dnaApos","siz","div","shift","Ori", "Ter"]]
-    # print(E_coli)
-    # B_subtilis = df.loc[df["name"] == "NC_000964.3",["siz","div","shift","Ori", "Ter", "dnaApos"]]
-    # print(B_subtilis)
-    # P_aeruginosa = df.loc[df["name"] == "NC_002516.2",["siz","div","shift","Ori", "Ter", "dnaApos"]]
-    # print(P_aeruginosa)
-
     df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
-    #writing to csv file stored in local computer
-    #df.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_with_ori&ter.csv")
     return(df)

@@ -1,3 +1,14 @@
+import sys
+import os
+from scipy.cluster.hierarchy import linkage, dendrogram
+from collections import defaultdict
+import platform
+import matplotlib.pyplot as plt
+from skewDB import dowloading_filtered_csvFile as download_filtered
+from skewDB import fetching_data as fd
+from sklearn.cluster import KMeans
+import pandas as pd
+sys.path.insert(1,'C:/Users/Felix/Documents/GitHub/Project-HT22/')
 
 # Get the dataframe with origin of replicaiton
 # For each entry get the ori and the dnaA loc
@@ -10,23 +21,10 @@
 # Perform clustering using colours to represent clades. 
 # Test different iteration seperating the data into differnt groups before clustering
 
-import sys
-import os
-from scipy.cluster.hierarchy import linkage, dendrogram
-from collections import defaultdict
-import platform
-
-import matplotlib.pyplot as plt
-sys.path.insert(1,'C:/Users/Felix/Documents/GitHub/Project-HT22/')
-from skewDB import dowloading_filtered_csvFile as download_filtered
-from skewDB import fetching_data as fd
-from sklearn.cluster import KMeans
-import pandas as pd
-
 
 def main(csv_path):
 
-    #Check if csv is downloaded & filtered 
+    # Check if csv is downloaded & filtered 
     if not os.path.isfile(csv_path):
         download_filtered.run_download_filtered_csvfile(csv_path)
         print("csv filtered downloaded")
@@ -34,9 +32,7 @@ def main(csv_path):
     #Get the data as a dataframe
     df = fd.fetch_csv_as_df(csv_path) 
 
-    
-
-    # Add distance and relative distance to the datafram
+    # Add distance and relative distance to the dataframe
     test_df = df.copy()
     
     distance = []
@@ -71,7 +67,6 @@ def main(csv_path):
     
     # Explore clustering using dendogram. 
     #['realm2, 'realm3', 'realm4', 'realm5']
-   
 
     new_df = test_df[['Relative Distance', 'Distance', 'realm4']].copy()
     x = list(test_df['Relative Distance'])
@@ -82,7 +77,6 @@ def main(csv_path):
     realm_cluster(x, y, label[1], realm[1])
     realm_cluster(x, y, label[2], realm[2])
     realm_cluster(x, y, label[3], realm[3])
-    
     
     # Remove the clade from the DataFrame, save for later
     #varieties = list(new_df.pop('realm4'))
@@ -120,7 +114,6 @@ def realm_cluster(x, y, label, realm):
     """
     kmeans = KMeans(n_clusters=3)
     kmeans.fit(data)
-    
 
     plt.scatter(x, y, c=kmeans.labels_, label=1 )
     plt.title(realm)

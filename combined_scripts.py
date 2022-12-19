@@ -1,22 +1,21 @@
+import time
+from collections import defaultdict
+import sys
+import logging
+from skewDB import fetching_data as fd
+from NCBI_DATA_FETCH import main_script as ms
+sys.path.insert(0, '/skewDB/')
+sys.path.insert(0, '/NCBI_DATA_FETCH/')
+
 # Combining the fetching data & csv_filtered
 def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, verbose=False):
     """ Iterating over all chromosomes and retreiving rRNAs as a dictionary with accession number as keys and rRNA locations as values.
         Also fetching the locus tags for all rRNAs as a dictionary using accession number as keys and rRNA locus tags as values. 
     """
-    import time
-    from collections import defaultdict
-    import sys
-    import logging
-    sys.path.insert(0, '/skewDB/')
-    from skewDB import fetching_data as fd
-    sys.path.insert(0, '/NCBI_DATA_FETCH/')
-    from NCBI_DATA_FETCH import main_script as ms
     
     # Fetching the SkewDB data as a dataframe
     org_df = fd.fetch_csv_as_df(csv_path) 
     
-
-    #test_df = org_df.head(50).copy()
     test_df = org_df.loc[27000:27500].copy()
     if a_list != None:
         df = org_df.loc[org_df['name'].isin(a_list)]
@@ -32,6 +31,7 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     t_tot = []
     no_16s = []
     t_fin_1 = time.time()
+
     # Fetching the rRNA data in batches of 10 from NCBI since 10 is the maximum number of fetches per second using an ordinary API-key
     for index, row in test_df.iterrows():
         if i == 9:
@@ -59,8 +59,6 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
             print("Estimated precentage done", ((1-(((sum(t_tot)/len(t_tot))*2700)-((sum(t_tot)/len(t_tot))*j))/((sum(t_tot)/len(t_tot))*2700))*100), "%")
             print("Current faulty records: ", faulty)
             
-            
-
             j += 1
         else:
             i += 1

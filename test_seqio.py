@@ -47,5 +47,4 @@ def find_rrna():
     print("---------- SUMMARY ----------")
     print("Search for rRNA genes is done, for details see 'warnings_rrna_YYYY-MM-DD HH:MM.log' file")
 
-
 find_rrna()

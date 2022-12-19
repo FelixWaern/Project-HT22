@@ -11,5 +11,3 @@ in_handle = open(in_file)
 for rec in GFF.parse(in_handle, limit_info=limit_info):
     print(rec.features[0])
 in_handle.close()
-
-

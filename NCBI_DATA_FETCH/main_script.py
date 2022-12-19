@@ -11,11 +11,11 @@ import logging
 
 def accession_to_rRNA_interval(accession_numbers, res, locus, faulty, email, api_key, local_storage_path, no_16s ,verbose=False):
     """
-    This function recieves a accession number and checks if that accession number already exists on the local storage as a file.
-    If it does not exists then it will download that accession numbers GenbBank flat file from NCBI, gzip it and save it to the local storage.
-    Afterwards it it will open the file and look for 16S rRNAs and the location of them and if they are on the primary or complementary strand.
+    This function recieves an accession number and checks if that accession number already exists in the local storage as a file.
+    If it does not exist then it will download that accession numbers GenbBank flat file from NCBI, gzip it and save it to the local storage.
+    Afterwards it will open the file and look for 16S rRNAs and the location of them and if they are on the primary or complementary strand.
     It will create a list of all rRNAs which exists for that accession number and insert them into the res dictionary using the accession number
-    as a key and the list of rRNA locations and strand informaation as values. 
+    as a key and the list of rRNA locations and strand information as values. 
     It will also at the same time record the locus tag of said rRNAs in a similiar fashion and save them to a seperate dictionary. 
     """
     Entrez.email = email #Always tell NCBI who you are
@@ -80,7 +80,7 @@ def accession_to_rRNA_interval(accession_numbers, res, locus, faulty, email, api
 
 def batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s, verbose=False ):
     """ The batch operator recieves a list of accession numbers and returns them as a dictionary with the accession numbers as keys
-         with the rRNA intervals for each chromosmes as the content. The functions uses multithreading, one thread per accession number.
+         with the rRNA intervals for each chromosomes as the content. The functions uses multithreading, one thread per accession number.
      Input: ["NC_002516.2", "NZ_CP041016.1"]
      Output: {"NC_002516.2": ['[722095:723631](+)', '[4792195:4793731](-)', '[5267723:5269259](-)', '[6043207:6044743](-)']
      , "NZ_CP041016.1: ['[1399531:1401046](-)', '[2622584:2624099](-)', '[5379840:5381355](+)']"} 
@@ -97,7 +97,7 @@ def batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s, ve
     return([res, locus])
 #---------------------------------------------------------------------------------------
 
-# For some operating systems this was required as to not get errors when fetching the NCBI files. 
+# For some operating systems this was required to not get errors when fetching the NCBI files. 
 try:
     _create_unverified_https_context = ssl._create_unverified_context
 except AttributeError:
@@ -106,48 +106,3 @@ except AttributeError:
 else:
     # Handle target environment that doesn't support HTTPS verification
     ssl._create_default_https_context = _create_unverified_https_context
-
-
-
-"""
-# -----------------------------------------
-#Test if functions work
-# FAULTY RECORD: 'NC_002947.4'
-email = "Felix.wae@gmail.com"
-api_key = "7b4a5e9841f79495be73767323ad485fda08"
-local_storage_path = 'D:/'
-batch = ["NC_000913.3"]
-#["NC_015730.1"] Does not work. Is not on flash drive
-#["NC_014618.1"] Does not work. 
-#["NC_002506.1"]
-
-#["NC_000913.3"] Works
-no_16s = []
-#["NC_000913.3", "NC_000964.3", "NC_002516.2", "NZ_CP041016.1", "NZ_AP023438.1", "NC_022737.1", "NZ_CP013444.1", "NZ_CP086979.1", "NZ_CP085753.1", "NZ_CP012026.1"]
-faulty = []
-t0 = time.time()
-res = batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s)
-print("")
-print("Testing if the functions works as intended")  
-for x in res:
-    print(x)
-    print(res[x])
-    print(res[x][0][1:-4])
-    print(res[x][0][-2])
-    print("")
-
-#for x in res:
-#    if res[x][-2] == "+":
-#        if res[x][0]
-#        #Check in positive strand
-#    elif res[x][-2] == "-":
-        #Check
-
-t1 = time.time()
-print("")
-total = t1-t0
-print(total)
-print("")
-print("Faulty records: ", faulty)
-print("------------------Test done----------------")
-"""

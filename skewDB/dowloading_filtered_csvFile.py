@@ -1,17 +1,10 @@
-# first import the module
 import pandas as pd
 import ssl
-try:
-    _create_unverified_https_context = ssl._create_unverified_context
-except AttributeError:
-    # Legacy Python that doesn't verify HTTPS certificates by default
-    pass
-else:
-    # Handle target environment that doesn't support HTTPS verification
-    ssl._create_default_https_context = _create_unverified_https_context
+
 
 def run_download_filtered_csvfile(csv_path):
-
+    """Function that downloads a csv file from skewdb.org, remove duplicated records
+        and removes archaea etc. to only include bacteria"""
     # reading csv file into dataframe
     df = pd.read_csv('https://skewdb.org/view/gcskewdb.csv')
     print("size of dataframe downloaded from skewDB")
@@ -50,3 +43,13 @@ def run_download_filtered_csvfile(csv_path):
 
     #Dowloading the filtered dataframe to local computer
     df_4.to_csv(csv_path)
+
+
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    # Legacy Python that doesn't verify HTTPS certificates by default
+    pass
+else:
+    # Handle target environment that doesn't support HTTPS verification
+    ssl._create_default_https_context = _create_unverified_https_context
