@@ -1,9 +1,0 @@
-2022-12-13 23:47:36,381 INFO     Logging verbose set to False
-2022-12-14 03:22:51,683 WARNING   
-No 16S rRNA genes were found for NZ_CP033322.1, but these products were found: ['5S ribosomal RNA', '23S ribosomal RNA']
-2022-12-14 03:22:56,361 WARNING   
-No 16S rRNA genes were found for NZ_CP033316.1, but these products were found: ['5S ribosomal RNA']
-2022-12-14 03:22:56,877 WARNING   
-No 16S rRNA genes were found for NZ_CP033313.1, but these products were found: ['5S ribosomal RNA', '23S ribosomal RNA']
-2022-12-14 03:22:56,908 WARNING   
-No 16S rRNA genes were found for NZ_CP033319.1, but these products were found: ['23S ribosomal RNA']

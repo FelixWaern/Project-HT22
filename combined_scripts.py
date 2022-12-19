@@ -16,8 +16,8 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     org_df = fd.fetch_csv_as_df(csv_path) 
     
 
-    test_df = org_df.head(50).copy()
-    #test_df = org_df.loc[14000:21000].copy()
+    #test_df = org_df.head(50).copy()
+    test_df = org_df.loc[27000:27500].copy()
     if a_list != None:
         df = org_df.loc[org_df['name'].isin(a_list)]
     else:
@@ -96,4 +96,6 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     print("------------------rRNA fetch done----------------")
     print("rrna", len(dict))
     print("locus", len(locus))
+    if len(dict) == 0 or len(locus) == 0:
+        raise IndexError('No rRNA or locus tags were found')
     return([dict, locus])

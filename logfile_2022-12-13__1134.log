@@ -1,6 +1,0 @@
-2022-12-13 11:34:43,789 INFO     Logging verbose set to False
-2022-12-13 11:34:43,978 WARNING   
- -------- The overlap with rRNA and strand is not correct for 2 ------- 
- rRNA location = 7 sign = - & strand interval = [1, 4)lagging1 & [9, 10]lagging2. Apos Distance to Ori = 0 & rRNA location between dnaApos and Ori = False
- rRNA location = 1 sign = + & strand interval = [4, 9)leading1. Apos Distance to Ori = 0 & rRNA location between dnaApos and Ori = False 
- -------------------------------------------------------------------------------
