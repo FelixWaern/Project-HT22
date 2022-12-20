@@ -280,11 +280,13 @@ def plotting_graphs(csv_path):
     top10 = take(10, desc_taxa_dict.items())
     top10 = dict(top10)
     print(top10)
+    logging.info(f"Top ten non-cooriented taxonomical orders {top10}") 
 
     # calling take function to fetch bottom 10 records
     bottom10 = take(10, taxa_dict.items())
     bottom10 = dict(bottom10)
     print(bottom10)
+    logging.info(f"Bottom ten non-cooriented taxonomical orders {bottom10}") 
 
     #Plotting histogram for the bottom 10 taxas
     plt.bar(list(bottom10.keys()), bottom10.values(), color='g')
