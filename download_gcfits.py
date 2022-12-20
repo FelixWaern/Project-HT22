@@ -25,7 +25,7 @@ def run_download_gcfits(file_path):
 
     with bz2.BZ2File(gc_fits_zip_path) as fr, open(gc_fits_zip_path[:-4],"wb") as fw:
         shutil.copyfileobj(fr,fw)
-
+    
 
 # Testing the script
 #csv_path = "C:/Users/Felix/Documents/FilteredDataFile.csv"
