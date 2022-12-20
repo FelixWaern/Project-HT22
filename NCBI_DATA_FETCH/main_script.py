@@ -28,10 +28,11 @@ def accession_to_rRNA_interval(accession_numbers, res, locus, faulty, email, api
         if not os.path.isfile(absolute_path):
             if verbose == True:
                 logging.debug(f"\n Downloading NCBI record: \n {accession_numbers} ")
-            
+                
             net_handle = Entrez.efetch(
                 db="nucleotide", id=accession_numbers, rettype="gbwithparts", retmode="text"
             ) 
+            
             out_handle = gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "wt") #This one does not work for every eleventh record 
             out_handle.write(net_handle.read()) 
             out_handle.close()
@@ -43,7 +44,6 @@ def accession_to_rRNA_interval(accession_numbers, res, locus, faulty, email, api
         # Open the file locally
         if verbose == True:
             logging.debug(f"\n Fetching NCBI record: \n {accession_numbers} ")
-        
         with gzip.open(os.path.join(path, accession_numbers+".gbff.gz"), "rt") as input_handle:
             for index, seq_record in enumerate(SeqIO.parse(input_handle, "gb")):
                 temp = []
@@ -75,7 +75,7 @@ def accession_to_rRNA_interval(accession_numbers, res, locus, faulty, email, api
     except Exception:
         # Adding faulty NCBI file to list for error log
         faulty.append(accession_numbers)
-        sys.stderr.write("Error! Cannot fetch: %s        \n" % accession_numbers)
+        #sys.stderr.write("Error! Cannot fetch: %s        \n" % accession_numbers) #Remove?
 #----------------------------------------------------------------------------------------
 
 def batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s, verbose=False ):

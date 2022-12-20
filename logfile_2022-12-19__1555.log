@@ -1,0 +1,11 @@
+2022-12-19 15:55:36,655 INFO     Logging verbose set to False
+2022-12-19 15:57:28,326 WARNING   
+ -------- No rRNA was found for: --------  
+ NZ_AP024957.1 
+ -------------------------------------------------------------------------------
+2022-12-19 15:57:28,326 DEBUG    OK! No faulty records from NCBI recorded!
+2022-12-19 15:57:30,373 WARNING   
+ -------- The overlap with rRNA and strand is not correct for NZ_CP076620.1 ------- 
+ rRNA location = 9930 sign = + & strand interval = [22013, 1808938)leading1. Apos Distance to Ori = 21337 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+2022-12-19 15:57:30,517 WARNING    Nr of records with rRNA and strand non-overlap: 1

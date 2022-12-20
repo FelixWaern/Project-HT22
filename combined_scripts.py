@@ -15,9 +15,9 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     # Fetching the SkewDB data as a dataframe
     org_df = fd.fetch_csv_as_df(csv_path) 
     
-
-    test_df = org_df.head(50).copy()
-    #test_df = org_df.loc[14000:21000].copy()
+    # Runt 2184 så kaosar den
+    #test_df = org_df.head(50).copy()
+    test_df = org_df.loc[23800:].copy()
     if a_list != None:
         df = org_df.loc[org_df['name'].isin(a_list)]
     else:
@@ -75,23 +75,56 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
         dict.update(res[0])
         locus.update(res[1])
 
-    # Recording the records without 16S rRNAs
-    if no_16s != []:
-            string = ""
-            for i in range(len(no_16s)):
-                string = string + no_16s[i]
-            logging.warning(f" \n -------- No rRNA was found for: -------- {string} \n -------------------------------------------------------------------------------")    
 
     print("-----All chromosmes with corresponding rRNA intervals should be in dict now-----")
     t_fin_2 = time.time()
     print("Total time :",t_fin_2-t_fin_1)
+
 
     print("")
     print("Faulty records from NCBI: ", faulty)
     if faulty == []:
         logging.debug("OK! No faulty records from NCBI recorded!")
     else:
+        
+        # Retry in different directory.
+        print("")
+        print("Retrying fetch for faulty records.")
+        batch = []
+        no_16s = []
+        retry_list = faulty.copy()
+        faulty = []
+        new_path = local_storage_path + "second/"
+        i = 0
+        j = 1
+        for x in retry_list:
+            if i == 9:
+                print("Batch", j, "of retry")
+                batch.append(x)
+                res = ms.batch_operator(batch, faulty, email, api_key, new_path, no_16s ,verbose )
+                print("Number of retrieved retries for batch: ",len(res[0]))
+                print("")
+                dict.update(res[0])
+                locus.update(res[1])
+                i = 0
+                batch = []
+                j += 1
+            else:
+                i += 1
+                batch.append(x)
+        if len(batch) > 0:
+            res = ms.batch_operator(batch, faulty, email, api_key, new_path, no_16s)
+            dict.update(res[0])
+            locus.update(res[1])
         logging.warning("Faulty records from NCBI: "+ str(faulty))
+
+    # Recording the records without 16S rRNAs
+    if no_16s != []:
+            string = ""
+            for i in range(len(no_16s)):
+                string = string + no_16s[i]
+            logging.warning(f" \n -------- No rRNA was found for: -------- {string} \n -------------------------------------------------------------------------------")
+        
     print("")
     print("------------------rRNA fetch done----------------")
     print("rrna", len(dict))

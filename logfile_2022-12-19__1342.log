@@ -1,0 +1,6 @@
+2022-12-19 13:42:50,476 INFO     Logging verbose set to False
+2022-12-19 13:44:35,279 WARNING   
+ -------- No rRNA was found for: --------  
+ NZ_AP024957.1 
+ -------------------------------------------------------------------------------
+2022-12-19 13:44:35,283 DEBUG    OK! No faulty records from NCBI recorded!

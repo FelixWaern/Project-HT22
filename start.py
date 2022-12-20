@@ -166,6 +166,7 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
             rdg(file_path)
             print("gcfits downloaded")
         # Run the graphical representation script
+        print("Plotting graphs")
         plotting_graphs(csv_path)
 
     print("Everything is done")
