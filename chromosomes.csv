@@ -1,5 +1,6 @@
 ,name,fullname,shift,div,siz,dnaApos,taxonid,realm1,realm2,realm3,realm4,realm5,Ori,Ter,leading1,lagging1,lagging2,leading2,dist_dnaA_ori,frac_co_orient,median_dist_ori_rrna
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 0,NZ_CP083032.1,"NZ_CP083032.1 Klebsiella pneumoniae strain 5208.51 chromosome, complete genome",16204,0.475756,5217869,1,573,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacterales,Enterobacteriaceae,16205,2498637,"[16205, 2498637)","[1, 16205)","[2498637, 5217869]",,16204.0,1.0,374104.5
 1,NZ_CP083066.1,"NZ_CP083066.1 Klebsiella pneumoniae strain 1613015451 chromosome, complete genome",38838,0.482734,5340601,1,573,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacterales,Enterobacteriaceae,38839,2616929,"[38839, 2616929)","[1, 38839)","[2616929, 5340601]",,38838.0,1.0,369452.5
 2,NZ_CP083026.1,"NZ_CP083026.1 Klebsiella pneumoniae strain 6604.68 chromosome, complete genome",47408,0.49486,5428358,1,573,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacterales,Enterobacteriaceae,47409,2733686,"[47409, 2733686)","[1, 47409)","[2733686, 5428358]",,47408.0,1.0,380681.0
@@ -97,6 +98,8 @@
 94,NZ_CP089304.1,"NZ_CP089304.1 Pseudomonas sp. NIBR-H-19 chromosome, complete genome",2185226,0.505641,6184378,2197665,2901380,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Pseudomonadaceae,2185227,5312302,"[2185227, 5312302)","[1, 2185227)","[5312302, 6184378]",,12438.0,1.0,939643.0
 95,NZ_CP089399.1,"NZ_CP089399.1 Klebsiella oxytoca strain Kox26 chromosome, complete genome",1185248,0.499627,5907204,1150505,571,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacterales,Enterobacteriaceae,1185249,4136648,"[1185249, 4136648)","[1, 1185249)","[4136648, 5907204]",,34744.0,1.0,397937.0
 =======
+=======
+>>>>>>> Stashed changes
 0,NZ_CP086653.1,"NZ_CP086653.1 Lactobacillus acidophilus strain NC55 chromosome, complete genome",-44302,0.501248,2037415,31,1579,Bacteria,Terrabacteria group,Firmicutes,Bacilli,Lactobacillales,1993114,976949,"[1, 976949)","[976949, 1993114)",,"[1993114, 2037415]",44332.0,1.0,316659.0
 1,NZ_CP086654.1,"NZ_CP086654.1 Staphylococcus ratti strain CCM 9025 chromosome, complete genome",13911,0.532447,2317570,1,2892440,Bacteria,Terrabacteria group,Firmicutes,Bacilli,Bacillales,13912,1247895,"[13912, 1247895)","[1, 13912)","[1247895, 2317570]",,13911.0,1.0,422562.5
 2,NZ_CP086659.1,"NZ_CP086659.1 Staphylococcus capitis strain XZ03 chromosome, complete genome",103736,0.573777,2565474,1,29388,Bacteria,Terrabacteria group,Firmicutes,Bacilli,Bacillales,103737,1575747,"[103737, 1575747)","[1, 103737)","[1575747, 2565474]",,103736.0,1.0,650546.0
@@ -297,4 +300,7 @@
 197,NZ_CP083007.1,"NZ_CP083007.1 Klebsiella pneumoniae strain 6711.43 chromosome, complete genome",-26092,0.492661,5408311,1,573,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacterales,Enterobacteriaceae,5382220,2638373,"[1, 2638373)","[2638373, 5382220)",,"[5382220, 5408311]",26092.0,1.0,372406.5
 198,NZ_CP082988.1,"NZ_CP082988.1 Klebsiella pneumoniae strain 7008.20 chromosome, complete genome",28093,0.489911,5368753,1,573,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacterales,Enterobacteriaceae,28094,2658305,"[28094, 2658305)","[1, 28094)","[2658305, 5368753]",,28093.0,1.0,380429.5
 199,NZ_CP083016.1,"NZ_CP083016.1 Klebsiella pneumoniae strain 6709.15-I chromosome, complete genome",42481,0.498143,5413230,1,573,Bacteria,Proteobacteria,Gammaproteobacteria,Enterobacterales,Enterobacteriaceae,42482,2739045,"[42482, 2739045)","[1, 42482)","[2739045, 5413230]",,42481.0,1.0,381206.0
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
