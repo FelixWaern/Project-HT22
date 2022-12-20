@@ -156,7 +156,7 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
         pass
     else: 
         file_path = csv_path.rstrip("FilteredDataFile.csv")
-        gcfit_path = file_path + "gcfits.tar"
+        gcfit_path = file_path + "gcfits"
         #Check if gc_fits.csv is downloaded
         if not os.path.isdir(gcfit_path):
             print("Downloading gcfits")
