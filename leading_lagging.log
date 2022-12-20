@@ -1,0 +1,85 @@
+ 
+ -------- The overlap with rRNA and strand is not correct for NZ_AP025667.1 ------- 
+ rRNA location = 763107 sign = + & strand interval = [1, 404625)leading1 & [3208087, 6542273]leading2. Apos Distance to Ori = 3124340 & rRNA location between dnaApos and Ori = True
+ rRNA location = 1914989 sign = + & strand interval = [1, 404625)leading1 & [3208087, 6542273]leading2. Apos Distance to Ori = 3124340 & rRNA location between dnaApos and Ori = True
+ rRNA location = 2403627 sign = + & strand interval = [1, 404625)leading1 & [3208087, 6542273]leading2. Apos Distance to Ori = 3124340 & rRNA location between dnaApos and Ori = True
+ rRNA location = 5013073 sign = - & strand interval = [404625, 3208087) lagging1. Apos Distance to Ori = 3124340 & rRNA location between dnaApos and Ori = False
+ rRNA location = 6239888 sign = - & strand interval = [404625, 3208087) lagging1. Apos Distance to Ori = 3124340 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+ 
+ -------- The overlap with rRNA and strand is not correct for NZ_CP094998.1 ------- 
+ rRNA location = 3322695 sign = + & strand interval = [64, 2348306)leading1. Apos Distance to Ori = 1350333 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+ 
+ -------- The overlap with rRNA and strand is not correct for NZ_CP094997.1 ------- 
+ rRNA location = 5506603 sign = - & strand interval = [1678019, 5338704) lagging1. Apos Distance to Ori = 1833192 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+ 
+ -------- The overlap with rRNA and strand is not correct for NZ_CP091522.1 ------- 
+ rRNA location = 2748979 sign = - & strand interval = [1320688, 2670553) lagging1. Apos Distance to Ori = 428467 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+ 
+ -------- The overlap with rRNA and strand is not correct for NZ_CP091509.1 ------- 
+ rRNA location = 886 sign = + & strand interval = [36091, 1378710)leading1. Apos Distance to Ori = 253653 & rRNA location between dnaApos and Ori = False 
+ -------------------------------------------------------------------------------
+ 
+ -------- The overlap with rRNA and strand is not correct for NZ_CP091516.1 ------- 
+ rRNA location = 2271392 sign = - & strand interval = [1170835, 2179070) lagging1. Apos Distance to Ori = 223392 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+ 
+ -------- The overlap with rRNA and strand is not correct for NZ_CP095083.1 ------- 
+ rRNA location = 5195119 sign = - & strand interval = [2536212, 5171351) lagging1. Apos Distance to Ori = 81301 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+ 
+ -------- The overlap with rRNA and strand is not correct for NZ_CP095061.1 ------- 
+ rRNA location = 26051 sign = + & strand interval = [93769, 2607224)leading1. Apos Distance to Ori = 1381696 & rRNA location between dnaApos and Ori = True 
+ -------------------------------------------------------------------------------
+  Nr of records with rRNA and strand non-overlap: 8
+Loaded backend tkagg version unknown.
+STREAM b'IHDR' 16 13
+STREAM b'sBIT' 41 4
+b'sBIT' 41 4 (unknown)
+STREAM b'pHYs' 57 9
+STREAM b'IDAT' 78 1189
+STREAM b'IHDR' 16 13
+STREAM b'sBIT' 41 4
+b'sBIT' 41 4 (unknown)
+STREAM b'pHYs' 57 9
+STREAM b'IDAT' 78 2994
+STREAM b'IHDR' 16 13
+STREAM b'sBIT' 41 4
+b'sBIT' 41 4 (unknown)
+STREAM b'pHYs' 57 9
+STREAM b'IDAT' 78 696
+STREAM b'IHDR' 16 13
+STREAM b'sBIT' 41 4
+b'sBIT' 41 4 (unknown)
+STREAM b'pHYs' 57 9
+STREAM b'IDAT' 78 526
+STREAM b'IHDR' 16 13
+STREAM b'sBIT' 41 4
+b'sBIT' 41 4 (unknown)
+STREAM b'pHYs' 57 9
+STREAM b'IDAT' 78 499
+STREAM b'IHDR' 16 13
+STREAM b'sBIT' 41 4
+b'sBIT' 41 4 (unknown)
+STREAM b'pHYs' 57 9
+STREAM b'IDAT' 78 673
+STREAM b'IHDR' 16 13
+STREAM b'sBIT' 41 4
+b'sBIT' 41 4 (unknown)
+STREAM b'pHYs' 57 9
+STREAM b'IDAT' 78 922
+STREAM b'IHDR' 16 13
+STREAM b'sBIT' 41 4
+b'sBIT' 41 4 (unknown)
+STREAM b'pHYs' 57 9
+STREAM b'IDAT' 78 568
+STREAM b'IHDR' 16 13
+STREAM b'sBIT' 41 4
+b'sBIT' 41 4 (unknown)
+STREAM b'pHYs' 57 9
+STREAM b'IDAT' 78 626
+Top ten non-cooriented taxonomical orders {}
+Bottom ten non-cooriented taxonomical orders {}
