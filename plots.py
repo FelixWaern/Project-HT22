@@ -194,6 +194,9 @@ def plotting_graphs(csv_path):
         plt.clf()
         #plt.show()
 
+    list_not_orient = list(dict.fromkeys(list_not_orient))
+    list_betn_ori_dnaA = list(dict.fromkeys(list_betn_ori_dnaA))
+
     # checking for the files which are repeated in both the lists
     for fil in list_not_orient:
         if fil in list_betn_ori_dnaA:
@@ -201,9 +204,7 @@ def plotting_graphs(csv_path):
 
     # Removing duplicates
     exclude_file = list(dict.fromkeys(exclude_file))
-    list_not_orient = list(dict.fromkeys(list_not_orient))
-    list_betn_ori_dnaA = list(dict.fromkeys(list_betn_ori_dnaA))
-
+    
     #Removing the files which are repeated in the list_betn_ori_dnaA
     for acc in list_betn_ori_dnaA:
         if acc in exclude_file:
