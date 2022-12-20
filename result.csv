@@ -1,6 +1,7 @@
 ,No_of_chromosomes,No_of_non_cooriented_chromosomes,No_of_non_cooriented_chromosomes_andNotBetnOriandDnaA,Percentage_of_non_cooriented_chromosomes,No_of_chromosomes_has_rrnaBetnOriandDnaA,Percentage_of_chromosomes_has_rrnaBetnOriandDnaA
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 0,48,2,1,2.0833333333333335,1,2.0833333333333335
 ,No_of_chromosomes,No_of_non_cooriented_chromosomes,No_of_non_cooriented_chromosomes_andNotBetnOriandDnaA,Percentage_of_non_cooriented_chromosomes,No_of_chromosomes_has_rrnaBetnOriandDnaA,Percentage_of_chromosomes_has_rrnaBetnOriandDnaA
 0,48,2,1,2.0833333333333335,1,2.0833333333333335
@@ -44,6 +45,11 @@
 0,10,2,1,10.0,1,10.0
 ,No_of_chromosomes,No_of_non_cooriented_chromosomes,No_of_non_cooriented_chromosomes_andNotBetnOriandDnaA,Percentage_of_non_cooriented_chromosomes,No_of_chromosomes_has_rrnaBetnOriandDnaA,Percentage_of_chromosomes_has_rrnaBetnOriandDnaA
 0,96,3,1,1.0416666666666667,2,2.0833333333333335
+=======
+0,200,9,0,0.0,0,0.0
+,No_of_chromosomes,No_of_non_cooriented_chromosomes,No_of_non_cooriented_chromosomes_andNotBetnOriandDnaA,Percentage_of_non_cooriented_chromosomes,No_of_chromosomes_has_rrnaBetnOriandDnaA,Percentage_of_chromosomes_has_rrnaBetnOriandDnaA
+0,85,1,0,0.0,0,0.0
+>>>>>>> Stashed changes
 =======
 0,200,9,0,0.0,0,0.0
 ,No_of_chromosomes,No_of_non_cooriented_chromosomes,No_of_non_cooriented_chromosomes_andNotBetnOriandDnaA,Percentage_of_non_cooriented_chromosomes,No_of_chromosomes_has_rrnaBetnOriandDnaA,Percentage_of_chromosomes_has_rrnaBetnOriandDnaA
