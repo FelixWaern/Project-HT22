@@ -1,7 +1,3 @@
-#TODO instructions for using this script
-#TODO help for script
-#TODO check the taxa for chromosomes where the rrna is not overlapping with leading strand
-
 # Import libraries
 import glob
 import pandas as pd
@@ -20,6 +16,13 @@ import operator
 plt.rcParams['figure.figsize'] = [9.5, 7]
 
 def plotting_graphs(csv_path):
+
+    """ This function plots the graphs for those chromosomes where the rRNAs are not co-oriented with the replication.
+    It takes the csv path as the input path then edit it to gcfit_path which has the csv files for plotting the graphs.
+    Within the function it reads the output files and make a list of accession numbers where there is no co-orientation 
+    of rRNAs with replication. These accession numbers are later used to compare with csv files of gcfit and fetch only 
+    the matched ones. We need to create a new folder called figures in the current working directory to save the plots"""
+
     # Read csv output files for chromosomes and rRNAs
     df_rRNA = pd.read_csv("rrna.csv")
     df_chromo = pd.read_csv("chromosomes.csv")
@@ -46,8 +49,6 @@ def plotting_graphs(csv_path):
         accession.append(df_rRNA.loc[file,"name"])
         new_df = pd.DataFrame(accession, columns=["name"])
 
-    #print(new_df)
-
     #Read data from rRNA file and check whether rRNA is co-oriented or not
     for file in range(len(df_rRNA)):
         betn_ori_dnaA.append(df_rRNA.loc[file,"between_dnaA_ori"])    
@@ -63,7 +64,7 @@ def plotting_graphs(csv_path):
                 start_regular.append(df_rRNA.loc[file, "start"])
             else:     
                 start_regular.append(df_rRNA.loc[file, "stop"])      
-    #new_df["rRNA"] = rrna 
+    
     new_df["co-orient"] = orient
     new_df["rRNAPos"] = start_regular
     new_df["between_dnaA_ori"] = betn_ori_dnaA 
@@ -84,26 +85,26 @@ def plotting_graphs(csv_path):
         gcfit_path = file_path + "gcfits\\"
     else:
         gcfit_path = file_path + "gcfits/"
-    #print(gcfit_path)
+    
 
-    #counting the total number of phylums from the csv file
+    """#counting the total number of phylums from the csv file
     df_csv = pd.read_csv(csv_path)
     count_realm2_proteo = 0
     for ind in df_csv.index:   
         if df_csv["realm2"][ind] == "Proteobacteria":
             count_realm2_proteo += 1
-    #print("count realm2 proteo")
-    #print(count_realm2_proteo)
+    print("count realm2 proteo")
+    print(count_realm2_proteo)
     count_realm2_Terra = 0
     for ind in df_csv.index:   
         if df_csv["realm2"][ind] == "Terrabacteria group":
             count_realm2_Terra += 1
-    #print("count realm2 terra")
-    #print(count_realm2_Terra)
+    print("count realm2 terra")
+    print(count_realm2_Terra)"""
 
     # Get CSV files list from a gcfit folder
     csv_files = glob.glob(gcfit_path + "*.csv")
-    #print(csv_files[1])
+   
 
     # Get only accession numbers from the file names
     for fil in csv_files:
@@ -111,7 +112,7 @@ def plotting_graphs(csv_path):
         st = st.lstrip("\ ")
         st = st.rstrip("_fit.csv")
         gcfits_accession.append(st)
-    #print(gcfits_accession[1])
+    
 
     #Matching accession numbers of rrna output files with gcfit csv files
     for fil in csv_files:
@@ -120,11 +121,10 @@ def plotting_graphs(csv_path):
         st = st.rstrip("_fit.csv")
         if st in unique_orient:
             new_csv_files.append(st)
-    #print(new_csv_files)
+   
 
     #plotting graph for matched accession numbers
     for acc_num in new_csv_files:
-        #print(acc_num)
         full_path = gcfit_path + acc_num + "_fit.csv"
         df = pd.read_csv(full_path)
         us=new_df[new_df.name==acc_num]
@@ -134,7 +134,7 @@ def plotting_graphs(csv_path):
         taxa_non_orient.append(taxon)
         #Creating new dataframe for the rrnas for the accession number
         df_rrna_plot = new_df.loc[new_df["name"] == acc_num,["name","between_dnaA_ori", "co-orient", "rRNAPos"]]
-        #print(df_rrna_plot)
+        
 
         # for marking rrna
         for ind in df_rrna_plot.index:
@@ -154,16 +154,13 @@ def plotting_graphs(csv_path):
                     plt.axvline(int(non_overlap_rrna), ls='-', color='brown')
         
         # for marking shift
-        #print(chromo)
         leshift=chromo["shift"].item()
-        #print(leshift)
         if int(leshift) > 0:
             plt.axvline(int(leshift), ls='-', color='black')
         else:
             plt.axvline(df.pos.max() + int(leshift), ls='-', color='black')
         # for marking dnaA pos
         dnaApos=chromo["dnaApos"].item()
-        #print(dnaApos)
         if int(dnaApos) > 0:
             plt.axvline(int(dnaApos), ls='-', color='red')
         else:
@@ -218,28 +215,6 @@ def plotting_graphs(csv_path):
     #Calculating the percentage for chromosomes, where rrna locates betn ori and dnaA
     percent_dnaa = (100 * len(list_betn_ori_dnaA))/num_records
                 
-    """# printing results
-    print("total number of chromosomes")
-    print(num_records)
-
-    print("Number of accession numbers that is not co-oriented")
-    print(len(unique_orient))
-
-    print("number of chromosomes where atleast one rrna is not co-orinted")
-    print(len(list_not_orient))
-
-    print("number of chromosomes where atleast one rrna is not co-oriented becuase it locates betn ori and dnaA")
-    print(len(list_betn_ori_dnaA))
-
-    print("excluded files are")
-    print(exclude_file)
-
-    print("percentage of chromosomes which are not co-oriented")
-    print(percent)
-
-    print("percentage of chromosomes where the rrna are located betn ori and dnaa")
-    print(percent_dnaa)"""
-
     #creating new csv files for the chromosomes that are not co-oriented with the replication
     data = {'No_of_chromosomes':  [num_records],
             'No_of_non_cooriented_chromosomes':[len(unique_orient)],
@@ -256,13 +231,11 @@ def plotting_graphs(csv_path):
     taxa_dict = Counter(taxa_non_orient)
 
     #plotting histogram for all the taxas
-    #taxa_list = taxa_dict.keys()
     plt.bar(list(taxa_dict.keys()), taxa_dict.values(), color='g', label = "Bar plot")
     plt.xlabel('Taxa')
     #plt.ylabel('Height', fontsize=16)
     plt.title('Barchart - Distribution of taxas')
-    #plt.legend(taxa_list)
-    #plt.show()
+    #plt.savefig("Taxas.png")
 
     #sorting taxa dictionary
     taxa_dict = sorted(taxa_dict.items(), key=lambda x:x[1])
@@ -290,7 +263,7 @@ def plotting_graphs(csv_path):
     plt.bar(list(bottom10.keys()), bottom10.values(), color='g')
     plt.xlabel('Taxa')
     plt.title('Barchart - Distribution of taxas')
-    #plt.show()
+    #plt.savefig("Taxas_bottom10.png")
 
 
 
