@@ -11,7 +11,8 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     from skewDB import fetching_data as fd
     sys.path.insert(0, '/NCBI_DATA_FETCH/')
     from NCBI_DATA_FETCH import main_script as ms
-    
+    import platform
+
     # Fetching the SkewDB data as a dataframe
     org_df = fd.fetch_csv_as_df(csv_path) 
     
@@ -94,7 +95,10 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
         no_16s = []
         retry_list = faulty.copy()
         faulty = []
-        new_path = local_storage_path + "second/"
+        if platform.system() == 'Windows':
+            new_path = local_storage_path + "second\\"
+        else:
+            new_path = local_storage_path + "second/"
         i = 0
         j = 1
         for x in retry_list:
