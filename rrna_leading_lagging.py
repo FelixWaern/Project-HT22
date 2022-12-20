@@ -119,7 +119,7 @@ def rrna_lead_lag(csv_path, rrna_locus_list):
             ter = (df_rrna_ori_ter.loc[row, "siz"] * df_rrna_ori_ter.loc[row, "div"]) + df_rrna_ori_ter.loc[row, "shift"] + 1
             # find the first/last position of the rrna gene with regex
             rrna = re.findall(r'(?<=\[)[0-9]+', str(df_rrna_ori_ter.loc[row, col]))
-            rrna_comp = re.findall(r'(?<=\:)[0-9]+', str(df_rrna_ori_ter.loc[row, col]))
+            rrna_comp = re.findall(r'(?<=\:|\>)[0-9]+', str(df_rrna_ori_ter.loc[row, col]))
             # rrna in this column
             if rrna:
                 count_rrna += 1
