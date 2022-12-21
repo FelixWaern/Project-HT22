@@ -18,7 +18,7 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     
     # Runt 2184 så kaosar den
     #test_df = org_df.head(50).copy()
-    test_df = org_df.loc[23800:24000].copy()
+    test_df = org_df.copy()
     if a_list != None:
         df = org_df.loc[org_df['name'].isin(a_list)]
     else:
