@@ -78,9 +78,9 @@ def main(csv_path):
     y = list(test_df['Distance'])
     realm = ['realm2', 'realm3', 'realm4', 'realm5']
     label = [list(test_df[realm[0]]), list(test_df[realm[1]]), list(test_df[realm[2]]), list(test_df[realm[2]])]
-    realm_cluster(x, y, label[0], realm[0])
-    realm_cluster(x, y, label[1], realm[1])
-    realm_cluster(x, y, label[2], realm[2])
+    #realm_cluster(x, y, label[0], realm[0])
+    #realm_cluster(x, y, label[1], realm[1])
+    #realm_cluster(x, y, label[2], realm[2])
     realm_cluster(x, y, label[3], realm[3])
     
     
@@ -105,7 +105,7 @@ def main(csv_path):
     
 def realm_cluster(x, y, label, realm):
     data = list(zip(x,y))
-    """
+    
     inertias = []
     for i in range(1,11):
         kmeans = KMeans(n_clusters=i)
@@ -117,16 +117,24 @@ def realm_cluster(x, y, label, realm):
     plt.xlabel('Number of clusters')
     plt.ylabel('Inertia')
     plt.show()
-    """
+    
     kmeans = KMeans(n_clusters=3)
     kmeans.fit(data)
     
-
-    plt.scatter(x, y, c=kmeans.labels_, label=1 )
-    plt.title(realm)
-    plt.legend()
+    fig, ax = plt.subplots()
+    sc = ax.scatter(x, y, c=kmeans.labels_, cmap='tab10')
+    ax.legend(*sc.legend_elements(), title='clusters')
+    plt.title("K-means clustering, K=3")
+    plt.xlabel('dnaA distance to Ori relative to chromsome size', fontsize=10)
+    plt.ylabel('dnaA distance to Ori', fontsize=10)
     plt.show()
 
+    """
+    plt.scatter(x, y, c=kmeans.labels_, label=1 )
+    plt.title("K-means clustering, K=3")
+    plt.legend()
+    plt.show()
+    """
 
 
     

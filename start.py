@@ -96,7 +96,7 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
     if test_set == True:
         print("Running script on test set.")
 
-    #Check if csv is downloaded & filtered 
+    # Check if csv is downloaded & filtered 
     # Skip if running on test set
     if test_set == True:
         pass
