@@ -1,6 +1,6 @@
 # Project-HT22
-GitHub Page for the Project "Exploring the effects of replication on chromosomal features and orientation of genes" in the course Applied Bioinformatics HT 22
-# How to run the pipeline
+GitHub Page for the Project __"Exploring the effects of replication on chromosomal features and orientation of genes"__ in the course Applied Bioinformatics HT 22
+## How to run the pipeline
 Before any python script can be run for the validation of co-orientation of the rRNA process the Biopython package needs to be installed using for example pip. If not installed, running the script will result in an error in the log file and the run is interrupted. 
 
 The python script used for the validation of co-orientation of the rRNA process is started from the command line by having the folder containing start.py as the current directory and starting python and calling the script with the appropriate arguments.  
