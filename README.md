@@ -1,5 +1,5 @@
 # Project-HT22
-GitHub Page for the Project _"Exploring the effects of replication on chromosomal features and orientation of genes"_ in the course Applied Bioinformatics HT 22
+GitHub Page for the Project _"Exploring the effects of replication on chromosomal features and orientation of genes"_ in the course Applied Bioinformatics - HT22
 
 ## Project description
 Bacteria (and some archaea) are replicated bidirectionally, from the origin of replication (Ori) to the terminus (Ter). This property structures the whole genome, impacting – among others – the nucleotide composition and the location and orientation of genes, emphasizing the importance of these two locations.
@@ -7,7 +7,7 @@ Bacteria (and some archaea) are replicated bidirectionally, from the origin of r
 Since the beginning of the genomic era, researchers have started to use these properties to identify Ori and Ter. The most reliable indicator is the GC-skew, i.e. the difference between the number of Gs and Cs on one strand, but other sources of evidence have been used (some marker sequences, gene orientation, etc.). A newly published database, SkewDB (https://skewdb.org/), proposes a robust GC-skew-based method to predict the origin and terminus of replication in most chromosomes. This opens up whole new avenues of research, allowing to correlate chromosomal features with replication.
 
 ## Aims
-In the course of this project we aimed firstly to test if the hypothesis that rRNA genes are co-oriented with replication is still true (Guy & Roten 2004). The second task is to investigate the cases where non-colocalization of dnaA with Ori is related to taxonomic distribution.
+In the course of this project we aimed firstly to test if the hypothesis that rRNA genes are co-oriented with replication is still true (Guy & Roten 2004). The second task was to investigate the cases where non-colocalization of dnaA with Ori is related to taxonomic distribution.
 
 ## How to run the pipeline
 Before any python script can be run for the validation of co-orientation of the rRNA process the Biopython package needs to be installed using for example pip. If not installed, running the script will result in an error in the log file and the run is interrupted. 
