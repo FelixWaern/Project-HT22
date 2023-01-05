@@ -9,14 +9,14 @@ Example of command:
 
 _python start.py <path to FilteredDataFile.csv> <firstname.lastname@gmail.com> <7b4a5e9841f79495be77491+223ad485fda08> <D:/>_
   
-All of these arguments are mandatory.
+All of the above arguments are mandatory.
   
 - The first argument is the path to what the filtered data is named or is going to be named.
 - The second argument is the mail used for the user's NCBI account.
 - The third argument is the API-key from NCBI for that specific user.
 - The fourth argument is the path to local storage with at least 120 GB of free storage. 
 
-There are also optional commands for start.py.
+There are also optional commands for start.py:
 - The flag -v is used to toggle verbose logging which will increase the amount of information in the log file. This will cause it to display most information about the run which can be useful when debugging.
 - The -l flag will allow the user to run the script using specified accession numbers. 
 
