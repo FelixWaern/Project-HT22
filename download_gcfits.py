@@ -2,9 +2,10 @@
 import ssl
 from urllib.request import urlopen
 from urllib import request
-import zipfile
-import bz2
-import shutil
+import tarfile
+import os
+
+
 
 try:
     _create_unverified_https_context = ssl._create_unverified_context
@@ -21,11 +22,13 @@ def run_download_gcfits(file_path):
     gc_fits_zip_path = file_path+'gcfits.tar.bz2'
     zipurl = "https://berthub.eu/antonie/gcfits.tar.bz2"
     request.urlretrieve(zipurl, gc_fits_zip_path)
-    
 
-    with bz2.BZ2File(gc_fits_zip_path) as fr, open(gc_fits_zip_path[:-4],"wb") as fw:
-        shutil.copyfileobj(fr,fw)
-    
+    gc_fits_dir = file_path + "gcfits"
+    os.makedirs(gc_fits_dir)
+
+    tar = tarfile.open(gc_fits_zip_path, "r:bz2")  
+    tar.extractall(gc_fits_dir)
+    tar.close()
 
 # Testing the script
 #csv_path = "C:/Users/Felix/Documents/FilteredDataFile.csv"

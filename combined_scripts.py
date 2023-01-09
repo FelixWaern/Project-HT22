@@ -16,9 +16,6 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     # Fetching the SkewDB data as a dataframe
     org_df = fd.fetch_csv_as_df(csv_path) 
     
-    # Runt 2184 så kaosar den
-    #test_df = org_df.head(50).copy()
-    test_df = org_df.copy()
     if a_list != None:
         df = org_df.loc[org_df['name'].isin(a_list)]
     else:
@@ -33,18 +30,17 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
     t_tot = []
     no_16s = []
     t_fin_1 = time.time()
-    # Fetching the rRNA data in batches of 10 from NCBI since 10 is the maximum number of fetches per second using an ordinary API-key
-    for index, row in test_df.iterrows():
+    # Fetching the rRNA data in batches of 10 from NCBI since 10 is the maximum number 
+    # of fetches per second using an ordinary API-key from NCBI
+    for index, row in org_df.iterrows():
         if i == 9:
             batch.append(row["name"])
             if verbose == True:
                 logging.debug(f"\n --------Batch {j} sent to batch_operator--------- \n Contains NCBI records: {batch} ")
             t0 = time.time()
+
             # Sending a batch of 10 accession number to the fetching script
             res = ms.batch_operator(batch, faulty, email, api_key, local_storage_path, no_16s ,verbose )
-            print("")
-            print(len(res[0]))
-
             dict.update(res[0])
             locus.update(res[1])
             i = 0
@@ -53,15 +49,14 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
             total = t1-t0
             t_tot.append(total)  
 
+            print("")
             print("Batch:",j, "done!")
             print("Batch:",j, "took:", total, "seconds!")
-            print("Estimated time left: ", (((sum(t_tot)/len(t_tot))*2700)-((sum(t_tot)/len(t_tot))*j))/60 ,"minutes")
-            print("Estimated mean total time: ", ((sum(t_tot)/len(t_tot))*2700)/60,"minutes")
-            print("Estimated precentage done", ((1-(((sum(t_tot)/len(t_tot))*2700)-((sum(t_tot)/len(t_tot))*j))/((sum(t_tot)/len(t_tot))*2700))*100), "%")
+            print("Estimated time left: ", (((sum(t_tot)/len(t_tot))*2771)-((sum(t_tot)/len(t_tot))*j))/60 ,"minutes")
+            print("Estimated mean total time: ", ((sum(t_tot)/len(t_tot))*2771)/60,"minutes")
+            print("Estimated percentage done", ((1-(((sum(t_tot)/len(t_tot))*2771)-((sum(t_tot)/len(t_tot))*j))/((sum(t_tot)/len(t_tot))*2771))*100), "%")
             print("Current faulty records: ", faulty)
             
-            
-
             j += 1
         else:
             i += 1
@@ -77,18 +72,10 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
         locus.update(res[1])
 
 
-    print("-----All chromosmes with corresponding rRNA intervals should be in dict now-----")
-    t_fin_2 = time.time()
-    print("Total time :",t_fin_2-t_fin_1)
-
-
-    print("")
-    print("Faulty records from NCBI: ", faulty)
     if faulty == []:
         logging.debug("OK! No faulty records from NCBI recorded!")
     else:
-        
-        # Retry in different directory.
+        # Retry fetching faulty records t0 subdictionary
         print("")
         print("Retrying fetch for faulty records.")
         batch = []
@@ -103,11 +90,13 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
         j = 1
         for x in retry_list:
             if i == 9:
-                print("Batch", j, "of retry")
                 batch.append(x)
                 res = ms.batch_operator(batch, faulty, email, api_key, new_path, no_16s ,verbose )
+
+                print("Batch", j, "of retry")
                 print("Number of retrieved retries for batch: ",len(res[0]))
                 print("")
+
                 dict.update(res[0])
                 locus.update(res[1])
                 i = 0
@@ -128,9 +117,11 @@ def get_rRNA_intervals(csv_path, email, api_key, local_storage_path, a_list, ver
             for i in range(len(no_16s)):
                 string = string + no_16s[i]
             logging.warning(f" \n -------- No rRNA was found for: -------- {string} \n -------------------------------------------------------------------------------")
-        
+
+
+    print("-----All chromosmes with corresponding rRNA intervals should be in dict now-----")
+    t_fin_2 = time.time()
+    print("Total time :",t_fin_2-t_fin_1)    
     print("")
     print("------------------rRNA fetch done----------------")
-    print("rrna", len(dict))
-    print("locus", len(locus))
     return([dict, locus])
