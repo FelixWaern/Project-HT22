@@ -1,7 +1,12 @@
 #import module
 import pandas as pd
 #import numpy as np
+
 def fetch_csv_as_df(csv_path):
+
+    """This function fetch the filtered data from downloading_filtered_csvFile.py then converts it to dataframe.
+    Origin of replication and terminus were calculated in this function and the calculated part has been added as a new 
+    columns in the dataframe. This function also returns the edited dataframe to the start.py script."""
 
     # Reading filtered csv file
     df = pd.read_csv(csv_path)
@@ -20,7 +25,7 @@ def fetch_csv_as_df(csv_path):
             origin = 1
         return origin
 
-    #Method defined for calculate the size after adding the shift value 
+    #Method defined for calculating the terminus
     def shift_value_terminus(shift, siz):
         ter = (siz * df.loc[i, "div"]) + shift + 1
         if ter > siz:
@@ -44,29 +49,16 @@ def fetch_csv_as_df(csv_path):
         
     #Checking the range for ori and ter and assigning those to dataframe
     if any(item <= siz and item > 0 for item in ori):
-        print("Ori is within range")
         df["Ori"] = ori
         print("Ori has been added successfully")
     else:
         print("Ori is not within the range")
 
     if any(item <= siz and item > 0 for item in ter):
-        print("Terminus is within range")
         df["Ter"] = ter
         print("Terminus has been added successfully")
     else:
         print("terminus is not within the range")
     
-
-    # checking the calculation for the selected bacterias
-    # E_coli = df.loc[df["name"] == "NC_000913.3",["dnaApos","siz","div","shift","Ori", "Ter"]]
-    # print(E_coli)
-    # B_subtilis = df.loc[df["name"] == "NC_000964.3",["siz","div","shift","Ori", "Ter", "dnaApos"]]
-    # print(B_subtilis)
-    # P_aeruginosa = df.loc[df["name"] == "NC_002516.2",["siz","div","shift","Ori", "Ter", "dnaApos"]]
-    # print(P_aeruginosa)
-
     df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
-    #writing to csv file stored in local computer
-    #df.to_csv("/Users/saralindberg/Documents/Applied_bioinformatics/Code/dataFile_with_ori&ter.csv")
     return(df)
