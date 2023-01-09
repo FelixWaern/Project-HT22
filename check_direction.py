@@ -1,11 +1,8 @@
-import logging
-import math
-
-
 def check_rrna_two_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dist, count_rrna, df_rrna_csv):
-    """Function that check if the rrna genes are co-oriented with replication
+    """Function that checks if the rrna genes are co-oriented with replication
         if there are two intervals for the leading strand and one interval for
-        the lagging strand in the circular bacterial chromosome"""
+        the lagging strand in the circular bacterial chromosome.
+    """
     # Compare with one strand
     if df_rrna_ori_ter.loc[row, col][-2] == "-":
         sign = -1
@@ -17,7 +14,6 @@ def check_rrna_two_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dis
         else:
             df_rrna_csv.loc[count_rrna, "co-orient"] = False
             records.append(f"\n rRNA location = {int(rrna_comp[0])} sign = {'-'} & strand interval = {df_rrna_ori_ter.loc[row, 'lagging1']} {'lagging1'}. Apos Distance to Ori = {apos_check[0]} & rRNA location between dnaApos and Ori = {apos_check[1]}")
-            #logging.warning(f" \nThe overlap with rRNA {int(rrna_comp[0])} and lagging1 strand {df_rrna_ori_ter.loc[row, 'lagging1']} is not correct for {df_rrna_ori_ter.loc[row, 'name']}") 
     # Compare with two strands
     elif str(df_rrna_ori_ter.loc[row, col][-2]) == "+":
         sign = 1
@@ -32,11 +28,10 @@ def check_rrna_two_lead(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dis
             else:
                 df_rrna_csv.loc[count_rrna, "co-orient"] = False
                 records.append(f"\n rRNA location = {int(rrna[0])} sign = {'+'} & strand interval = {df_rrna_ori_ter.loc[row, 'leading1']}{'leading1'} & {df_rrna_ori_ter.loc[row, 'leading2']}{'leading2'}. Apos Distance to Ori = {apos_check[0]} & rRNA location between dnaApos and Ori = {apos_check[1]}") 
-                # logging.warning(f" \nThe overlap with rRNA {int(rrna[0])} and leading1/leading2 strand {df_rrna_ori_ter.loc[row, 'leading1']}/{df_rrna_ori_ter.loc[row, 'leading2']} is not correct for {df_rrna_ori_ter.loc[row, 'name']}") 
 
 
 def check_rrna_two_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dist, count_rrna, df_rrna_csv):
-    """Function that check if the rrna genes are co-oriented with replication
+    """Function that checks if the rrna genes are co-oriented with replication
         if there are two intervals for the lagging strand and one interval for
         the leading strand in the chromosome"""
     # Compare with one strand
@@ -50,7 +45,6 @@ def check_rrna_two_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dist
         else:
             df_rrna_csv.loc[count_rrna, "co-orient"] = False
             records.append(f"\n rRNA location = {int(rrna[0])} sign = {'+'} & strand interval = {df_rrna_ori_ter.loc[row, 'leading1']}{'leading1'}. Apos Distance to Ori = {apos_check[0]} & rRNA location between dnaApos and Ori = {apos_check[1]}") 
-            #logging.warning(f" \nThe overlap with rRNA {int(rrna[0])} and leading1 strand {df_rrna_ori_ter.loc[row, 'leading1']} is not correct for {df_rrna_ori_ter.loc[row, 'name']}") 
     # Compare with two strands
     elif str(df_rrna_ori_ter.loc[row, col][-2]) == "-":
         sign = -1
@@ -64,12 +58,11 @@ def check_rrna_two_lag(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dist
                 df_rrna_csv.loc[count_rrna, "co-orient"] = True
             else:
                 df_rrna_csv.loc[count_rrna, "co-orient"] = False
-                records.append(f"\n rRNA location = {int(rrna_comp[0])} sign = {'-'} & strand interval = {df_rrna_ori_ter.loc[row, 'lagging1']}{'lagging1'} & {df_rrna_ori_ter.loc[row, 'lagging2']}{'lagging2'}. Apos Distance to Ori = {apos_check[0]} & rRNA location between dnaApos and Ori = {apos_check[1]}")
-                # logging.warning(f" \nThe overlap with rRNA {int(rrna_comp[0])} and lagging1/lagging2 strand {df_rrna_ori_ter.loc[row, 'lagging1']}/{df_rrna_ori_ter.loc[row, 'lagging2']} is not correct for {df_rrna_ori_ter.loc[row, 'name']}") 
+                records.append(f"\n rRNA location = {int(rrna_comp[0])} sign = {'-'} & strand interval = {df_rrna_ori_ter.loc[row, 'lagging1']}{'lagging1'} & {df_rrna_ori_ter.loc[row, 'lagging2']}{'lagging2'}. Apos Distance to Ori = {apos_check[0]} & rRNA location between dnaApos and Ori = {apos_check[1]}") 
 
 
 def no_shift_check_rrna_dir(df_rrna_ori_ter, rrna, rrna_comp, row, col, records, dist, count_rrna, df_rrna_csv):
-    """Function that check if the rrna genes are co-oriented with replication
+    """Function that checks if the rrna genes are co-oriented with replication
         if there are one interval for the lagging strand and one for the leading strand
         in the chromosome"""
     # Compare with first strand
@@ -83,7 +76,6 @@ def no_shift_check_rrna_dir(df_rrna_ori_ter, rrna, rrna_comp, row, col, records,
         else:
             df_rrna_csv.loc[count_rrna, "co-orient"] = False
             records.append(f"\n rRNA location = {int(rrna[0])} sign = {'+'} & strand interval = {df_rrna_ori_ter.loc[row, 'leading1']}{'leading1'}. Apos Distance to Ori = {apos_check[0]} & rRNA location between dnaApos and Ori = {apos_check[1]}") 
-            #logging.warning(f" \nThe overlap with rRNA and leading1 strand is not correct for {df_rrna_ori_ter.loc[row, 'name']}") 
     # Compare with second strand
     elif str(df_rrna_ori_ter.loc[row, col][-2]) == "-":
         sign = -1
@@ -95,24 +87,17 @@ def no_shift_check_rrna_dir(df_rrna_ori_ter, rrna, rrna_comp, row, col, records,
         else:
             df_rrna_csv.loc[count_rrna, "co-orient"] = False
             records.append(f"\n rRNA location = {int(rrna_comp[0])} sign = {'-'} & strand interval = {df_rrna_ori_ter.loc[row, 'lagging1']}{'lagging1'}. Apos Distance to Ori = {apos_check[0]} & rRNA location between dnaApos and Ori = {apos_check[1]}") 
-            #logging.warning(f" \nThe overlap with rRNA and lagging1 strand is not correct for {df_rrna_ori_ter.loc[row, 'name']}") 
 
 
 def check_ori_dnaapos(df_rrna_ori_ter, row, rna, count_rrna, df_rrna_csv):
-    # Checks the distance between Ori and dnaApos and if the rRNA location is between the two. 
-    # Returns the distance between Ori and dnaApos and True if the rRNA location is between the two locations
-    # and False if not.
-    # Returns distance rRNA - Ori
-
-    # row for the record
-    # rna must be the rna location to be checked. 
-    # df_rrna_ori_ter = ['name', 'siz', 'shift', 'div','Ter', 'Ori', 'dnaApos'] Ter is true position
-    #Two seperate for the seperate shifts
-
+    """Function that checks the distance between Ori and dnaApos and if the rRNA location is between these two. 
+        Returns the distance between Ori and dnaApos. Returns True if the rRNA location is between the two locations
+        and False if not. Returns distance rRNA - Ori."""
     ori = df_rrna_ori_ter.loc[row, "Ori"]
     apos = df_rrna_ori_ter.loc[row, "dnaApos"]
     size = df_rrna_ori_ter.loc[row, "siz"]
     rna_between = False
+    #calculate distance from rRNA to ori
     if rna > ori:
         rna_ori_dis_1 = rna - ori
         rna_ori_dis_2 = (size - rna) + ori
@@ -122,6 +107,7 @@ def check_ori_dnaapos(df_rrna_ori_ter, row, rna, count_rrna, df_rrna_csv):
         rna_ori_dis_2 = (size - ori) +  rna 
         rna_ori_dis = min(rna_ori_dis_1, rna_ori_dis_2)
     df_rrna_csv.loc[count_rrna, "dist_ori"] = rna_ori_dis
+    #calculate distance from dnaA to ori and check if rRNA is located between dnaA and ori
     if apos > ori:
         path_dis = apos - ori
         other_path_dis = (size - apos) + ori

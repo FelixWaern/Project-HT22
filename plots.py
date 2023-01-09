@@ -3,7 +3,7 @@ import glob
 import pandas as pd
 import numpy as np
 import re
-from skewDB import fetching_data as csv
+from calculation import calc
 import platform
 import logging
 logging.getLogger('matplotlib.font_manager').setLevel(logging.ERROR)
@@ -43,6 +43,7 @@ def plotting_graphs(csv_path):
     list_not_orient = []
     list_betn_ori_dnaA = []
     exclude_file = []
+    ex_betn = []
 
     # Creating new dataframe
     for file in range(len(df_rRNA)):
@@ -53,7 +54,6 @@ def plotting_graphs(csv_path):
     for file in range(len(df_rRNA)):
         betn_ori_dnaA.append(df_rRNA.loc[file,"between_dnaA_ori"])    
         orient.append(df_rRNA.loc[file,"co-orient"])   
-        #print(file)
         if df_rRNA.loc[file,"co-orient"] == False:     
             if df_rRNA.loc[file, "strand"] == "1":
                 start_regular.append(df_rRNA.loc[file, "start"])
@@ -75,7 +75,7 @@ def plotting_graphs(csv_path):
         unique_orient.append(df_orient["name"][ind])
 
     unique_orient = list(dict.fromkeys(unique_orient))
-
+   
     #Fetching unique accession numbers from new_df dataframe 
     unique_acc_rrna = new_df["name"].unique()
 
@@ -86,22 +86,7 @@ def plotting_graphs(csv_path):
     else:
         gcfit_path = file_path + "gcfits/"
     
-
-    """#counting the total number of phylums from the csv file
-    df_csv = pd.read_csv(csv_path)
-    count_realm2_proteo = 0
-    for ind in df_csv.index:   
-        if df_csv["realm2"][ind] == "Proteobacteria":
-            count_realm2_proteo += 1
-    print("count realm2 proteo")
-    print(count_realm2_proteo)
-    count_realm2_Terra = 0
-    for ind in df_csv.index:   
-        if df_csv["realm2"][ind] == "Terrabacteria group":
-            count_realm2_Terra += 1
-    print("count realm2 terra")
-    print(count_realm2_Terra)"""
-
+    
     # Get CSV files list from a gcfit folder
     csv_files = glob.glob(gcfit_path + "*.csv")
    
@@ -143,13 +128,9 @@ def plotting_graphs(csv_path):
                 plt.axvline(int(mark_rrna), ls='-', color='orange')
             else:
                 if df_rrna_plot["between_dnaA_ori"][ind] == False:
-                    temp = df_rrna_plot["name"][ind]
-                    list_not_orient.append(temp)
                     non_overlap_rrna = df_rrna_plot["rRNAPos"][ind]
                     plt.axvline(int(non_overlap_rrna), ls='-', color='blue')
                 else:
-                    temp_1 = df_rrna_plot["name"][ind]
-                    list_betn_ori_dnaA.append(temp_1)
                     non_overlap_rrna = df_rrna_plot["rRNAPos"][ind]
                     plt.axvline(int(non_overlap_rrna), ls='-', color='brown')
         
@@ -168,6 +149,7 @@ def plotting_graphs(csv_path):
         # for marking terminus
         Terminus=chromo["Ter"].item()
         plt.axvline(int(Terminus), ls='-', color='green')
+        
         #Placing legend
         dnaA = mlines.Line2D([], [], color='red', label='dnaA')
         shift = mlines.Line2D([], [], color='black', label='Shift')
@@ -186,7 +168,6 @@ def plotting_graphs(csv_path):
         
         #fixing title
         plt.title(str(chromo["fullname"].item()))
-        #plt.grid()
         if platform.system() == 'Windows':
             plt.savefig("figures\\"+ str(acc_num) + ".png")
         else:
@@ -194,47 +175,15 @@ def plotting_graphs(csv_path):
         plt.clf()
         #plt.show()
 
-    list_not_orient = list(dict.fromkeys(list_not_orient))
-    list_betn_ori_dnaA = list(dict.fromkeys(list_betn_ori_dnaA))
+    # Calling function calc which calculates the percentage of chromosomes which has noo co-oriented rRNA genes.
+    calc(df_rRNA, df_chromo)
 
-    # checking for the files which are repeated in both the lists
-    for fil in list_not_orient:
-        if fil in list_betn_ori_dnaA:
-            exclude_file.append(fil)
-
-    # Removing duplicates
-    exclude_file = list(dict.fromkeys(exclude_file))
-    
-    #Removing the files which are repeated in the list_betn_ori_dnaA
-    for acc in list_betn_ori_dnaA:
-        if acc in exclude_file:
-            list_betn_ori_dnaA.remove(acc)
-    
-    #Calculating the percentage for non co-oriented chromosomes
-    percent = (100 * len(list_not_orient))/num_records
-
-    #Calculating the percentage for chromosomes, where rrna locates betn ori and dnaA
-    percent_dnaa = (100 * len(list_betn_ori_dnaA))/num_records
-                
-    #creating new csv files for the chromosomes that are not co-oriented with the replication
-    data = {'No_of_chromosomes':  [num_records],
-            'No_of_non_cooriented_chromosomes':[len(unique_orient)],
-            'No_of_non_cooriented_chromosomes_andNotBetnOriandDnaA': [len(list_not_orient)],
-            'Percentage_of_non_cooriented_chromosomes':[percent],
-            'No_of_chromosomes_has_rrnaBetnOriandDnaA':[len(list_betn_ori_dnaA)],
-            'Percentage_of_chromosomes_has_rrnaBetnOriandDnaA':[percent_dnaa]
-            }
-    df_table = pd.DataFrame(data)
-    df_table.to_csv("result.csv", mode='a')
-
-
-    #print(taxa_non_orient)
+    # Creating taxa_dict
     taxa_dict = Counter(taxa_non_orient)
 
-    #plotting histogram for all the taxas
+    #plotting histogram for the taxanomic groups of chromosomes that are not co-oriented
     plt.bar(list(taxa_dict.keys()), taxa_dict.values(), color='g', label = "Bar plot")
     plt.xlabel('Taxa')
-    #plt.ylabel('Height', fontsize=16)
     plt.title('Barchart - Distribution of taxas')
     #plt.savefig("Taxas.png")
 
@@ -242,7 +191,7 @@ def plotting_graphs(csv_path):
     taxa_dict = sorted(taxa_dict.items(), key=lambda x:x[1])
     taxa_dict = (dict(taxa_dict))
 
-    #Taking top 10 taxas
+    #sorting dictionary in descending order
     desc_taxa_dict = dict( sorted(taxa_dict.items(), key=operator.itemgetter(1),reverse=True))
 
     #Taking only the bottom 10 records of lowest values
@@ -253,20 +202,16 @@ def plotting_graphs(csv_path):
     # calling take fuction to fetch top 10 taxas
     top10 = take(10, desc_taxa_dict.items())
     top10 = dict(top10)
-    print(top10)
+    # Printing the dictionary to log file
     logging.info(f"Top ten non-cooriented taxonomical orders {top10}") 
 
     # calling take function to fetch bottom 10 records
     bottom10 = take(10, taxa_dict.items())
     bottom10 = dict(bottom10)
-    print(bottom10)
+    #printing dictionary to log file
     logging.info(f"Bottom ten non-cooriented taxonomical orders {bottom10}") 
 
-    #Plotting histogram for the bottom 10 taxas
-    plt.bar(list(bottom10.keys()), bottom10.values(), color='g')
-    plt.xlabel('Taxa')
-    plt.title('Barchart - Distribution of taxas')
-    #plt.savefig("Taxas_bottom10.png")
+    
 
 
 
