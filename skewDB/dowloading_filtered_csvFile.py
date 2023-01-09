@@ -12,6 +12,8 @@ else:
 
 def run_download_filtered_csvfile(csv_path):
 
+    """ This function accepts the csv_path as input and filters the dataframe for different categories. """
+    
     # reading csv file into dataframe
     df = pd.read_csv('https://skewdb.org/view/gcskewdb.csv')
     print("size of dataframe downloaded from skewDB")
@@ -48,5 +50,5 @@ def run_download_filtered_csvfile(csv_path):
 
     df_4 = df_4.loc[:, ~df_4.columns.str.contains('^Unnamed')]
 
-    #Dowloading the filtered dataframe to local computer
+    #Converting the dataframe to csv
     df_4.to_csv(csv_path)
