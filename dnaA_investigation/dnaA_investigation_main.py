@@ -1,23 +1,13 @@
 
-# Get the dataframe with origin of replicaiton
-# For each entry get the ori and the dnaA loc
-# Get the distance
-# Get the precentage distance relative the size
-# Add distance and relative distance to the datafram
-# Find number of clusters which seperates records sufficiently
-# Explore using dendogram. 
-# Find proportion of different clades within the clusters.
-# Perform clustering using colours to represent clades. 
-# Test different iteration seperating the data into differnt groups before clustering
+# Script for investigating how dnaA proximity to origin clusters for different taxonomic families 
 
 import sys
 import os
 from scipy.cluster.hierarchy import linkage, dendrogram
 from collections import defaultdict
-import platform
-
 import matplotlib.pyplot as plt
-sys.path.insert(1,'C:/Users/Felix/Documents/GitHub/Project-HT22/')
+folder_path = input("Input full path to Project-HT22 folder: ")
+sys.path.insert(1,folder_path)
 from skewDB import dowloading_filtered_csvFile as download_filtered
 from skewDB import fetching_data as fd
 from sklearn.cluster import KMeans
@@ -34,7 +24,6 @@ def main(csv_path):
     #Get the data as a dataframe
     df = fd.fetch_csv_as_df(csv_path) 
 
-    
 
     # Add distance and relative distance to the datafram
     test_df = df.copy()
@@ -69,38 +58,11 @@ def main(csv_path):
     test_df['Distance'] = distance
     test_df['Relative Distance'] = relative_distance
     
-    # Explore clustering using dendogram. 
-    #['realm2, 'realm3', 'realm4', 'realm5']
-   
-
-    new_df = test_df[['Relative Distance', 'Distance', 'realm4']].copy()
     x = list(test_df['Relative Distance'])
     y = list(test_df['Distance'])
     realm = ['realm2', 'realm3', 'realm4', 'realm5']
-    label = [list(test_df[realm[0]]), list(test_df[realm[1]]), list(test_df[realm[2]]), list(test_df[realm[2]])]
-    #realm_cluster(x, y, label[0], realm[0])
-    #realm_cluster(x, y, label[1], realm[1])
-    #realm_cluster(x, y, label[2], realm[2])
+    label = [list(test_df[realm[0]]), list(test_df[realm[1]]), list(test_df[realm[2]]), list(test_df[realm[3]])]
     realm_cluster(x, y, label[3], realm[3])
-    
-    
-    # Remove the clade from the DataFrame, save for later
-    #varieties = list(new_df.pop('realm4'))
-
-    # Extract the measurements as a NumPy array
-    #samples = new_df.values
-    """
-    mergings = linkage(samples, method='complete')
-    dendrogram(mergings,
-            labels=varieties,
-            leaf_rotation=90,
-            leaf_font_size=6,
-            )
-    plt.show()
-    """
-
-    # Record observations from different dendograms with different parameters.
-    # Seems like between 12-20 seems appropriate
     
     
 def realm_cluster(x, y, label, realm):
@@ -122,22 +84,13 @@ def realm_cluster(x, y, label, realm):
     kmeans.fit(data)
     
     fig, ax = plt.subplots()
-    sc = ax.scatter(x, y, c=kmeans.labels_, cmap='tab10')
+    sc = ax.scatter(x, y, c=kmeans.labels_, cmap='tab10', alpha=0.3)
     ax.legend(*sc.legend_elements(), title='clusters')
     plt.title("K-means clustering, K=3")
     plt.xlabel('dnaA distance to Ori relative to chromsome size', fontsize=10)
     plt.ylabel('dnaA distance to Ori', fontsize=10)
     plt.show()
 
-    """
-    plt.scatter(x, y, c=kmeans.labels_, label=1 )
-    plt.title("K-means clustering, K=3")
-    plt.legend()
-    plt.show()
-    """
-
-
-    
     cluster_map = pd.DataFrame()
     cluster_map[realm] = label
     cluster_map['cluster'] = kmeans.labels_
@@ -147,24 +100,49 @@ def realm_cluster(x, y, label, realm):
     print("")
     print("Realm clustering for ", realm)
     print("Testing function Third cluster")
-    find_most_common(third, realm, 3)
+    find_most_common(third, realm, 3, label)
     print("Testing function Second cluster")
-    find_most_common(second, realm, 2)
+    find_most_common(second, realm, 2, label)
     print("Testing function First cluster")
-    find_most_common(first, realm, 1)
+    find_most_common(first, realm, 1, label)
+
+    interval_list = [0, 0.1, 0.2, 0.3, 0.4, 0.5]
+    for i in range(len(interval_list)-1):
+        interval_checks(interval_list[i], interval_list[i+1], x)
 
 
 
+def find_most_common(cluster, realm, nr, all_realm5):
+    temp = defaultdict(int)
+    i = 0
+    for x in list(cluster[realm]):
+        i += 1
+        temp[x] += 1
+    res = max(temp, key=temp.get)
+    percentage = (temp[res])/(len(list(cluster[realm])))*100
+    print("The most common of for cluster",nr  ,"is", res, "with a percentage of", percentage, ". Total count for cluster is", i)
+    find_part_of_total(res, realm, all_realm5)
+        
+def find_part_of_total(res, realm ,all_realm5):
+    i = 0
+    for x in all_realm5:
+        if x == res:
+            i +=1
+    percentage = (i/len(all_realm5))*100
+    print(res, "represents ", percentage, "of Filtered Data")
 
-def find_most_common(cluster, realm, nr):
-        temp = defaultdict(int)
-        for x in list(cluster[realm]):
-            temp[x] += 1
-        res = max(temp, key=temp.get)
-        percentage = (temp[res])/(len(list(cluster[realm])))*100
-        print("The most common of for cluster",nr  ,"is", res, "with a percentage of", percentage)
+    
 
+def interval_checks(below, above, x):
+    temp = defaultdict(int)
+    i = 0
+    for record in x:
+        if record <= above and record >= below:
+            i += 1
+    percentage = i/(len(x))
+    print("Percentage of total records in interval", below, "-", above, "is", percentage)
+    
+    
 
-
-csv_path = 'C:/Users/Felix/Documents/FilteredDataFile.csv'
+csv_path = input("Input full path to FilterDataFile.csv: ")
 main(csv_path)

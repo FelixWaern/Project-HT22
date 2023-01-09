@@ -1,12 +1,4 @@
-# The top script which calls and checks 
-#TODO Email NCBI about the faulty files, KEEP UNTIL LATER SO WE KNOW WE HAVE ONE FAULTY.
-#TODO Perform for larger dataset, investigate faulty or strange records
-
-#TODO The new dnaA investigation things 
-#TODO Fix comments. Can add more if possible. 
-#TODO Run the entire thing
-#TODO Report
-#TODO Won't open. 
+# Starting the pipeline for SkewDB rRNA co-orientation with replication check
 
 import importlib.util
 import pandas as pd
@@ -92,12 +84,13 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
         logging.warning("BIOPYTHON NEEDS TO BE INSTALLED BEFORE RUNNING START.PY")
         sys.exit()
 
+
     # Checks if the processes are to be run using the test set available. 
     if test_set == True:
         print("Running script on test set.")
 
-    # Check if csv is downloaded & filtered 
-    # Skip if running on test set
+    
+    # Check if csv is downloaded & filtered, skip if running on test set
     if test_set == True:
         pass
     else: 
@@ -108,14 +101,14 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
             print("csv filtered downloaded")
 
 
-    # Get the rRNA interval dict
-    # Skip if running on test set
+    
+    # Get the rRNA interval dict and skip if running on test set
     if test_set == True:
         pass
     else:
         if verbose == True:
             logging.debug(f"\n --------parameters into rrna_dict()--------- \n csv_path = {csv_path} \n email = {email} \n api_key = {api_key} \n local_storage_path = {local_storage_path}")
-        rrna_dict = get_rrna(csv_path, email, api_key, local_storage_path, a_list, verbose) #rna dict is list. 0 is the position and 1 is the locus_tag. And change inputs.
+        rrna_dict = get_rrna(csv_path, email, api_key, local_storage_path, a_list, verbose) #rna dict is list. 0 is the positions and 1 is the locus_tag.
     
     
     if test_set == True:
@@ -137,17 +130,16 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
                         locus_tag_row.append(x)
                     else:
                         rna_row.append(x)
-            #rna_row = rna_row[1:]
             temp_rrna_dict[i + 1] = rna_row
             locus_dict[i + 1] = locus_tag_row
         rrna_dict = [temp_rrna_dict, locus_dict]
-        rll(csv_path, rrna_dict) # Need to change the rll so that True uses only test set. Add if statment in rll. 
+        rll(csv_path, rrna_dict) 
 
     else:
         # Starting the matching process using a dictionary of all chromosomes and rRNAs, and strand data
         if verbose == True:
             logging.debug(f"\n parameters into rrna_dict: \n csv_path = {csv_path} \n rrna_dict = rrna_dict, too long to display")
-        rll(csv_path, rrna_dict) # Need to specicfy which in the list now. 
+        rll(csv_path, rrna_dict) 
 
 
     # Creating graphical representation. 
@@ -162,7 +154,6 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
             print("Downloading gcfits")
             if verbose == True:
                 logging.debug(f"\n --------Filtered csv file not found--------- \n run_download_gcfits input: {gcfit_path} ")
-            #download_filtered.run_download_filtered_csvfile(csv_path)
             rdg(file_path)
         # Run the graphical representation script
         print("Plotting graphs")
@@ -170,12 +161,3 @@ def start(csv_path, email, api_key, local_storage_path, verbose=False, a_list=[]
 
     print("Everything is done")
 start(args.csv_path, args.email, args.api_key, args.local_storage_path, args.verbose, args.a_list, args.test_set)
-
-
-"""
-csv_path = 'C:/Users/Felix/Documents/FilteredDataFile.csv'
-email = "Felix.wae@gmail.com"
-api_key = "7b4a5e9841f79495be73767323ad485fda08"
-local_storage_path = 'D:/'
-start(csv_path, email, api_key, local_storage_path)
-"""
